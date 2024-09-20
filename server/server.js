@@ -5,7 +5,7 @@ const { neon } = require('@neondatabase/serverless'); // use require, not import
 
 const app = express();
 
-// Database client connection
+// Database client connection- traverse
 async function dbClient() {
     const sql = neon(process.env.DATABASE_URL);
     return sql;
