@@ -28,10 +28,24 @@ app.get("/getWeeklyEvents", async (req, res) => {
 app.get("/getTrainingCourses", async (req, res) => {
     try {
         const db = await dbClient();
-        const weeklyEvents = await db`SELECT * FROM training_courses`; // Adjust query based on your data
+        const trainingCourses = await db`SELECT * FROM training_courses`; // Adjust query based on your data
         res.json({
             status: "Success",
-            events: weeklyEvents
+            events: trainingCourses
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Route to fetch Speakers
+app.get("/getSpeakers", async (req, res) => {
+    try {
+        const db = await dbClient();
+        const speakers = await db`SELECT * FROM speakers`; // Adjust query based on your data
+        res.json({
+            status: "Success",
+            events: speakers
         });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
