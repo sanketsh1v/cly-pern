@@ -4,6 +4,11 @@ const express = require("express");
 const { neon } = require('@neondatabase/serverless'); // use require, not import
 const app = express();
 
+app.use((req, res, next) => {
+    console.log("yeah our middleware");
+    next(); 
+})
+
 // Database client connection- traverse
 async function dbClient() {
     const sql = neon(process.env.DATABASE_URL);
@@ -60,6 +65,34 @@ app.get("/getQuarterlyEvents", async (req, res) => {
         res.json({
             status: "Success",
             events: quarterlyEvents
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Route to fetch Quarterly Events
+app.get("/getQuarterlyEvents", async (req, res) => {
+    try {
+        const db = await dbClient();
+        const quarterlyEvents = await db`SELECT * FROM quarterly_events`; // Adjust query based on your data
+        res.json({
+            status: "Success",
+            events: quarterlyEvents
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Route to fetch Payments
+app.get("/getPayments", async (req, res) => {
+    try {
+        const db = await dbClient();
+        const payments = await db`SELECT * FROM payments`; // Adjust query based on your data
+        res.json({
+            status: "Success",
+            events: payments
         });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
