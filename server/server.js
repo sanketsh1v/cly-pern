@@ -3,11 +3,8 @@ require('dotenv').config();
 const express = require("express");
 const { neon } = require('@neondatabase/serverless'); // use require, not import
 const app = express();
+const morgan = require('morgan')
 
-app.use((req, res, next) => {
-    console.log("yeah our middleware");
-    next(); 
-})
 
 // Database client connection- traverse
 async function dbClient() {
@@ -15,10 +12,12 @@ async function dbClient() {
     return sql;
 }
 
+app.use(express.json());
 // Route to fetch Weekly Events
 app.get("/getWeeklyEvents", async (req, res) => {
     try {
         const db = await dbClient();
+        console.log("route ran")
         const weeklyEvents = await db`SELECT * FROM weekly_events`; // Adjust query based on your data
         res.json({
             status: "Success",
@@ -71,20 +70,6 @@ app.get("/getQuarterlyEvents", async (req, res) => {
     }
 });
 
-// Route to fetch Quarterly Events
-app.get("/getQuarterlyEvents", async (req, res) => {
-    try {
-        const db = await dbClient();
-        const quarterlyEvents = await db`SELECT * FROM quarterly_events`; // Adjust query based on your data
-        res.json({
-            status: "Success",
-            events: quarterlyEvents
-        });
-    } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
-    }
-});
-
 // Route to fetch Payments
 app.get("/getPayments", async (req, res) => {
     try {
@@ -98,6 +83,7 @@ app.get("/getPayments", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

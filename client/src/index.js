@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+<<<<<<< HEAD
 import App from './App';
+=======
+import WeeklyEvents from './WeeklyEvents';
+>>>>>>> 39dfbc172b4ea79913da013571d440d63860f0d3
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+<<<<<<< HEAD
     <App />
+=======
+    <WeeklyEvents />
+>>>>>>> 39dfbc172b4ea79913da013571d440d63860f0d3
   </React.StrictMode>
 );
 
