@@ -14,11 +14,11 @@ async function dbClient() {
 
 app.use(express.json());
 // Route to fetch Weekly Events
-app.get("/getWeeklyEvents", async (req, res) => {
+app.get("/Events", async (req, res) => {
     try {
         const db = await dbClient();
         console.log("route ran")
-        const weeklyEvents = await db`SELECT * FROM weekly_events`; // Adjust query based on your data
+        const weeklyEvents = await db`SELECT * FROM events`; // Adjust query based on your data
         res.json({
             status: "Success",
             events: weeklyEvents
@@ -57,18 +57,18 @@ app.get("/getSpeakers", async (req, res) => {
 });
 
 // Route to fetch Quarterly Events
-app.get("/getQuarterlyEvents", async (req, res) => {
-    try {
-        const db = await dbClient();
-        const quarterlyEvents = await db`SELECT * FROM quarterly_events`; // Adjust query based on your data
-        res.json({
-            status: "Success",
-            events: quarterlyEvents
-        });
-    } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
-    }
-});
+// app.get("/getQuarterlyEvents", async (req, res) => {
+//     try {
+//         const db = await dbClient();
+//         const quarterlyEvents = await db`SELECT * FROM quarterly_events`; // Adjust query based on your data
+//         res.json({
+//             status: "Success",
+//             events: quarterlyEvents
+//         });
+//     } catch (error) {
+//         res.status(500).json({ status: "Error", message: error.message });
+//     }
+// });
 
 // Route to fetch Payments
 app.get("/getPayments", async (req, res) => {
