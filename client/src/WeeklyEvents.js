@@ -17,7 +17,7 @@ function WeeklyEvents() {
 
     return (
         <main className="main-container">
-            <div>
+            <div className="box-container">
                 <h1 className="heading-title">
                     Welcome to Calgary Laughter Yoga and Adventures
                 </h1>
@@ -29,24 +29,26 @@ function WeeklyEvents() {
                         <li key={event.id}>{event.title} - {event.date}</li>
                     ))}
                 </ul>
+            
+                <div className="image-container">
+                    <img
+                        src="./first.png"
+                        alt="Laughing Image 1"
+                        className="event-image"
+                    />
+                    <img
+                        src="./second.png"
+                        alt="Laughing Image 2"
+                        className="event-image"
+                    />
+                    <img
+                        src="./third.png"
+                        alt="Laughing Image 3"
+                        className="event-image"
+                    />
+                </div>
             </div>
-            <div className="image-container">
-                <img
-                    src="./first.png"
-                    alt="Laughing Image 1"
-                    className="event-image"
-                />
-                <img
-                    src="./second.png"
-                    alt="Laughing Image 2"
-                    className="event-image"
-                />
-                <img
-                    src="./third.png"
-                    alt="Laughing Image 3"
-                    className="event-image"
-                />
-            </div>
+            <hr className="parting"/>
         </main>
     );
 }

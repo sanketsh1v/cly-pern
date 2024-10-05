@@ -6,12 +6,31 @@
   position: relative;
   overflow: hidden; 
 }
+
+.box-container {
+  text-align: center;
+  background: rgb(46 16 101);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  margin: 2.5rem auto; /* Top and bottom margin, centered horizontally */
+  width: 95%; /* Increased width to minimize space on left and right */
+  max-width: 1200px; /* Set a high max width to avoid being too large */
+  padding: 2rem;
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out; /* Smooth transition for transform and box-shadow */
+}
+
+.box-container:hover {
+  transform: scale(1.05); /* Slightly enlarge the box when hovered */
+  box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3); /* Increase shadow for more prominent pop effect */
+}
+
+
 .heading-title {
     font-size: 2.5rem;
     font-weight: 800;
     margin-top: 1.25rem;
     margin-bottom: 1rem;
-    color: black;
+    color: rgb(253, 239, 221);
     line-height: 1.25;
     text-align: center;
 
@@ -21,7 +40,7 @@
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 3rem;
-    color: #000000; /* Yellow-100 */
+    color: rgb(253, 239, 221);
     text-align: center;
   }
   
@@ -33,17 +52,18 @@
   
   .image-container {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem; 
+    justify-content: space-around; /* Space around to distribute evenly */
+    gap: 1rem; /* Reduced gap for better fitting */
     align-items: center;
     margin-top: 2rem;
-    flex-wrap: wrap; 
-  }
-  
-  .event-image {
-    width: auto; /* Equivalent to w-28 */
-    height:fit-content ; /* Equivalent to h-28 */
-    border-radius: 9999px; /* Equivalent to rounded-full */
-    border: 4px solid #f0e68c; /* Yellow-300 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* shadow-lg */
-  }
+    flex-wrap: nowrap; /* Prevent wrapping to ensure all images stay in one line */
+}
+
+.event-image {
+    width: 20%; /* Set width as percentage to fit all images within the screen */
+    max-width: 200px; /* Ensure the images do not grow too large */
+    border-radius: 9999px; /* Keep images round */
+    border: 4px solid #f0e68c; /* Border styling */
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Shadow */
+}
+
