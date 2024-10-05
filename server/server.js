@@ -18,10 +18,10 @@ app.get("/Events", async (req, res) => {
     try {
         const db = await dbClient();
         console.log("route ran")
-        const weeklyEvents = await db`SELECT * FROM events`; // Adjust query based on your data
+        const events = await db`SELECT * FROM events`; // Adjust query based on your data
         res.json({
             status: "Success",
-            events: weeklyEvents
+            events: events
         });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });

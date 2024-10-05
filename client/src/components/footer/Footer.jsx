@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import './weeklyevents.css'; // Import the CSS file
+import './Footer.scss'; 
 
-function WeeklyEvents() {
+function Footer() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -53,4 +53,4 @@ function WeeklyEvents() {
     );
 }
 
-export default WeeklyEvents;
+export default Footer;
