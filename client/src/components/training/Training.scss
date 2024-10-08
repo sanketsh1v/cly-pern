@@ -1,7 +1,7 @@
 .training {
     text-align: center;
     padding: 10px;
-    background-color: #f6e9fc;
+    background-color: #f3e8ff;
   
     &__heading {
       font-size: 2.5rem;
@@ -36,7 +36,7 @@
       font-weight: bold;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      color: #222;
+      color: #000;
     }
   
     &__description {
@@ -47,27 +47,29 @@
       padding: 0 1rem;
     }
   
+    &__details-box {
+      background-color: rgb(46, 16, 101); // Dark purple background
+      color: rgb(253, 239, 221); // Light font color
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
     &__schedule {
       font-size: 1.1rem;
-      color: #333;
       font-weight: bold;
-      margin: 1rem 0;
-      line-height: 1.4;
+      color: rgb(253, 239, 221); // Light font color for schedule
     }
   
     &__fee {
       font-size: 1.1rem;
-      color: #007bff;
       font-weight: bold;
-      margin: 1rem 0;
-    }
-  
-    &__note {
-      font-size: 0.9rem;
-      color: #333;
-      margin: 1rem 0;
-      padding: 0 1rem;
-      font-style: italic;
+      color: rgb(253, 239, 221); // Set to light font color for fee
     }
   
     &__button {
@@ -79,11 +81,24 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s;
-      margin-top: 1rem;
   
       &:hover {
         background-color: #0056b3;
       }
+    }
+  
+    &__inquire-box {
+      background-color: rgb(46, 16, 101); // Dark purple background
+      color: rgb(253, 239, 221); // Light font color
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    &__note {
+      font-size: 0.9rem;
+      font-style: italic;
     }
   }
   
