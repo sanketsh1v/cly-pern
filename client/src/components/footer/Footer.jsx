@@ -1,56 +1,49 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import './Footer.scss'; 
+import React from 'react';
+import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaPhoneAlt, FaYoutube, FaGithub } from 'react-icons/fa';
+import './Footer.scss';
 
-function Footer() {
-    const [events, setEvents] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:4000/getWeeklyEvents')
-            .then(response => {
-                setEvents(response.data.events);
-            })
-            .catch(error => {
-                console.error('Error fetching weekly events:', error);
-            });
-    }, []);
-
+const Footer = () => {
     return (
-        <main className="main-container">
-            <div className="box-container">
-                <h1 className="heading-title">
-                    Welcome to Calgary Laughter Yoga and Adventures
-                </h1>
-                <p className="subheading-text">
-                    Join our inclusive community, embrace playfulness & transform your life through intentional laughter.
-                </p>
-                <ul className="event-list">
-                    {events.map(event => (
-                        <li key={event.id}>{event.title} - {event.date}</li>
-                    ))}
-                </ul>
-            
-                <div className="image-container">
-                    <img
-                        src="./first.png"
-                        alt="Laughing Image 1"
-                        className="event-image"
-                    />
-                    <img
-                        src="./second.png"
-                        alt="Laughing Image 2"
-                        className="event-image"
-                    />
-                    <img
-                        src="./third.png"
-                        alt="Laughing Image 3"
-                        className="event-image"
-                    />
+        <footer className="footer">
+            <div className="footer__top">
+                <div className="footer__logo-section">
+                    <img src="/logo.png" alt="Logo" className="footer__logo" />
+                    <div className="footer__social">
+                        <FaFacebook />
+                        <FaTwitter />
+                        <FaInstagram />
+                        <FaYoutube />
+                        <FaGithub />
+                    </div>
+                </div>
+                
+                <div className="footer__links">
+                    <div className="footer__section">
+                        <h4>Explore</h4>
+                        <p className="footer__link">Our Club</p>
+                        <p className="footer__link">Donations</p>
+                    </div>
+                    <div className="footer__section">
+                        <h4>Service</h4>
+                        <p className="footer__link">FAQ's</p>
+                        <p className="footer__link">Contact Us</p>
+                    </div>
+                </div>
+
+                <div className="footer__contact">
+                    <p><FaPhoneAlt /> 403-995-9546</p>
+                    <p><FaEnvelope /> <a href="mailto:laughteradventurescanada@gmail.com">laughteradventurescanada@gmail.com</a></p>
                 </div>
             </div>
-            <hr className="parting"/>
-        </main>
+
+            <div className="footer__bottom">
+                <hr className="footer__line" />
+                <p className="footer__copyright">
+                    @2023 by YYC Laughter Yoga and Adventures.
+                </p>
+            </div>
+        </footer>
     );
-}
+};
 
 export default Footer;
