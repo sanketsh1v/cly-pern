@@ -1,116 +1,113 @@
 .footer {
-  padding: 20px;
-  background-color: #fff;
-  font-size: 0.9rem;
-  color: #333;
-  border-top: 1px solid #ddd;
+    
+    background-color: #f3e8ff;
+    font-size: 0.9rem;
+    color: #000000;
+    border-top: 1px solid #ddd;
 
-  &__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-  }
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
 
-  &__logo-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    &__logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
 
-      & .footer__logo {
-          width: 100px; /* Increase the logo size to match the image */
-          margin-bottom: 10px;
-      }
+        & .footer__logo {
+            width: 100px;
+            margin-bottom: 10px;
+        }
 
-      & .footer__social {
-          display: flex;
-          gap: 10px;
-          font-size: 1.2rem;
+        & .footer__social {
+            display: flex;
+            gap: 10px;
+            font-size: 1.2rem;
 
-          svg {
-              cursor: pointer;
-              transition: color 0.3s;
+            svg {
+                cursor: pointer;
+                transition: color 0.3s;
 
-              &:hover {
-                  color: #666;
-              }
-          }
-      }
-  }
+                &:hover {
+                    color: #666;
+                }
+            }
+        }
+    }
 
-  &__links {
-      display: flex;
-      justify-content: space-around;
-      flex: 1;
-      max-width: 300px;
-      text-align: left;
+    &__links {
+        display: flex;
+        justify-content: space-around;
+        flex: 1;
+        max-width: 300px;
+        text-align: left;
 
-      & .footer__section {
-          h4 {
-              font-size: 1rem;
-              font-weight: bold;
-              margin-bottom: 8px;
-          }
+        & .footer__section {
+            h4 {
+                font-size: 1rem;
+                font-weight: bold;
+                margin-bottom: 8px;
+            }
 
-          .footer__link {
-              margin: 0;
-              font-size: 0.9rem;
-              color: #666;
-              cursor: pointer;
-              transition: color 0.3s;
+            .footer__link {
+                margin: 0;
+                font-size: 0.9rem;
+                color: #666;
+                cursor: pointer;
+                transition: color 0.3s;
 
-              &:hover {
-                  color: #000;
-                  text-decoration: underline;
-              }
-          }
-      }
-  }
+                &:hover {
+                    color: #000;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 
-  &__contact {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      
-      p {
-          display: flex;
-          align-items: center;
-          font-size: 0.9rem;
-          margin: 5px 0;
+    &__contact {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
+        p {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin: 5px 0;
 
-          svg {
-              margin-right: 8px;
-              font-size: 1rem;
-          }
+            svg {
+                margin-right: 8px;
+                font-size: 1rem;
+            }
 
-          a {
-              color: #333;
-              text-decoration: none;
+            a {
+                color: #333;
+                text-decoration: none;
 
-              &:hover {
-                  text-decoration: underline;
-              }
-          }
-      }
-  }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 
-  &__bottom {
-      text-align: center;
-      margin-top: 20px;
+     .footer__copyright {
+        font-size: 0.8rem;
+        color: #000000;
+        text-align: right; /* Align text to the right */
+        margin-left: auto;
+     }
 
-      & .footer__line {
-          border: none;
-          height: 1px;
-          background-color: #000;
-          margin: 0 auto 10px auto;
-          width: 100%;
-      }
-
-      & .footer__copyright {
-          font-size: 0.8rem;
-          color: #666;
-      }
-  }
+     .separator {
+        width: 100%;
+        height: 1px;
+        background-color: #000;
+        border-color: #000000;
+        margin: 20px 0;
+    }
 }

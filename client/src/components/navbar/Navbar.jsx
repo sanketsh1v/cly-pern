@@ -17,9 +17,6 @@ const Navbar = () => {
         <a href="#speakers" className="navbar__link">Speakers</a>
         <a href="#about" className="navbar__link">About</a>
       </div>
-    <div>
-      <hr className="navbar__separator" />
-    </div>
     </nav>
   );
 };
