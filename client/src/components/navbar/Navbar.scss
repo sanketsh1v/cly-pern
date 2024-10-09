@@ -1,69 +1,51 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff; // White background
-    padding: 1rem 2rem;
-    color: #000000; // Black text color
-  
-    &__logo {
-      display: flex;
-      align-items: center;
-  
-      &-image {
-        width: 150px; // Adjust size of the logo as needed
-        height: 80px;
-        margin-right: 1;
-      }
-    }
-  
-    &__title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-right: 10rem;
-      color: #560edb; // Black color for the title text
-    }
-  
-    &__links {
-      display: flex;
-      gap: 3rem;
-  
-      .navbar__link {
-        text-decoration: none;
-        color: #000000; // Black color for the navigation links
-        font-weight: 600;
-  
-        &:hover {
-          color: #2e1065; // Dark purple on hover (optional)
-        }
-      }
-    }
-  
-    &__hamburger {
-      display: none;
-      cursor: pointer;
-  
-      &-icon {
-        font-size: 2rem;
-        color: #2e1065; // Dark purple color for the icon
-      }
-    }
-  
-    @media (max-width: 768px) {
-      &__hamburger {
-        display: block;
-      }
-  
-      &__links {
-        display: none;
-      }
-    }
-  
-    &__separator {
-      width: 100%;
-      height: 1px;
-      background-color: #000000; // Black color for the separator line
-      margin-top: 1rem;
-    }
-  }
-  
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__content {
+  display: flex;
+  justify-content: space-between; /* Space between logo and links */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.navbar__logo-container {
+  margin-left: -10px; /* Keep the logo on the left */
+}
+
+.navbar__logo-image {
+  width: 150px;
+  height: auto;
+}
+
+.navbar__links {
+  display: flex;
+  margin-left: auto; /* Push links to the right */
+}
+
+.navbar__link {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  padding: 0 1.5rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: #007bff;
+}
+
+.navbar__separator {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0; /* Remove any extra margin */
+}
