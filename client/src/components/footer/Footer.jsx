@@ -5,9 +5,6 @@ import './Footer.scss';
 const Footer = () => {
     return (
         <footer className="footer">
-             <div>
-      <hr className="separator" />
-    </div>
             <div className="footer__top">
                 <div className="footer__logo-section">
                     <img src="/logo.png" alt="Logo" className="footer__logo" />
@@ -39,9 +36,12 @@ const Footer = () => {
                 </div>
             </div>
 
-            <p className="footer__copyright">
-                © 2023 by YYC Laughter Yoga and Adventures.
-            </p>
+            <div className="footer__bottom">
+                <hr className="footer__line" />
+                <p className="footer__copyright">
+                    @2023 by YYC Laughter Yoga and Adventures.
+                </p>
+            </div>
         </footer>
     );
 };
