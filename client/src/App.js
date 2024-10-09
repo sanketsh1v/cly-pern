@@ -4,6 +4,7 @@ import './App.css';
 import Footer from './components/footer/Footer';
 import Hero from './components/hero/Hero';
 import Navbar from './components/navbar/Navbar';
+import Events from './components/events/Events';
 import Training from './components/training/Training';
 import Speakers from './components/speakers/Speakers';
 
@@ -20,6 +21,7 @@ function App() {
 
         <Route path="/training" element={<Training />} />
         <Route path="/speakers" element={<Speakers />} />
+        <Route path="/events" element={<Events />} />
         
       </Routes>
 
