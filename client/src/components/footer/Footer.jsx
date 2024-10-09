@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaPhoneAlt, FaYoutube, FaGithub } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom for routing
 import './Footer.scss';
 
 const Footer = () => {
@@ -27,6 +28,8 @@ const Footer = () => {
                         <h4>Service</h4>
                         <p className="footer__link">FAQ's</p>
                         <p className="footer__link">Contact Us</p>
+                        {/* Add the Admin Login Link */}
+                        <Link to="/admin" className="footer__link">Admin Login</Link>
                     </div>
                 </div>
 
@@ -39,7 +42,7 @@ const Footer = () => {
             <div className="footer__bottom">
                 <hr className="footer__line" />
                 <p className="footer__copyright">
-                    @2023 by YYC Laughter Yoga and Adventures.
+                    @2023 by Calgary Laughter Yoga and Adventures.
                 </p>
             </div>
         </footer>
