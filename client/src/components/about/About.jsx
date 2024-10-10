@@ -59,21 +59,21 @@ const Training = () => {
 
       <div className='donation-box'>
         <div className='text-content'>
-          <p className='text-3xl font-extrabold mt-10 mb-10'>Calgary Laughter Club Online</p>
-          <p className='text-3xl font-extrabold mt-10 mb-10'>Every Sunday 5:00-5:40 PM Mountain Time</p>
-          <p className='text-2xl font-bold mt-20 mb-10 text-cyan-400'>Join Us On Zoom</p>
+          <p className='heading'>Calgary Laughter Club Online</p>
+          <p className='heading-2'>Every Sunday 5:00-5:40 PM Mountain Time</p>
+          <p className='heading-2'>Join Us On Zoom</p>
         </div>
         <div className='text-content'>
-          <p className='mb-3'>
+          <p className='heading-2'>
             Every week, a fantastic team of unpaid facilitators hosts these free seminars for the local community.
           </p>
-          <p className='mb-3'>Come through, introduce yourself, and laugh with us and other visitors from across the globe.</p>
-          <p className='mb-3'>You could quickly discover that you're returning often!</p>
+          <p className='heading-2'>Come through, introduce yourself, and laugh with us and other visitors from across the globe.</p>
+          <p className='heading-2'>You could quickly discover that you're returning often!</p>
         </div>
         <div className='text-content'>
-          <p className='text-3xl font-extrabold mt-10 mb-10'>Calgary Laughter Club Sunday Brunch Potlucks</p>
-          <p className='text-3xl font-extrabold mt-10 mb-10'>Sundays Quarterly 11:00am-1:00pm</p>
-          <p className='text-2xl font-bold mt-20 mb-10 text-cyan-400'>
+          <p className='heading-2'>Calgary Laughter Club Sunday Brunch Potlucks</p>
+          <p className='heading-2'>Sundays Quarterly 11:00am-1:00pm</p>
+          <p className='heading-2'>
             Join us in-person at the{' '}
             <a href='https://www.insideouttheatre.com/' target='_blank' className='underline'>
               Inside Out Theatre
@@ -86,23 +86,23 @@ const Training = () => {
           </p>
         </div>
         <div className='text-content'>
-          <p className='mb-3'>
+          <p className='heading-2'>
             These sessions are offered to our community by a fantastic collection of volunteer Facilitators, much like our
             online club.
           </p>
-          <p className='mb-3'>
+          <p className='heading-2'>
             They take turns. Nothing compares to a good laugh—well, except for a good laugh shared with delicious food and
             wonderful company!
           </p>
-          <p className='mb-3'>
+          <p className='heading-2'>
             Please bring a dish to share and a recommended $10 donation to help cover the costs of marketing and venue
             rental.
           </p>
         </div>
         <div className='text-content'>
-          <p className='text-xl font-extrabold mt-10 '>No cash? No problem! Please use the link to contribute below. 😊 </p>
+          <p className='heading-2'>No cash? No problem! Please use the link to contribute below. 😊 </p>
         </div>
-        <div className='flex justify-start items-center mt-20'>
+        <div className='heading-2'>
           <button className='bg-black text-white px-8 py-2 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors duration-300'>
             Make A Donation
           </button>
