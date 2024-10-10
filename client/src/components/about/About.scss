@@ -1,13 +1,13 @@
 $primary-purple: #2e1065;
-$secondary-purple: #452e75;
-$accent-gold: #f0e68c;
+
+$accent-gold: rgb(253, 251, 227);
 $text-light: #fdf7f0;
 $text-dark: #333;
-$button-hover: #452e75;
+$button-hover: #240071;
 
 .main {
   min-height: 100vh;
-  background-color: $text-light; // Light background for overall page
+  background-color: #f6e9fc; // Light background for overall page
   padding: 2rem;
 }
 
@@ -30,7 +30,7 @@ $button-hover: #452e75;
   text-align: left;
   margin: 20px 0 10px 10px;
   margin-right: 10px;
-  background-color: $secondary-purple; // Light purple background for quote
+  background-color: $primary-purple; // Light purple background for quote
   padding: 20px;
   border-radius: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -99,7 +99,7 @@ $button-hover: #452e75;
 .separator {
   width: 100%;
   height: 2px;
-  background-color: $secondary-purple; // Separator using secondary purple
+  background-color: $primary-purple; // Separator using secondary purple
   margin: 30px 0;
 }
 
@@ -115,7 +115,7 @@ a {
 }
 
 .donation-box {
-  background-color: $secondary-purple; // Light purple background
+  background-color: $primary-purple; // Light purple background
   color: $text-light;
   border-radius: 1.5rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // Softer shadow

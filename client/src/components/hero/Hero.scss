@@ -50,7 +50,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 3rem;
-  color: #f0e68c; // Warm accent yellow for subheadings
+  color: rgb(253, 251, 227); // Warm accent yellow for subheadings
   text-align: center;
 }
 
@@ -73,7 +73,7 @@ body {
   width: 20%;
   max-width: 200px;
   border-radius: 9999px;
-  border: 4px solid #f0e68c; // Consistent accent color
+  border: 4px solid rgb(255, 252, 217); // Consistent accent color
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease-in-out;
 }
@@ -84,7 +84,7 @@ body {
 
 // Upcoming Event Section Styling
 .upcoming-event-section {
-  background-color: #fdf7f0; // Light background for sections
+  background-color: rgb(253, 251, 227); // Light background for sections
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -93,7 +93,7 @@ body {
 
 .event-section-title {
   font-size: 2.5rem;
-  color: #2e1065; // Consistent purple for section titles
+  color: #2a0078; // Consistent purple for section titles
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -103,7 +103,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  background-color: #fdf7f0;
+  background-color: rgb(255, 253, 235);
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -129,16 +129,16 @@ body {
 .event-title {
   font-size: 1.75rem;
   font-weight: bold;
-  color: #2e1065; // Purple for text
+  color: #220060; // Purple for text
 }
 
 .event-date, .event-location {
   font-size: 1rem;
-  color: #333; // Consistent dark text for dates and locations
+  color: #000000; // Consistent dark text for dates and locations
 }
 
 .event-button {
-  background-color: #5c16c5;
+  background-color: #210052;
   color: #fdf7f0;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -148,7 +148,7 @@ body {
 }
 
 .event-button:hover {
-  background-color: #452e75;
+  background-color: #d3beff;
   transform: translateY(-2px);
 }
 
@@ -165,7 +165,7 @@ body {
 
 .weekly-events-title {
   font-size: 2.5rem;
-  color: #fdf7f0; // Light text for contrast
+  color: rgb(255, 254, 241); // Light text for contrast
   margin-bottom: 1.5rem;
 }
 
@@ -177,7 +177,7 @@ body {
 }
 
 .weekly-event-card {
-  background-color: white; // Darker background for weekly event cards
+  background-color: rgb(255, 253, 234); // Darker background for weekly event cards
   color: black; // Light text
   padding: 1rem;
   border-radius: 1rem;

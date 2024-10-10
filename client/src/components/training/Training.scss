@@ -1,62 +1,84 @@
 $primary-purple: #2e1065;
 $secondary-purple: #452e75;
-$accent-gold: #f0e68c;
+$accent-gold: rgb(255, 252, 217);
 $text-light: #fdf7f0;
-$text-dark: #333;
+$text-dark: #000000;
 $button-hover: #452e75;
 
 .training {
   text-align: center;
   padding: 10px;
-  background-color: $text-light; // Light background for page consistency
+  background-color: #f6e9fc; // Light background for page consistency
+  max-width: 100%;
+  box-sizing: border-box;
 
   &__heading {
-    font-size: 2.5rem;
+    font-size: 2rem; // Adjusted for better mobile compatibility
     margin-top: 0.5rem;
     margin-bottom: 0.2rem;
     font-weight: bold;
-    color: $text-dark; // Dark text for better contrast
+    color: $text-dark;
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 
   &__subheading {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 0.1rem;
     margin-bottom: 0.5rem;
-    color: $text-dark; // Consistent dark color for subheadings
+    color: $text-dark;
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__content {
-    max-width: 600px;
+    max-width: 90%;
     margin: 0 auto;
+    @media (min-width: 768px) {
+      max-width: 600px;
+    }
   }
 
   &__image {
     width: 100%;
-    max-width: 350px;
+    height: auto;
+    max-width: 100%; 
+    object-fit: cover; // Ensures the image covers the entire area while maintaining aspect ratio
     border-radius: 5px;
     margin: 1rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @media (min-width: 768px) {
+      max-width: 350px;
+    }
   }
 
   &__title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: $primary-purple; // Title in primary purple
+    color: $primary-purple;
+    @media (min-width: 768px) {
+      font-size: 1.8rem;
+    }
   }
 
   &__description {
-    font-size: 1rem;
-    color: $text-dark; // Dark text for readability
+    font-size: 0.9rem;
+    color: $text-dark;
     margin: 1rem 0;
     line-height: 1.6;
     padding: 0 1rem;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
   }
 
   &__details-box {
-    background-color: $primary-purple; // Deep purple background
-    color: $text-light; // Light font color
+    background-color: $primary-purple;
+    color: $text-light;
     border-radius: 10px;
     padding: 1rem;
     margin: 1.5rem 0;
@@ -68,14 +90,17 @@ $button-hover: #452e75;
   }
 
   &__schedule, &__fee {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
-    color: $text-light; // Light font color for schedule and fee
+    color: $text-light;
+    @media (min-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
 
   &__button {
-    background-color: $accent-gold; // Warm yellow button
-    color: $primary-purple; // Purple text inside the button
+    background-color: $accent-gold;
+    color: $primary-purple;
     padding: 0.5rem 1.2rem;
     border: none;
     border-radius: 5px;
@@ -84,24 +109,52 @@ $button-hover: #452e75;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: $button-hover; // Dark purple hover effect
-      color: $text-light; // Light text on hover
+      background-color: $button-hover;
+      color: $text-light;
     }
   }
 
   &__inquire-box {
-    background-color: $primary-purple; // Deep purple background
-    color: $text-light; // Light font color
+    background-color: $primary-purple;
+    color: $text-light;
     border-radius: 10px;
     padding: 1rem;
     margin-top: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5rem;
+    margin-bottom: 3rem; // Reduced margin for smaller screens
   }
 
   &__note {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-style: italic;
-    color: $text-light; // Light font color for note as well
+    color: $text-light;
+    @media (min-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Media queries for better responsiveness
+@media (max-width: 600px) {
+  .training {
+    padding: 5px;
+  }
+
+  .training__heading {
+    font-size: 1.8rem;
+  }
+
+  .training__title {
+    font-size: 1.4rem;
+  }
+
+  .training__description {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+
+  .training__button {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
   }
 }

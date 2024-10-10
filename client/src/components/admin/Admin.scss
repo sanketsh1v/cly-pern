@@ -10,7 +10,7 @@ $button-hover: #452e75;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f6f6f9; // Subtle light background
+  background-color: #f6e9fc; // Subtle light background
   padding: 2rem;
   margin-top: 2rem; // Add a consistent margin at the top and bottom
   margin-bottom: 2rem;
@@ -87,7 +87,7 @@ $button-hover: #452e75;
   }
 
   &__button {
-    background-color: $accent-gold;
+    background-color: rgb(255, 252, 217);
     color: $primary-purple;
     padding: 0.75rem 1.5rem;
     border: none;

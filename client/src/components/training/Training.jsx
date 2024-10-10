@@ -13,7 +13,7 @@ const Training = () => {
         <h3 className="training__title">Certified Laughter Yoga Leader Training</h3>
 
         <p className="training__description">
-          Embark on a life-changing journey that will bring laughter into your life. During the training, you’ll dive into Laughter Yoga and the power of joyful practice.
+        Enrich your life with laughter! Join us for this unique weekend training program that may change the way you live with joy through laughter! After the completion of the training, you will be qualified as a Certified Laughter Yoga Leader (CLYL) with the Laughter Yoga International University; this is an internationally recognized certification. As CLYL, you can lead Laughter Yoga sessions with corporate clients, seniors and healthcare facilities, schools, colleges and universities, yoga and fitness centres, community groups and not for profit organizations, or integrate Laughter Yoga into your own business practice, instruction, or healing modality.
         </p>
 
         {/* Box for Date, Price, and Register Button */}
