@@ -10,6 +10,7 @@ import Speakers from './components/speakers/Speakers';
 import Admin from './components/admin/Admin';
 import Console from './components/console/Console';
 import About from './components/about/About';
+import Pform from './components/pform/Pform'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/console" element={<Console />} />
         <Route path="/about" element={<About />} />
+        <Route path="/pform" element={<Pform />} />
         
         
       </Routes>

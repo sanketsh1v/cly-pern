@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.scss';
+
 
 function Hero() {
     const events = [
@@ -52,7 +54,7 @@ function Hero() {
                         <h3 className="event-title">Laughter Adventures Conference</h3>
                         <p className="event-date">Fri, May 03, 2024</p>
                         <p className="event-location">Pocaterra Inn, Canmore</p>
-                        <button className="event-button">Event Details</button>
+                        <a href="/events" className="event-button">Event Details</a>
                     </div>
                 </div>
             </section>

@@ -5,21 +5,19 @@ $text-light: #fdf7f0;
 $text-dark: #333;
 $button-hover: #452e75;
 
-.admin-login {
+.payment-form {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f6f6f9; // Subtle light background
   padding: 2rem;
-  margin-top: 2rem; // Add a consistent margin at the top and bottom
-  margin-bottom: 2rem;
 
   &__container {
-    background-color: $primary-purple; // Dark purple for the login box
+    background-color: $secondary-purple; // Light purple background for form box
     padding: 2.5rem;
     border-radius: 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); // Softer shadow for depth
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     text-align: center;
     width: 400px;
     display: flex;
@@ -33,22 +31,9 @@ $button-hover: #452e75;
     }
   }
 
-  &__profile {
-    margin-bottom: 1.5rem;
-
-    .admin-login__profile-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 4px solid $accent-gold; // Accent gold for the profile border
-      object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-  }
-
   &__title {
     font-size: 2rem;
-    color: $accent-gold;
+    color: $accent-gold; // Accent color for the title
     font-weight: bold;
     margin-bottom: 1.5rem;
   }
@@ -58,17 +43,17 @@ $button-hover: #452e75;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    width: 100%;
+    width: 100%; // Set the form to 100% width of the container
   }
 
   &__input-group {
-    width: 100%;
+    width: 80%; // Adjust the width of input fields to make them smaller and centered
 
     input {
       width: 100%;
       padding: 0.75rem;
       border-radius: 0.5rem;
-      border: 2px solid $primary-purple;
+      border: 2px solid $primary-purple; // Primary purple for input border
       background-color: rgba(255, 255, 255, 0.1);
       color: $text-light;
       font-size: 1rem;
@@ -80,15 +65,15 @@ $button-hover: #452e75;
 
       &:focus {
         outline: none;
-        border-color: $accent-gold;
+        border-color: $accent-gold; // Accent color on focus
         background-color: rgba(255, 255, 255, 0.15);
       }
     }
   }
 
   &__button {
-    background-color: $accent-gold;
-    color: $primary-purple;
+    background-color: $accent-gold; // Accent gold for button
+    color: $primary-purple; // Purple text for button
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 0.5rem;
@@ -96,10 +81,11 @@ $button-hover: #452e75;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 1rem;
 
     &:hover {
-      background-color: $button-hover;
-      color: $text-light;
+      background-color: $button-hover; // Button hover color
+      color: $text-light; // Light text on hover
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }

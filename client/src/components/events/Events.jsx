@@ -129,7 +129,7 @@ const Events = () => {
  
         <div className="events__checkout">
           <p className="total-amount">Total Amount: ${totalAmount.toFixed(2)}</p>
-          <button onClick={handleCheckoutClick}>Checkout</button>
+          <a href='/Pform'>Checkout</a>
         </div>
       </div>
      

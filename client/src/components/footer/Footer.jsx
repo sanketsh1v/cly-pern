@@ -48,6 +48,7 @@ const Footer = () => {
 <li><a href="/speakers">Our Speakers</a></li>
 <li><a href="/about">About Us</a></li>
 <li><a href="/blog">Blog</a></li>
+<li><a href="/admin">Admin Login</a></li>
 </ul>
 </div>
 <div className="footer__section footer__contact">
