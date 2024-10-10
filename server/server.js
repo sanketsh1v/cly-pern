@@ -3,7 +3,13 @@ require('dotenv').config();
 const express = require("express");
 const { neon } = require('@neondatabase/serverless');
 const app = express();
+const authRoutes = require('./authRoutes');
+const authenticateToken = require('./authMiddleware');
 const morgan = require('morgan');
+
+const cors = require('cors');
+
+app.use(cors());
 
 // Database client connection- traverse
 async function dbClient() {
@@ -12,6 +18,12 @@ async function dbClient() {
 }
 
 app.use(express.json());
+app.use('/auth', authRoutes);
+
+// Protected admin dashboard route
+app.get('/admin-dashboard', authenticateToken, (req, res) => {
+    res.json({ message: 'Welcome to the admin dashboard!' });
+  });
 
 // Route to fetch Events (Weekly, Quarterly, and Training Courses)
 app.get("/Events", async (req, res) => {

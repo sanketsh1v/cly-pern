@@ -1,0 +1,57 @@
+$primary-bg: #2e1065;
+$secondary-bg: #452e75;
+$accent-color: #f0e68c;
+$text-light: #fdf7f0;
+$text-dark: #333;
+$button-hover: #452e75;
+
+.console {
+  background-color: $primary-bg;
+  min-height: calc(100vh - 100px); // Adjust based on your navbar and footer height
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  &__title {
+    color: $accent-color;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  &__button {
+    background-color: $secondary-bg;
+    color: $text-light;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $accent-color;
+      color: $text-dark;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Media query for smaller screens
+@media (max-width: 600px) {
+  .console {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

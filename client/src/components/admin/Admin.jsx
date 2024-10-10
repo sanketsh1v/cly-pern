@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Admin.scss';
 
 const Admin = () => {
@@ -6,6 +7,8 @@ const Admin = () => {
     username: '',
     password: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,10 +18,30 @@ const Admin = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic
-    console.log('Admin logged in:', formData);
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:4000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        navigate('/console');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Login failed');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -32,6 +55,7 @@ const Admin = () => {
           />
         </div>
         <h1 className="admin-login__title">Admin Login</h1>
+        {error && <p className="admin-login__error">{error}</p>}
         <form onSubmit={handleSubmit} className="admin-login__form">
           <div className="admin-login__input-group">
             <input
