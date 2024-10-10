@@ -7,6 +7,9 @@ import Navbar from './components/navbar/Navbar';
 import Events from './components/events/Events';
 import Training from './components/training/Training';
 import Speakers from './components/speakers/Speakers';
+import Admin from './components/admin/Admin';
+import Console from './components/console/Console';
+import About from './components/about/About';
 
 function App() {
   return (
@@ -22,6 +25,10 @@ function App() {
         <Route path="/training" element={<Training />} />
         <Route path="/speakers" element={<Speakers />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/console" element={<Console />} />
+        <Route path="/about" element={<About />} />
+        
         
       </Routes>
 

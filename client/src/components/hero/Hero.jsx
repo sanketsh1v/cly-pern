@@ -1,25 +1,21 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import './Hero.scss'; 
+import React from 'react';
+import './Hero.scss';
 
 function Hero() {
-    const [events, setEvents] = useState([]);
+    const events = [
+        { id: 1, title: 'Laughter Yoga Workshop', date: 'April 25, 2024' },
+        { id: 2, title: 'Laughter Adventures Conference', date: 'May 03, 2024' },
+        { id: 3, title: 'Mindfulness & Laughter Retreat', date: 'June 15, 2024' },
+    ];
 
-    useEffect(() => {
-        axios.get('http://localhost:4000/getWeeklyEvents')
-            .then(response => {
-                setEvents(response.data.events);
-            })
-            .catch(error => {
-                console.error('Error fetching weekly events:', error);
-            });
-    }, []);
+    const weeklyEvents = [
+        { id: 1, title: 'Zoom Meet-Up', date: 'Sun Jul 14th', time: '5:00pm - 5:40pm' },
+        { id: 2, title: 'Zoom Meet-Up', date: 'Sun Jul 21st', time: '5:00pm - 5:40pm' },
+        { id: 3, title: 'Zoom Meet-Up', date: 'Sun Jul 28th', time: '5:00pm - 5:40pm' }
+    ];
 
     return (
         <main className="main-container">
-            <div>
-             <hr className="separator" />
-             </div>
             <div className="box-container">
                 <h1 className="heading-title">
                     Welcome to Calgary Laughter Yoga and Adventures
@@ -27,12 +23,7 @@ function Hero() {
                 <p className="subheading-text">
                     Join our inclusive community, embrace playfulness & transform your life through intentional laughter.
                 </p>
-                <ul className="event-list">
-                    {events.map(event => (
-                        <li key={event.id}>{event.title} - {event.date}</li>
-                    ))}
-                </ul>
-            
+
                 <div className="image-container">
                     <img
                         src="./first.png"
@@ -51,95 +42,39 @@ function Hero() {
                     />
                 </div>
             </div>
+            <hr className="styled-separator" />
+
+            <section className="upcoming-event-section">
+                <h2 className="event-section-title">Upcoming In-Person Event</h2>
+                <div className="event-details-card">
+                    <img src="./upcomingevent.png" alt="Laughter Event" className="event-image-large" />
+                    <div className="event-info">
+                        <h3 className="event-title">Laughter Adventures Conference</h3>
+                        <p className="event-date">Fri, May 03, 2024</p>
+                        <p className="event-location">Pocaterra Inn, Canmore</p>
+                        <button className="event-button">Event Details</button>
+                    </div>
+                </div>
+            </section>
+            <hr className="styled-separator" />
+
+            <section className="weekly-events-section">
+                <h2 className="weekly-events-title">Weekly Events Calendar</h2>
+                <div className="weekly-events-container">
+                    {weeklyEvents.map((event) => (
+                        <div className="weekly-event-card" key={event.id}>
+                            <h3 className="weekly-event-title">{event.title}</h3>
+                            <p className="weekly-event-date">{event.date}</p>
+                            <p className="weekly-event-time">{event.time}</p>
+                        </div>
+                    ))}
+                </div>
+                <p className="weekly-events-info">
+                    Join us every Sunday from 5:00–5:40 PM Mountain time on Zoom. We also have in-person gatherings sporadically.
+                </p>
+            </section>
         </main>
-        
     );
 }
 
 export default Hero;
-
-// import axios from 'axios';
-// import React, { useEffect, useState } from 'react';
-// import './Hero.scss'; 
-
-// function Hero() {
-//     const [events, setEvents] = useState([]);
-//     const [loading, setLoading] = useState(true); // Loading state
-//     const [error, setError] = useState(null); // Error state
-
-//     useEffect(() => {
-//         axios.get('http://localhost:4000/getWeeklyEvents')
-//             .then(response => {
-//                 setEvents(response.data.events);
-//                 setLoading(false); // Stop loading after data is fetched
-//             })
-//             .catch(error => {
-//                 console.error('Error fetching weekly events:', error);
-//                 setError('Failed to fetch events'); // Set error message if fetching fails
-//                 setLoading(false);
-//             });
-//     }, []);
-
-//     if (loading) {
-//         return <div className="loading">Loading events...</div>; // Loading message
-//     }
-
-//     if (error) {
-//         return <div className="error">{error}</div>; // Display error message
-//     }
-
-//     return (
-//         <main className="main-container">
-//             <div>
-//                 <hr className="separator" />
-//             </div>
-//             <div className="box-container">
-//                 <h1 className="heading-title">
-//                     Welcome to Calgary Laughter Yoga and Adventures
-//                 </h1>
-//                 <p className="subheading-text">
-//                     Join our inclusive community, embrace playfulness & transform your life through intentional laughter.
-//                 </p>
-//                 <ul className="event-list">
-//                     {events.map(event => (
-//                         <li key={event.id}>{event.title} - {event.date}</li>
-//                     ))}
-//                 </ul>
-            
-//                 <div className="image-container">
-//                     <img
-//                         src="./first.png"
-//                         alt="Laughing Image 1"
-//                         className="event-image"
-//                     />
-//                     <img
-//                         src="./second.png"
-//                         alt="Laughing Image 2"
-//                         className="event-image"
-//                     />
-//                     <img
-//                         src="./third.png"
-//                         alt="Laughing Image 3"
-//                         className="event-image"
-//                     />
-//                 </div>
-//             </div>
-
-//             {/* New Section for Upcoming Event Details */}
-//             <div className="upcoming-event-section">
-//                 <h2 className="upcoming-event-title">Upcoming Special Event</h2>
-//                 <div className="upcoming-event-content">
-//                     <img src="./specialevent.png" alt="Special Event" className="upcoming-event-image" />
-//                     <div className="upcoming-event-details">
-//                         <h3 className="upcoming-event-name">Laughter Yoga Retreat</h3>
-//                         <p className="upcoming-event-date">Sat, June 15, 2024</p>
-//                         <p className="upcoming-event-location">Banff Springs Hotel, Banff</p>
-//                         <a href="#event-details" className="upcoming-event-link">Event Details</a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </main>
-//     );
-// }
-
-// export default Hero;

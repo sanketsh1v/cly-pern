@@ -1,8 +1,8 @@
 // Global page background
 body {
-  background-color: #f6e9fc; // Light purple for the page background
-  font-family: Arial, sans-serif; // Ensure a consistent font
-  color: #333; // Default font color for pages
+  background-color: #f6e9fc; // Light purple background for the entire page
+  font-family: Arial, sans-serif;
+  color: #333; // Consistent dark text color
 }
 
 // Main container for the page content
@@ -19,8 +19,8 @@ body {
 // Box styling for sections and cards
 .box-container {
   text-align: center;
-  background: rgb(46, 16, 101); // Dark purple background
-  color: rgb(253, 239, 221); // Light font color for contrast
+  background: linear-gradient(135deg, #2e1065, #452e75); // Consistent gradient background
+  color: #fdf7f0; // Light text color for contrast
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   margin: 2.5rem auto;
@@ -37,51 +37,182 @@ body {
 
 // Titles and Headings
 .heading-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   margin-top: 1.25rem;
   margin-bottom: 1rem;
-  color: rgb(253, 239, 221); // Light color for title text
+  color: #fdf7f0; // Light color for main headings
   line-height: 1.25;
   text-align: center;
 }
 
 .subheading-text {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 3rem;
-  color: rgb(253, 239, 221);
+  color: #f0e68c; // Warm accent yellow for subheadings
   text-align: center;
 }
 
-// Specific elements inside the box
 .event-list {
   list-style-type: none;
   padding: 0;
-  color: rgb(253, 239, 221);
+  color: #fdf7f0; // Consistent light text color
 }
 
 .image-container {
   display: flex;
-  justify-content: space-around;
-  gap: 1rem;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
   margin-top: 2rem;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .event-image {
   width: 20%;
   max-width: 200px;
   border-radius: 9999px;
-  border: 4px solid #f0e68c;
+  border: 4px solid #f0e68c; // Consistent accent color
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-image:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+// Upcoming Event Section Styling
+.upcoming-event-section {
+  background-color: #fdf7f0; // Light background for sections
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.event-section-title {
+  font-size: 2.5rem;
+  color: #2e1065; // Consistent purple for section titles
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.event-details-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #fdf7f0;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-details-card:hover {
+  transform: scale(1.03);
+}
+
+.event-image-large {
+  width: 40%;
+  border-radius: 1rem;
+}
+
+.event-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2e1065; // Purple for text
+}
+
+.event-date, .event-location {
+  font-size: 1rem;
+  color: #333; // Consistent dark text for dates and locations
+}
+
+.event-button {
+  background-color: #5c16c5;
+  color: #fdf7f0;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.event-button:hover {
+  background-color: #452e75;
+  transform: translateY(-2px);
+}
+
+// Weekly Events Section
+.weekly-events-section {
+  background-color: #2e1065; // Consistent dark purple background
+  padding: 2rem;
+  margin-bottom: 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.weekly-events-title {
+  font-size: 2.5rem;
+  color: #fdf7f0; // Light text for contrast
+  margin-bottom: 1.5rem;
+}
+
+.weekly-events-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.weekly-event-card {
+  background-color: white; // Darker background for weekly event cards
+  color: black; // Light text
+  padding: 1rem;
+  border-radius: 1rem;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.weekly-event-card:hover {
+  transform: scale(1.05);
+}
+
+.weekly-event-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.weekly-event-date,
+.weekly-event-time {
+  font-size: 1.1rem;
+}
+
+.weekly-events-info {
+  font-size: 1.2rem;
+  color: #f0e68c; // Accent yellow for additional info text
+  margin-top: 1.5rem;
 }
 
 // Separator styling
-.separator {
-  width: 100%;
-  height: 1px;
-  background-color: #000;
+.styled-separator {
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(to right, #452e75, #f0e68c, #452e75); // Unified purple to yellow gradient
+  margin: 2.5rem auto;
   border: none;
+  border-radius: 1px;
 }

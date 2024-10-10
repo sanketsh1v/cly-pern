@@ -1,12 +1,9 @@
 import React from 'react';
-import './Hero.scss';
+import './About.scss';
 
 const Training = () => {
   return (
     <main className='main'>
-      <div>
-        <hr className="separator" />
-      </div>
 
       <div className='title-container'>
         <p className='title'>Calgary Laughter Yoga and Adventures</p>

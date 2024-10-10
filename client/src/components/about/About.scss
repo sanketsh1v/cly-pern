@@ -1,154 +1,163 @@
+$primary-purple: #2e1065;
+$secondary-purple: #452e75;
+$accent-gold: #f0e68c;
+$text-light: #fdf7f0;
+$text-dark: #333;
+$button-hover: #452e75;
+
 .main {
-    min-height: 100vh;
-    background-color: #f3e8ff;
-  }
-  
-  .title-container {
-    text-align: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  
-    .title {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-  }
-  
-  .quote-section {
-    text-align: left;
-    margin: 20px 0 10px 10px;
-    margin-right: 10px;
-  
-    .quote {
-      font-size: 1.25rem;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-  
-    .author {
-      margin-top: 5px;
-      margin-bottom: 20px;
-      margin-left: 10px;
-    }
-  }
-  
-  .image-text-container {
-    display: flex; /* Ensures image and text are in the same line */
-    align-items: center; /* Vertically aligns the text and image */
-    margin: 20px 0;
-    margin-left: 10px;
-  
-    .about-image {
-      width: auto;
-      height: 24rem;
-      border: 2px solid black;
-      margin-right: 20px;
-    }
-  
-    .text-content {
-      flex: 1;
-      text-align: left;
-      font-size: larger;
-      color: rgb(0, 0, 0);
-    }
-  }
-  
-  .mission-vision-section {
-    
-    color: #000000;
-    border-radius: 1.5rem;
-    transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
-    padding: 20px; /* Add space inside the section */
-    margin: 20px 10px;
-    line-height: 1.8;
-    text-align: left;
-    font-size: large;
-  
-    .heading {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  
-    p {
-      margin-top: 10px;
-    }
-  }
-  
-  .separator {
-    width: 100%;
-    height: 1px;
-    background-color: #000000;
-    border: none;
-  }
-  
-  .text-content {
-    text-align: left;
-    margin-right: 10px;
-    line-height: 1.8;
-    font-size: larger;
-    align-items: center;
-  }
-  
-  a {
-    color: hsl(269, 100%, 60%); /* Same as your background color */
-    text-decoration: none; /* Removes underline from link */
-    transition: color 300ms ease-in-out; /* Smooth color transition */
-  
-    &:hover {
-      color: #ffffff; /* Changes to the box background color on hover */
-      text-decoration: underline; /* Optional: Add underline on hover */
-    }
-  }
-  
-  .donation-box{
-    background: #230063;
-    color: white;
-    border-radius: 1.5rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
-    padding: 20px; /* Add space inside the section */
-    margin: 20px 10px;
-    line-height: 1.8;
-    text-align: left;
-    font-size: large;
-    text-align: center;
-  
-    .heading {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  
-    p {
-      margin-top: 10px;
-      text-align: center;
-    }
-  }
-  
-  button {
-    background-color: #efefe1; /* Cream color */
-    color: black; /* Black text */
-    padding: 12px 24px; /* Adjust padding for better button size */
-    border-radius: 1.5rem; /* Rounded corners */
-    font-size: 1.1rem; /* Slightly larger text */
+  min-height: 100vh;
+  background-color: $text-light; // Light background for overall page
+  padding: 2rem;
+}
+
+.title-container {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+
+  .title {
+    font-size: 3rem;
     font-weight: bold;
-    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
-  
-    &:hover {
-      background-color: #a488e5; /* Darker cream on hover */
-      color: black; /* Keep text black on hover */
-    }
+    margin-left: 10px;
+    color: $primary-purple; // Title in deep purple
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); // Soft shadow for text
   }
-  
-  .first-nation{
-    text-align: center;
-    font-size: larger;
-    p {
-      margin-top: 10px;
-      text-align: center;
-    }
+}
+
+.quote-section {
+  text-align: left;
+  margin: 20px 0 10px 10px;
+  margin-right: 10px;
+  background-color: $secondary-purple; // Light purple background for quote
+  padding: 20px;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .quote {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $accent-gold; // Accent color for quote text
+    margin-bottom: 10px;
   }
-  
+
+  .author {
+    font-size: 1rem;
+    color: $text-light; // Light font color for author
+  }
+}
+
+.image-text-container {
+  display: flex;
+  align-items: flex-start; // Align image and text properly
+  margin: 20px 0;
+  gap: 20px;
+
+  .about-image {
+    width: auto;
+    height: 22rem;
+    border: 4px solid $accent-gold; // Accent color for image border
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-content {
+    flex: 1;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: $text-dark; // Dark text for better readability
+    padding: 0 1rem;
+  }
+}
+
+.mission-vision-section {
+  background-color: $primary-purple; // Deep purple background
+  color: $text-light; // Light text for better contrast
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin: 20px 0;
+  line-height: 1.8;
+  text-align: left;
+  font-size: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // Softer shadow for depth
+
+  .heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $accent-gold; // Accent color for heading
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); // Slight text shadow
+  }
+
+  p {
+    margin-top: 10px;
+    color: $text-light; // Light text for paragraph
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 2px;
+  background-color: $secondary-purple; // Separator using secondary purple
+  margin: 30px 0;
+}
+
+a {
+  color: $accent-gold; // Accent color for links
+  text-decoration: none;
+  transition: color 300ms ease-in-out;
+
+  &:hover {
+    color: $primary-purple; // Hover color change to primary purple
+    text-decoration: underline;
+  }
+}
+
+.donation-box {
+  background-color: $secondary-purple; // Light purple background
+  color: $text-light;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // Softer shadow
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+
+  .heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: $accent-gold; // Gold for heading
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-top: 10px;
+    color: $text-light;
+  }
+}
+
+button {
+  background-color: $accent-gold; // Warm yellow for buttons
+  color: $primary-purple; // Purple text for contrast
+  padding: 12px 24px;
+  border-radius: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+
+  &:hover {
+    background-color: $button-hover; // Hover effect with secondary purple
+    color: $text-light;
+  }
+}
+
+.first-nation {
+  text-align: center;
+  font-size: 1.2rem;
+  color: $text-dark;
+
+  p {
+    margin-top: 10px;
+    color: $text-dark;
+  }
+}

@@ -1,116 +1,188 @@
-.footer {
-  padding: 20px;
-  background-color: #fff;
-  font-size: 0.9rem;
-  color: #333;
-  border-top: 1px solid #ddd;
+$primary-purple: #2e1065;
+$secondary-purple: #452e75;
+$accent-gold: #f0e68c;
+$text-light: #fdf7f0;
+$text-dark: #333;
+$button-hover: #452e75;
 
-  &__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
+.footer {
+  background-color: $primary-purple;
+  color: $text-light;
+  padding: 4rem 0 2rem;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
-  &__logo-section {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__section {
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  &__about {
+    p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+
+    a {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
 
-      & .footer__logo {
-          width: 100px; /* Increase the logo size to match the image */
-          margin-bottom: 10px;
+      &:hover {
+        background-color: $accent-gold;
+        color: $primary-purple;
+        transform: translateY(-3px);
       }
 
-      & .footer__social {
-          display: flex;
-          gap: 10px;
-          font-size: 1.2rem;
-
-          svg {
-              cursor: pointer;
-              transition: color 0.3s;
-
-              &:hover {
-                  color: #666;
-              }
-          }
+      svg {
+        width: 20px;
+        height: 20px;
       }
+    }
   }
 
   &__links {
-      display: flex;
-      justify-content: space-around;
-      flex: 1;
-      max-width: 300px;
-      text-align: left;
+    ul {
+      list-style: none;
+      padding: 0;
 
-      & .footer__section {
-          h4 {
-              font-size: 1rem;
-              font-weight: bold;
-              margin-bottom: 8px;
+      li {
+        margin-bottom: 0.75rem;
+
+        a {
+          color: $text-light;
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $accent-gold;
           }
-
-          .footer__link {
-              margin: 0;
-              font-size: 0.9rem;
-              color: #666;
-              cursor: pointer;
-              transition: color 0.3s;
-
-              &:hover {
-                  color: #000;
-                  text-decoration: underline;
-              }
-          }
+        }
       }
+    }
   }
 
-  &__contact {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      
-      p {
-          display: flex;
-          align-items: center;
-          font-size: 0.9rem;
-          margin: 5px 0;
+  &__form {
+    .form-group {
+      margin-bottom: 1rem;
 
-          svg {
-              margin-right: 8px;
-              font-size: 1rem;
-          }
+      input, textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        color: $text-light;
+        transition: all 0.3s ease;
 
-          a {
-              color: #333;
-              text-decoration: none;
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
 
-              &:hover {
-                  text-decoration: underline;
-              }
-          }
+        &:focus {
+          outline: none;
+          border-color: $accent-gold;
+          background-color: rgba(255, 255, 255, 0.15);
+        }
       }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+    }
+
+    .submit-btn {
+      background-color: $accent-gold;
+      color: $primary-purple;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $button-hover;
+        color: $text-light;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
   }
 
   &__bottom {
-      text-align: center;
-      margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-      & .footer__line {
-          border: none;
-          height: 1px;
-          background-color: #000;
-          margin: 0 auto 10px auto;
-          width: 100%;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__info {
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+
+  &__legal {
+    margin-top: 0.5rem;
+
+    a {
+      color: $text-light;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $accent-gold;
       }
 
-      & .footer__copyright {
-          font-size: 0.8rem;
-          color: #666;
+      &:first-child {
+        margin-left: 0;
       }
+    }
   }
 }

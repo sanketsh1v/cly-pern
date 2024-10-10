@@ -1,21 +1,28 @@
+$primary-purple: #2e1065;
+$secondary-purple: #452e75;
+$accent-gold: #f0e68c;
+$text-light: #fdf7f0;
+$text-dark: #333;
+$button-hover: #452e75;
+
 .training {
   text-align: center;
   padding: 10px;
-  background-color: #f6e9fc; // Updated light purple background for page consistency
+  background-color: $text-light; // Light background for page consistency
 
   &__heading {
     font-size: 2.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.2rem;
     font-weight: bold;
-    color: #333;
+    color: $text-dark; // Dark text for better contrast
   }
 
   &__subheading {
     font-size: 1.2rem;
     margin-top: 0.1rem;
     margin-bottom: 0.5rem;
-    color: #555;
+    color: $text-dark; // Consistent dark color for subheadings
   }
 
   &__content {
@@ -36,20 +43,20 @@
     font-weight: bold;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: #000;
+    color: $primary-purple; // Title in primary purple
   }
 
   &__description {
     font-size: 1rem;
-    color: #555;
+    color: $text-dark; // Dark text for readability
     margin: 1rem 0;
     line-height: 1.6;
     padding: 0 1rem;
   }
 
   &__details-box {
-    background-color: rgb(46, 16, 101); // Dark purple background
-    color: rgb(253, 239, 221); // Light font color
+    background-color: $primary-purple; // Deep purple background
+    color: $text-light; // Light font color
     border-radius: 10px;
     padding: 1rem;
     margin: 1.5rem 0;
@@ -60,21 +67,15 @@
     gap: 1rem;
   }
 
-  &__schedule {
+  &__schedule, &__fee {
     font-size: 1.1rem;
     font-weight: bold;
-    color: rgb(253, 239, 221); // Light font color for schedule
-  }
-
-  &__fee {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: rgb(253, 239, 221); // Set to light font color for fee
+    color: $text-light; // Light font color for schedule and fee
   }
 
   &__button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: $accent-gold; // Warm yellow button
+    color: $primary-purple; // Purple text inside the button
     padding: 0.5rem 1.2rem;
     border: none;
     border-radius: 5px;
@@ -83,22 +84,24 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: $button-hover; // Dark purple hover effect
+      color: $text-light; // Light text on hover
     }
   }
 
   &__inquire-box {
-    background-color: rgb(46, 16, 101); // Dark purple background
-    color: rgb(253, 239, 221); // Light font color
+    background-color: $primary-purple; // Deep purple background
+    color: $text-light; // Light font color
     border-radius: 10px;
     padding: 1rem;
     margin-top: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5rem;
   }
 
   &__note {
     font-size: 0.9rem;
     font-style: italic;
-    color: rgb(253, 239, 221); // Light font color for note as well
+    color: $text-light; // Light font color for note as well
   }
 }
