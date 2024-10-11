@@ -43,7 +43,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
-  margin-left: auto; /* Pushes links to the right side */
+  margin-left: auto; 
+  text-decoration: none;/* Pushes links to the right side */
 }
 
 .navbar__link {
@@ -67,7 +68,7 @@
   bottom: -5px;
   width: 0;
   height: 2px;
-  background-color: #5c16c5;
+  // background-color: #5c16c5;
   transition: width 0.3s ease;
 }
 
