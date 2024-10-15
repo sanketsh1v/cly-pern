@@ -8,8 +8,8 @@ const authenticateToken = require('./authMiddleware');
 const morgan = require('morgan');
 
 const cors = require('cors');
-
 app.use(cors());
+
 
 // Database client connection- traverse
 async function dbClient() {
@@ -25,12 +25,12 @@ app.get('/admin-dashboard', authenticateToken, (req, res) => {
     res.json({ message: 'Welcome to the admin dashboard!' });
   });
 
-// Route to fetch Events (Weekly, Quarterly, and Training Courses)
-app.get("/Events", async (req, res) => {
+// Route to fetch Quarterly Events
+app.get("/quarterlyEvents", async (req, res) => {
     try {
         const db = await dbClient();
         console.log("route ran")
-        const events = await db`SELECT * FROM events`; // Adjust query based on your data
+        const events = await db`SELECT * FROM events WHERE event_type = 'quarterly'`; // Adjust query based on your data
         res.json({
             status: "Success",
             events: events
@@ -40,6 +40,37 @@ app.get("/Events", async (req, res) => {
     }
 });
 
+// Route to fetch Weekly Events
+app.get("/weeklyEvents", async (req, res) => {
+    try {
+        const db = await dbClient();
+        console.log("route ran");
+        const events = await db`SELECT * FROM events WHERE event_type = 'weekly'`;
+        console.log(events); // Add this to check the data being fetched
+        res.json({
+            status: "Success",
+            events: events
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Route to fetch Training Courses
+app.get("/trainingCourses", async (req, res) => {
+    try {
+        const db = await dbClient();
+        console.log("route ran");
+        const events = await db`SELECT * FROM events WHERE event_type = 'training'`;
+        console.log(events); // Add this to check the data being fetched
+        res.json({
+            status: "Success",
+            events: events
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
 
 // Route to fetch Speakers
 app.get("/Speakers", async (req, res) => {
