@@ -115,7 +115,7 @@ $button-hover: #452e75;
   }
 
   .ticket-section {
-    background-color: $primary-purple;
+    background-color: rgb(253, 251, 227);
     border-radius: 2rem;
     overflow: hidden;
     margin-bottom: 2rem;
@@ -133,11 +133,13 @@ $button-hover: #452e75;
       .ticket-price {
         flex: 1;
         border-left: 2px solid $secondary-purple;
+
       }
     }
 
     .ticket-type, .ticket-price {
       padding: 2rem;
+
     }
 
     h2 {
@@ -149,8 +151,9 @@ $button-hover: #452e75;
 
     .price-amount {
       font-size: 2rem;
-      color: $primary-purple;
+      color:rgb(253, 251, 227);
       font-weight: 700;
+
     }
 
     .quantity-selector {
@@ -158,6 +161,7 @@ $button-hover: #452e75;
       align-items: center;
       justify-content: center;
       margin-top: 1.5rem;
+
     
       button {
         background-color: $primary-purple;
@@ -182,7 +186,6 @@ $button-hover: #452e75;
       span {
         font-size: 1.5rem;
         margin: 0 1.5rem;
-        color: $primary-purple;
         font-weight: 600;
         min-width: 50px; // Set a fixed width to ensure proper alignment
         text-align: center; // Center the number inside the span
