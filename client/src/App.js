@@ -10,7 +10,8 @@ import Speakers from './components/speakers/Speakers';
 import Admin from './components/admin/Admin';
 import Console from './components/console/Console';
 import About from './components/about/About';
-import Pform from './components/pform/Pform'
+import Pform from './components/pform/Pform';
+import BlogPage from './components/blog/blog';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/console" element={<Console />} />
         <Route path="/about" element={<About />} />
         <Route path="/pform" element={<Pform />} />
+        <Route path="/blog" element={<BlogPage/>} />
         
         
       </Routes>
