@@ -4,19 +4,32 @@ import './Hero.scss';
 
 function Hero() {
     const [weeklyEvents, setWeeklyEvents] = useState([]);
+    const [latestQuarterlyEvent, setLatestQuarterlyEvent] = useState(null);
 
-    // Fetch weekly events from the backend
+    // Fetch weekly events
     useEffect(() => {
         const fetchWeeklyEvents = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/weeklyEvents"); // Ensure correct API URL and port
-                setWeeklyEvents(response.data.events); // Assuming the response contains `events` array
+                const response = await axios.get("http://localhost:4000/weeklyEvents");
+                setWeeklyEvents(response.data.events);
             } catch (error) {
                 console.error("Error fetching weekly events:", error);
             }
         };
-    
         fetchWeeklyEvents();
+    }, []);
+
+    // Fetch latest quarterly event
+    useEffect(() => {
+        const fetchLatestQuarterlyEvent = async () => {
+            try {
+                const response = await axios.get("http://localhost:4000/latestQuarterlyEvent");
+                setLatestQuarterlyEvent(response.data.events[0]); // Assuming the response contains an array with one event
+            } catch (error) {
+                console.error("Error fetching latest quarterly event:", error);
+            }
+        };
+        fetchLatestQuarterlyEvent();
     }, []);
 
     return (
@@ -37,20 +50,27 @@ function Hero() {
             </div>
             <hr className="styled-separator" />
 
+            {/* Latest Quarterly Event Section */}
             <section className="upcoming-event-section">
                 <h2 className="event-section-title">Upcoming In-Person Event</h2>
-                <div className="event-details-card">
-                    <img src="./upcomingevent.png" alt="Laughter Event" className="event-image-large" />
-                    <div className="event-info">
-                        <h3 className="event-title">Laughter Adventures Conference</h3>
-                        <p className="event-date">Fri, May 03, 2024</p>
-                        <p className="event-location">Pocaterra Inn, Canmore</p>
-                        <a href="/events" className="event-button">Event Details</a>
+                {latestQuarterlyEvent ? (
+                    <div className="event-details-card">
+                        <img src="./upcomingevent.png" alt="Latest Quarterly Event" className="event-image-large" />
+                        <div className="event-info">
+                            <h3 className="event-title">{latestQuarterlyEvent.event_name}</h3>
+                            <p className="event-date">{new Date(latestQuarterlyEvent.event_date).toLocaleDateString()}</p>
+                            <p className="event-location">{latestQuarterlyEvent.event_description}</p>
+                            <p className="event-location">{latestQuarterlyEvent.event_location || "Online"}</p>
+                            <a href="/events" className="event-button">Event Details</a>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <p>No upcoming quarterly events available at the moment.</p>
+                )}
             </section>
             <hr className="styled-separator" />
 
+            {/* Weekly Events Section */}
             <section className="weekly-events-section">
                 <h2 className="weekly-events-title">Weekly Events Calendar</h2>
                 <div className="weekly-events-container">
@@ -58,7 +78,7 @@ function Hero() {
                         weeklyEvents.map((event) => (
                             <div className="weekly-event-card" key={event.event_id}>
                                 <h3 className="weekly-event-title">{event.event_name}</h3>
-                                
+                                <p className="weekly-event-date">{event.event_description}</p>
                                 <p className="weekly-event-time">{event.start_time} - {event.end_time}</p>
                             </div>
                         ))
@@ -67,7 +87,7 @@ function Hero() {
                     )}
                 </div>
                 <p className="weekly-events-info">
-                    Join us every Sunday from 5:00–5:40 PM Mountain time on Zoom. We also have in-person gatherings sporadically.
+                    Join us every weekend on Zoom. We also have in-person gatherings sporadically.
                 </p>
             </section>
         </main>
@@ -75,6 +95,7 @@ function Hero() {
 }
 
 export default Hero;
+
 
 // import React, { useEffect, useState } from 'react';
 // import './Hero.scss';

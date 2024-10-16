@@ -40,6 +40,21 @@ app.get("/quarterlyEvents", async (req, res) => {
     }
 });
 
+// Route to fetch most recently added Latest Quarterly Event for Home Page
+app.get("/latestQuarterlyEvent", async (req, res) => {
+    try {
+        const db = await dbClient();
+        console.log("route ran")
+        const latestQuarterlyEvent = await db`SELECT * FROM events WHERE event_type = 'quarterly' ORDER BY created_at DESC LIMIT 1`;
+        res.json({
+            status: "Success",
+            events: latestQuarterlyEvent
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
 // Route to fetch Weekly Events
 app.get("/weeklyEvents", async (req, res) => {
     try {

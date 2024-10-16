@@ -13,12 +13,13 @@ const Events = () => {
   const [sponsorshipAmount, setSponsorshipAmount] = useState(0);
   const [customAmount, setCustomAmount] = useState('');
   const [quarterlyEvents, setQuarterlyEvents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // Search term state
 
   // Fetch quarterly events from the backend
   useEffect(() => {
     const fetchQuarterlyEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/quarterlyEvents"); // Make sure backend runs on port 4000
+        const response = await axios.get("http://localhost:4000/quarterlyEvents"); // Ensure correct backend port
         setQuarterlyEvents(response.data.events); // Assuming response contains `events`
       } catch (error) {
         console.error("Error fetching quarterly events!", error);
@@ -71,16 +72,40 @@ const Events = () => {
   const totalRegularTicketPrice = regularTicketCount * (regularTicketPrice + gst + serviceFee);
   const totalAmount = totalRegularTicketPrice + sponsorshipAmount;
 
+  // Filter events based on the search term
+  const filteredEvents = quarterlyEvents.filter((event) => {
+    const searchString = searchTerm.toLowerCase();
+    return (
+      event.event_name.toLowerCase().includes(searchString) ||
+      event.event_description.toLowerCase().includes(searchString) ||
+      event.event_location?.toLowerCase().includes(searchString) ||
+      new Date(event.event_date).toLocaleDateString().includes(searchString) ||
+      event.start_time.includes(searchString) ||
+      event.end_time.includes(searchString)
+    );
+  });
+
   return (
     <div className="events">
-      {quarterlyEvents.length > 0 ? (
-        quarterlyEvents.map((event) => (
+      {/* Search Bar Section */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search events by Name, Description, Date, or Location.."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+        />
+      </div>
+
+      {/* Display Filtered Quarterly Events */}
+      {filteredEvents.length > 0 ? (
+        filteredEvents.map((event) => (
           <div className="events__container" key={event.event_id}>
             <div className="events__hero">
               <h3>Play, grow and shine in the Canadian Rockies!</h3>
               <h1>{event.event_name}</h1>
               <div className="events__date">
-                {new Date(event.event_date).toLocaleDateString()} | {event.event_location}
+                {new Date(event.event_date).toLocaleDateString()} | {event.event_location || "Online"}
               </div>
               <div className="events__image">
                 <img src="/upcomingevent.png" alt={event.event_name} />
@@ -158,6 +183,7 @@ const Events = () => {
 };
 
 export default Events;
+
 
 // import React, { useState } from 'react';
 // import './Events.scss';
