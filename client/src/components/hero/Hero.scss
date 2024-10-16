@@ -201,9 +201,24 @@ body {
   font-size: 1.1rem;
 }
 
+.weekly-zoom-link {
+  color: #000000;
+  transition: all 0.3s ease; /* Smooth transition effect */
+  margin-bottom: 3rem;
+}
+
+.weekly-zoom-link:hover {
+  color: white; /* Accent color to match your theme */
+  background-color: #452e75; /* Slightly lighter purple */
+  padding: 5px; /* Optional: add padding to emphasize the hover effect */
+  border-radius: 5px; /* Optional: rounded edges */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add a shadow to make the text pop */
+}
+
+
 .weekly-events-info {
   font-size: 1.2rem;
-  color: #f0e68c; // Accent yellow for additional info text
+  color: white; // Accent yellow for additional info text
   margin-top: 1.5rem;
 }
 

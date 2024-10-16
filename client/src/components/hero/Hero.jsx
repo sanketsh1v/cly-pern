@@ -80,6 +80,7 @@ function Hero() {
                                 <h3 className="weekly-event-title">{event.event_name}</h3>
                                 <p className="weekly-event-date">{event.event_description}</p>
                                 <p className="weekly-event-time">{event.start_time} - {event.end_time}</p>
+                                <a className="weekly-zoom-link" href="#">{event.zoom_link}</a>
                             </div>
                         ))
                     ) : (

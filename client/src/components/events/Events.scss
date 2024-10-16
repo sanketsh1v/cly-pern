@@ -5,6 +5,7 @@ $text-light: #fdf7f0;
 $text-dark: #333;
 $button-hover: #452e75;
 
+
 .search-bar {
   margin: 2rem auto;
   max-width: 800px;
@@ -158,6 +159,18 @@ $button-hover: #452e75;
 
       }
     }
+
+    .price-amount {
+      font-size: 2.5rem; // Large font size for emphasis
+      color: black; // Use primary purple for the price color
+      font-weight: bold; // Make the price stand out with bold text
+      margin-bottom: 1rem; // Add space below the price
+      text-align: center; // Center the price text
+    
+      // Optional: Add a subtle shadow for emphasis
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+    
 
     .ticket-type, .ticket-price {
       padding: 2rem;

@@ -22,13 +22,21 @@
 .navbar__logo-container {
   display: flex;
   align-items: center;
+  cursor: pointer; /* Make the entire container clickable */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.navbar__logo-container:hover .navbar__logo-image, 
+.navbar__logo-container:hover .navbar__company-name {
+  transform: scale(1.1); /* Slightly enlarge both the logo and the company name */
+  color: #5c16c5 ; /* Accent color for the company name on hover */
 }
 
 .navbar__logo-image {
   width: 120px;
   height: auto;
-  cursor: pointer;
   margin-right: 0rem;
+  transition: transform 0.3s ease; /* Smooth transition for the logo */
 }
 
 .navbar__company-name {
@@ -36,7 +44,9 @@
   font-weight: bold;
   color: #333; /* Darker color for company name */
   white-space: nowrap; /* Prevents text from wrapping */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and scale */
 }
+
 
 /* Navbar links styling */
 .navbar__links {

@@ -37,7 +37,7 @@ const Training = () => {
               <p className="training__schedule">
                 {new Date(event.event_date).toLocaleDateString()} | {event.start_time} - {event.end_time}
               </p>
-              <p className="training__fee">Fee: TBD</p>
+              <p className="training__fee">Fee: ${event.price ? event.price : 'TBD'}</p>
               <button className="training__button">Register</button>
             </div>
 
@@ -57,6 +57,7 @@ const Training = () => {
 };
 
 export default Training;
+
 
 
 
