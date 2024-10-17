@@ -1,28 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Speakers.scss';
 
-const speakersData = [
-  { id: 1, name: 'Carla Brown', location: 'California', image: '/IMG_2698_edited (8).webp' },
-  { id: 2, name: 'Tiffany Caudill', location: 'Sacramento, California', image: '/IMG_2698_edited (4).webp' },
-  { id: 3, name: 'Tamar Cohen', location: 'Richmond, BC', image: '/IMG_2698_edited (5).webp' },
-  { id: 4, name: 'Albert Nerenberg', location: 'Kingston, Ontario', image: '/IMG_2698_edited.webp' },
-  { id: 5, name: 'Pearl Wintonlow', location: 'Steinbach, Manitoba', image: '/IMG_2698_edited (7).webp' },
-  { id: 6, name: 'Marin McCue', location: 'Calgary, Alberta', image: '/IMG_2698_edited (6).webp' },
-  { id: 7, name: 'Dean Estrella', location: 'Calgary, Alberta', image: '/IMG_2698_edited (2).webp' },
-  { id: 8, name: 'Rolande Kirouac', location: 'Winnipeg, Manitoba', image: '/IMG_2698_edited (3).webp' },
-  { id: 9, name: 'Angelique Dougle', location: 'Medicine Hat, Alberta', image: '/IMG_2698_edited (1).webp' }
-];
-
 const Speakers = () => {
+  const [speakers, setSpeakers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch speakers from the backend when the component mounts
+  useEffect(() => {
+    const fetchSpeakers = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/Speakers'); // Make sure the backend route is correct
+        setSpeakers(response.data.events); // Update state with the fetched speakers
+        setLoading(false); // Turn off loading spinner
+      } catch (error) {
+        console.error('Error fetching speakers:', error);
+        setError('Error fetching speakers');
+        setLoading(false); // Turn off loading spinner even in case of error
+      }
+    };
+
+    fetchSpeakers();
+  }, []);
+
+  if (loading) {
+    return <div className="speakers__loading">Loading speakers...</div>;
+  }
+
+  if (error) {
+    return <div className="speakers__error">{error}</div>;
+  }
+
   return (
     <div className="speakers">
       <h1 className="speakers__heading">Speakers</h1>
       <div className="speakers__list">
-        {speakersData.map((speaker) => (
-          <div key={speaker.id} className="speakers__card">
-            <img src={speaker.image} alt={speaker.name} className="speakers__image" />
-            <h3 className="speakers__name">{speaker.name}</h3>
-            <p className="speakers__location">{speaker.location}</p>
+        {speakers.map((speaker) => (
+          <div key={speaker.speaker_id} className="speakers__card">
+            <img
+              src={`/assets/${speaker.speaker_id}.webp`} // Assuming image naming convention based on speaker_id
+              alt={speaker.first_name + ' ' + speaker.last_name}
+              className="speakers__image"
+            />
+            <h3 className="speakers__name">
+              {speaker.first_name} {speaker.last_name}
+            </h3>
+            <p className="speakers__location">{speaker.speaker_location}</p>
           </div>
         ))}
       </div>
