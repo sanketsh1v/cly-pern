@@ -138,7 +138,7 @@ a {
 
 button {
   background-color: $accent-gold; // Warm yellow for buttons
-  color: $primary-purple; // Purple text for contrast
+  color: $accent-gold; // Purple text for contrast
   padding: 12px 24px;
   border-radius: 1.5rem;
   font-size: 1.1rem;
@@ -167,4 +167,9 @@ button {
 }
 .heading-2{
   font-size:large ;
+}
+
+.donation-button{
+  color: $primary-purple;
+  background-color: $accent-gold;
 }

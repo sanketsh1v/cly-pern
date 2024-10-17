@@ -13,6 +13,7 @@ import About from './components/about/About';
 import Pform from './components/pform/Pform';
 import BlogPage from './components/blog/blog';
 import Update from './components/update/Update';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/pform" element={<Pform />} />
         <Route path="/blog" element={<BlogPage/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         
         
       </Routes>
