@@ -31,7 +31,7 @@ const Console = () => {
       <div className="console__grid">
         <button className="console__button" onClick={() => navigate('/')}>View as User</button>
         <button className="console__button">Manage Dashboard</button>
-        <button className="console__button">Update Schedule</button>
+        <button className="console__button" onClick={() => navigate('/update')}>Update Schedule</button>
         <button className="console__button">Manage User Info</button>
         <button className="console__button" onClick={handleLogout}>Log Out</button>
       </div>

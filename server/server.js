@@ -25,6 +25,21 @@ app.get('/admin-dashboard', authenticateToken, (req, res) => {
     res.json({ message: 'Welcome to the admin dashboard!' });
   });
 
+// Route to fetch Events
+app.get("/events", async (req, res) => {
+    try {
+        const db = await dbClient();
+        console.log("route ran")
+        const events = await db`SELECT * FROM events`;
+        res.json({
+            status: "Success",
+            events: events
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
 // Route to fetch Quarterly Events
 app.get("/quarterlyEvents", async (req, res) => {
     try {
@@ -116,12 +131,12 @@ app.get("/Payments", async (req, res) => {
 });
 
 // Create Event
-app.post("/Events", async (req, res) => {
-    const { event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type } = req.body;
+app.post("/createEvent", async (req, res) => {
+    const { event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price } = req.body;
     try {
         const db = await dbClient();
-        const newEvent = await db`INSERT INTO events (event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type)
-        VALUES (${event_name}, ${event_date}, ${start_time}, ${end_time}, ${event_location}, ${zoom_link}, ${event_description}, ${event_type}) RETURNING *`;
+        const newEvent = await db`INSERT INTO events (event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price)
+        VALUES (${event_name}, ${event_date}, ${start_time}, ${end_time}, ${event_location}, ${zoom_link}, ${event_description}, ${event_type}, ${price}) RETURNING *`;
         res.json({ status: "Success", event: newEvent });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
@@ -129,22 +144,35 @@ app.post("/Events", async (req, res) => {
 });
  
 // Update an existing Event
-app.put("/Events/:id", async (req, res) => {
+// Update an existing Event
+app.put('/updateEvent/:id', async (req, res) => {
     const { id } = req.params;
-    const { event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type } = req.body;
+    const { event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price } = req.body;
     try {
-        const db = await dbClient();
-        const updatedEvent = await db`UPDATE events SET event_name=${event_name}, event_date=${event_date}, start_time=${start_time},
-        end_time=${end_time}, event_location=${event_location}, zoom_link=${zoom_link}, event_description=${event_description},
-        event_type=${event_type} WHERE event_id=${id} RETURNING *`;
-        res.json({ status: "Success", event: updatedEvent });
+      const db = await dbClient();
+      const updatedEvent = await db`
+        UPDATE events 
+        SET 
+          event_name=${event_name}, 
+          event_date=${event_date}, 
+          start_time=${start_time}, 
+          end_time=${end_time}, 
+          event_location=${event_location}, 
+          zoom_link=${zoom_link}, 
+          event_description=${event_description}, 
+          event_type=${event_type}, 
+          price=${price}
+        WHERE event_id=${id}
+        RETURNING *`;
+      res.json({ status: 'Success', event: updatedEvent });
     } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
+      res.status(500).json({ status: 'Error', message: error.message });
     }
-});
+  });
+  
  
-//Delete an Event
-app.delete("/Events/:id", async (req, res) => {
+// Delete an Event
+app.delete("/deleteEvent/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const db = await dbClient();

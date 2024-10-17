@@ -12,6 +12,7 @@ import Console from './components/console/Console';
 import About from './components/about/About';
 import Pform from './components/pform/Pform';
 import BlogPage from './components/blog/blog';
+import Update from './components/update/Update';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/console" element={<Console />} />
+        <Route path="/update" element={<Update />} />
         <Route path="/about" element={<About />} />
         <Route path="/pform" element={<Pform />} />
         <Route path="/blog" element={<BlogPage/>} />
