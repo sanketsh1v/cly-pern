@@ -22,10 +22,17 @@ const Footer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+      // Map form data to match EmailJS template variable names
+      const templateParams = {
+        from_name: formData.name,    // Assuming your EmailJS template uses {{from_name}}
+        from_email: formData.email,  // Assuming your EmailJS template uses {{from_email}}
+        message: formData.message,   // Assuming your EmailJS template uses {{message}}
+      };
+
     emailjs.send(
       process.env.REACT_APP_EMAIL_SERVICE_ID,
       process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-      formData,
+      templateParams,
       process.env.REACT_APP_EMAIL_USER_ID
     )
     
