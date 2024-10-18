@@ -1,0 +1,148 @@
+.donation-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f3e8ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    color: #581c87;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .header-image-container {
+    width: 80%;
+    margin-bottom: 5rem;
+    margin-left: 5rem;
+
+    .header-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .donation-content {
+    display: flex;
+    justify-content: center; /* Centers the form horizontally */
+    align-items: center;
+    margin: 0 2rem; /* Adds margin on both sides for better spacing */
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  .donation-form {
+    width: 100%; /* Ensure it takes the full available width */
+    max-width: 500px; /* Limit the form width for better readability */
+    background-color: #fff; /* Improve contrast for the form */
+    padding: 5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    margin-bottom: 2rem; /* Ensure space between the form and button */
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #581c87;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #7e22ce;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #581c87; /* Improve text color contrast */
+      background-color: #f9f9f9; /* Softer background inside inputs */
+    }
+  }
+
+  .amount-options {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .amount-button {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #7e22ce;
+    background-color: white;
+    color: #7e22ce;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover, &.selected {
+      background-color: #7e22ce;
+      color: white;
+    }
+  }
+
+  .amount-input {
+    width: 100px;
+    padding: 0.5rem;
+    border: 2px solid #7e22ce;
+    border-radius: 4px;
+  }
+
+  .submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #7e22ce;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #581c87;
+    }
+
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the Back to Home button */
+    margin-top: 2rem; /* Add space above the button */
+  }
+
+  .thank-you-message {
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+    color: #581c87;
+  }
+}
+
+@media (max-width: 768px) {
+  .donation-content {
+    flex-direction: column;
+    margin: 0; /* Removes extra side margins for small screens */
+  }
+
+  .donation-form {
+    padding: 3rem; /* Reduce padding for smaller screens */
+  }
+
+  .button-container {
+    margin-top: 1rem; /* Reduce margin-top on smaller screens */
+  }
+}
