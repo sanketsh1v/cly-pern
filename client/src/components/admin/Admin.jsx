@@ -4,7 +4,7 @@ import './Admin.scss';
 
 const Admin = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const [error, setError] = useState('');
@@ -28,19 +28,21 @@ const Admin = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        navigate('/console');
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
+        throw new Error(errorData.message || 'Login failed');
       }
+
+      const data = await response.json();
+      // Handle successful login
+      localStorage.setItem('token', data.token);
+      navigate('/console');
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      console.error('Login error:', error);
+      setError(error.message || 'An error occurred. Please try again.');
     }
   };
 
@@ -59,10 +61,10 @@ const Admin = () => {
         <form onSubmit={handleSubmit} className="admin-login__form">
           <div className="admin-login__input-group">
             <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
               onChange={handleChange}
               required
             />

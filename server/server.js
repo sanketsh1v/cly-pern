@@ -1,4 +1,3 @@
-// const serverless = require("serverless-http");
 require('dotenv').config();
 const express = require("express");
 const { neon } = require('@neondatabase/serverless');
@@ -6,24 +5,49 @@ const app = express();
 const authRoutes = require('./authRoutes');
 const authenticateToken = require('./authMiddleware');
 const morgan = require('morgan');
-
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+
 app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'));
 
-
-// Database client connection- traverse
+// Database client connection
 async function dbClient() {
     const sql = neon(process.env.DATABASE_URL);
     return sql;
 }
 
-app.use(express.json());
+// Function to hash passwords
+async function hashPassword(password) {
+  const saltRounds = 10;
+  return await bcrypt.hash(password, saltRounds);
+}
+
+// Use auth routes
 app.use('/auth', authRoutes);
+
+// Route to create an admin user
+app.post('/auth/create-admin', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const db = await dbClient();
+    const hashedPassword = await hashPassword(password);
+    const newAdmin = await db`
+      INSERT INTO admins (email, password_hash)
+      VALUES (${email}, ${hashedPassword})
+      RETURNING admin_id, email
+    `;
+    res.json({ status: "Success", admin: newAdmin[0] });
+  } catch (error) {
+    res.status(500).json({ status: "Error", message: error.message });
+  }
+});
 
 // Protected admin dashboard route
 app.get('/admin-dashboard', authenticateToken, (req, res) => {
     res.json({ message: 'Welcome to the admin dashboard!' });
-  });
+});
 
 // Route to fetch Events
 app.get("/events", async (req, res) => {
@@ -45,7 +69,7 @@ app.get("/quarterlyEvents", async (req, res) => {
     try {
         const db = await dbClient();
         console.log("route ran")
-        const events = await db`SELECT * FROM events WHERE event_type = 'quarterly'`; // Adjust query based on your data
+        const events = await db`SELECT * FROM events WHERE event_type = 'quarterly'`;
         res.json({
             status: "Success",
             events: events
@@ -76,7 +100,7 @@ app.get("/weeklyEvents", async (req, res) => {
         const db = await dbClient();
         console.log("route ran");
         const events = await db`SELECT * FROM events WHERE event_type = 'weekly'`;
-        console.log(events); // Add this to check the data being fetched
+        console.log(events);
         res.json({
             status: "Success",
             events: events
@@ -92,7 +116,7 @@ app.get("/trainingCourses", async (req, res) => {
         const db = await dbClient();
         console.log("route ran");
         const events = await db`SELECT * FROM events WHERE event_type = 'training'`;
-        console.log(events); // Add this to check the data being fetched
+        console.log(events);
         res.json({
             status: "Success",
             events: events
@@ -106,7 +130,7 @@ app.get("/trainingCourses", async (req, res) => {
 app.get("/Speakers", async (req, res) => {
     try {
         const db = await dbClient();
-        const speakers = await db`SELECT * FROM speakers`; // Adjust query based on your data
+        const speakers = await db`SELECT * FROM speakers`;
         res.json({
             status: "Success",
             events: speakers
@@ -120,7 +144,7 @@ app.get("/Speakers", async (req, res) => {
 app.get("/Payments", async (req, res) => {
     try {
         const db = await dbClient();
-        const payments = await db`SELECT * FROM payments`; // Adjust query based on your data
+        const payments = await db`SELECT * FROM payments`;
         res.json({
             status: "Success",
             events: payments
@@ -143,7 +167,6 @@ app.post("/createEvent", async (req, res) => {
     }
 });
  
-// Update an existing Event
 // Update an existing Event
 app.put('/updateEvent/:id', async (req, res) => {
     const { id } = req.params;
@@ -168,9 +191,8 @@ app.put('/updateEvent/:id', async (req, res) => {
     } catch (error) {
       res.status(500).json({ status: 'Error', message: error.message });
     }
-  });
+});
   
- 
 // Delete an Event
 app.delete("/deleteEvent/:id", async (req, res) => {
     const { id } = req.params;
@@ -298,6 +320,16 @@ app.delete("/TrainingCourses/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
     }
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    status: "Error",
+    message: "Something went wrong!",
+    error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : err.toString()
+  });
 });
 
 const port = process.env.PORT || 3001;
