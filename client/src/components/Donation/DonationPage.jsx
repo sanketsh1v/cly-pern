@@ -1,18 +1,42 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { DollarSign } from 'lucide-react';
+import axios from 'axios'; // Import Axios
 import './DonationPage.scss';
 
 const DonationPage = () => {
-  const [amount, setAmount] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [donationAmount, setDonationAmount] = useState('');
+  const [paymentReference, setPaymentReference] = useState(''); // Add payment reference
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle donation submission logic here
-    console.log('Donation submitted:', { amount, name, email });
+    setError('');  // Clear any previous error messages
+    setMessage(''); // Clear any previous success messages
+
+    try {
+      // Send donation data to the backend
+      const response = await axios.post('http://localhost:4000/api/donate', {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        donation_amount: donationAmount,
+        payment_reference: paymentReference || 'AUTO123', // Generate or provide a payment reference
+      });
+
+      // Display success message
+      setMessage(response.data.message);
+    } catch (error) {
+      // Display error message if the request fails
+      if (error.response && error.response.data) {
+        setError(error.response.data.message);
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+    }
   };
 
   return (
@@ -26,65 +50,68 @@ const DonationPage = () => {
       <div className="donation-content">
         <form onSubmit={handleSubmit} className="donation-form">
           <div className="form-group">
-            <label>Select Amount:</label>
-            <div className="amount-options">
-              {['10', '25', '50', '100'].map((value) => (
-                <button
-                  key={value}
-                  type="button"
-                  className={`amount-button ${amount === value ? 'selected' : ''}`}
-                  onClick={() => setAmount(value)}
-                >
-                  ${value}
-                </button>
-              ))}
-              <input
-                type="number"
-                placeholder="Enter Amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="amount-input"
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
+            <label>First Name:</label>
             <input
               type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email:</label>
             <input
               type="email"
-              id="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
+          <div className="form-group">
+            <label>Donation Amount:</label>
+            <input
+              type="number"
+              placeholder="Donation Amount"
+              value={donationAmount}
+              onChange={(e) => setDonationAmount(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Payment Reference (Optional):</label>
+            <input
+              type="text"
+              placeholder="Payment Reference"
+              value={paymentReference}
+              onChange={(e) => setPaymentReference(e.target.value)}
+            />
+          </div>
+
+          {/* Display success or error messages */}
+          {message && <p className="success-message">{message}</p>}
+          {error && <p className="error-message">{error}</p>}
+
           <button type="submit" className="submit-button">
             <DollarSign className="icon" />
             Donate Now
           </button>
         </form>
-
-        {/* Place the Back to Home button at the end */}
-        <div className="button-container">
-          <button
-            onClick={() => navigate('/')} // Navigate to home page on click
-            className="bg-black text-white px-8 py-2 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors duration-300 mt-4"
-          >
-            Back to Home
-          </button>
-        </div>
       </div>
 
       <p className="thank-you-message">Thank you for supporting our community!</p>
