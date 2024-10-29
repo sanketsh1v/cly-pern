@@ -68,4 +68,11 @@
     color: rgb(253, 239, 221); // Light font color for location text as well
     transition: color 0.2s ease;
   }
+
+  &__expertise,
+  &__email {
+    font-size: 1rem;
+    color: rgb(253, 239, 221); // Matching light font color for expertise and email
+    transition: color 0.2s ease;
+  }
 }

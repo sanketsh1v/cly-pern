@@ -126,19 +126,20 @@ app.get("/trainingCourses", async (req, res) => {
     }
 });
 
-// Route to fetch Speakers
+// Route to fetch all Speakers
 app.get("/Speakers", async (req, res) => {
     try {
         const db = await dbClient();
-        const speakers = await db`SELECT * FROM speakers`;
+        const speakers = await db`SELECT * FROM speakers`; // Fetch all speaker fields, including image_path
         res.json({
             status: "Success",
-            events: speakers
+            events: speakers // Assuming 'events' is used in your frontend to store the speaker data
         });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
+
 
 // Route to fetch Payments
 app.get("/Payments", async (req, res) => {
@@ -205,32 +206,91 @@ app.delete("/deleteEvent/:id", async (req, res) => {
     }
 });
  
-// Create a New Speaker
-app.post("/Speakers", async (req, res) => {
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Configure Cloudinary Storage for Multer
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: '',
+    allowedFormats: ['jpg', 'png', 'jpeg']
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/Speakers', upload.single('image'), async (req, res) => {
     const { first_name, last_name, email, speaker_location, expertise } = req.body;
+
     try {
+        // Check if image was uploaded successfully
+        let imageUrl = null;
+        if (req.file && req.file.path) {
+            imageUrl = req.file.path; // Use Cloudinary secure URL
+        }
+
+        // Insert the speaker details along with the image URL into the database
         const db = await dbClient();
-        const newSpeaker = await db`INSERT INTO speakers (first_name, last_name, email, speaker_location, expertise)
-        VALUES (${first_name}, ${last_name}, ${email}, ${speaker_location}, ${expertise}) RETURNING *`;
-        res.json({ status: "Success", speaker: newSpeaker });
+        const newSpeaker = await db`
+            INSERT INTO speakers (first_name, last_name, email, speaker_location, expertise, image_path)
+            VALUES (${first_name}, ${last_name}, ${email}, ${speaker_location}, ${expertise}, ${imageUrl})
+            RETURNING *`;
+
+        // Send a success response with the newly created speaker
+        res.json({ status: 'Success', speaker: newSpeaker });
     } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
+        res.status(500).json({ status: 'Error', message: error.message });
     }
 });
+
+
  
 // Update an existing Speaker
 app.put("/Speakers/:id", async (req, res) => {
     const { id } = req.params;
-    const { first_name, last_name, email, speaker_location, expertise } = req.body;
+    const { first_name, last_name, email, speaker_location, expertise, image_path } = req.body;
+
     try {
         const db = await dbClient();
-        const updatedSpeaker = await db`UPDATE speakers SET first_name=${first_name}, last_name=${last_name}, email=${email},
-        speaker_location=${speaker_location}, expertise=${expertise} WHERE speaker_id=${id} RETURNING *`;
-        res.json({ status: "Success", speaker: updatedSpeaker });
+
+        // Base query with required fields
+        let query = `
+            UPDATE speakers
+            SET first_name = $1, last_name = $2, email = $3, speaker_location = $4, expertise = $5
+        `;
+
+        // Parameters array for the base query
+        const params = [first_name, last_name, email, speaker_location, expertise];
+
+        // Conditionally add image_path if provided
+        if (image_path) {
+            query += `, image_path = $6`;
+            params.push(image_path); // Add image_path to the params array
+        }
+
+        // Complete the query with the WHERE clause
+        query += ` WHERE speaker_id = $${params.length + 1} RETURNING *`; // Ensure the next parameter is the id
+        params.push(id); // Add the id as the last parameter
+
+        // Execute the query
+        const updatedSpeaker = await db.query(query, params);
+        
+        res.json({ status: "Success", speaker: updatedSpeaker.rows[0] }); // Return the updated speaker
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
+
+
  
 // Delete a Speaker
 app.delete("/Speakers/:id", async (req, res) => {
