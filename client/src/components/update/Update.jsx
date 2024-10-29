@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Using react-router-dom for navigation
+import { useNavigate } from 'react-router-dom';
 import './Update.scss';
 import CreateEventModal from './CreateEventModal';
 import UpdateEventModal from './UpdateEventModal';
@@ -11,14 +11,14 @@ const Update = () => {
 
   // Function to check if the admin is logged in
   const checkAdminAuth = () => {
-    const token = localStorage.getItem('token'); // Assuming the token is stored as 'token' in localStorage
+    const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/admin'); // Redirect to login page if not authenticated
+      navigate('/admin');
     }
   };
 
   useEffect(() => {
-    checkAdminAuth(); // Check if admin is authenticated on component load
+    checkAdminAuth();
   }, []);
 
   const openModal = (modalType) => {
@@ -32,6 +32,7 @@ const Update = () => {
   return (
     <div className="admin-console">
       <div className="admin-sidebar">
+        <h2>Admin Panel</h2>
         <ul>
           <li onClick={() => openModal('create')}>Create Event</li>
           <li onClick={() => openModal('update')}>Update Event</li>
@@ -49,4 +50,5 @@ const Update = () => {
 };
 
 export default Update;
+
 
