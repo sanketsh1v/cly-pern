@@ -12,13 +12,15 @@
     "@neondatabase/serverless": "^0.9.5",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.453.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "square": "^38.2.0"
   },
   "description": ""
 }
