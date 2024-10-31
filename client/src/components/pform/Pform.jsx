@@ -1,16 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Pform.scss';
 
 const PaymentForm = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const amount = queryParams.get('amount');
+  const eventName = queryParams.get('eventName');
+  const ticketCount = queryParams.get('ticketCount');
+  const ticketPrice = queryParams.get('ticketPrice');
+  const donation = queryParams.get('donation');
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     contactNumber: '',
-    amount: '',
+    amount: amount || '',
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const EventDetailsCard = () => {
+    // Calculate totals
+    const baseTicketTotal = Number(ticketCount) * Number(ticketPrice);
+    const ticketTotalWithTaxes = baseTicketTotal * 1.07625; // Including GST (5%) and Service Fee (2.625%)
+    const donationAmount = Number(donation);
+
+    return (
+      <div className="payment-form__event-details">
+        <h2>Event Summary</h2>
+        <div className="event-info">
+          <p className="event-name">{decodeURIComponent(eventName)}</p>
+          <div className="amount-breakdown">
+            <div className="summary-line">
+              <span>Tickets Total (inc. taxes):</span>
+              <span>${ticketTotalWithTaxes.toFixed(2)}</span>
+            </div>
+            
+            {donationAmount > 0 && (
+              <div className="summary-line">
+                <span>Donation:</span>
+                <span>${donationAmount.toFixed(2)}</span>
+              </div>
+            )}
+
+            <div className="total-line">
+              <span>Final Total:</span>
+              <span>${Number(amount).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,6 +110,9 @@ const PaymentForm = () => {
     <div className="payment-form">
       <div className="payment-form__container">
         <h1 className="payment-form__title">Payment Details</h1>
+        
+        <EventDetailsCard />
+
         <form onSubmit={handleSubmit} className="payment-form__form">
           <div className="payment-form__input-group">
             <input
@@ -107,7 +153,7 @@ const PaymentForm = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="payment-form__input-group">
+          {/* <div className="payment-form__input-group">
             <input
               type="number"
               name="amount"
@@ -118,7 +164,7 @@ const PaymentForm = () => {
               min="1"
               step="0.01"
             />
-          </div>
+          </div> */}
           <button 
             type="submit" 
             className="payment-form__button"

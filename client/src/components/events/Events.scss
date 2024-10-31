@@ -161,13 +161,11 @@ $button-hover: #452e75;
     }
 
     .price-amount {
-      font-size: 2.5rem; // Large font size for emphasis
-      color: $primary-purple; // Use primary purple for the price color
-      font-weight: bold; // Make the price stand out with bold text
-      margin-bottom: 1rem; // Add space below the price
-      text-align: center; // Center the price text
-    
-      // Optional: Add a subtle shadow for emphasis
+      font-size: 2.5rem;
+      color: $primary-purple;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
       text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     }
     
@@ -186,7 +184,7 @@ $button-hover: #452e75;
 
     .price-amount {
       font-size: 2rem;
-      color:rgb(253, 251, 227);
+      // color:rgb(253, 251, 227);
       font-weight: 700;
 
     }

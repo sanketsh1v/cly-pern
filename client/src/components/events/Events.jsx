@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Events.scss';
+import { Link } from 'react-router-dom';
 
 const Events = () => {
   const gstRate = 0.05;
@@ -28,25 +29,36 @@ const Events = () => {
   useEffect(() => {
     const calculateTotal = () => {
       if (quarterlyEvents.length > 0) {
-        const eventPrice = quarterlyEvents[0].price;
+        const eventPrice = Number(quarterlyEvents[0].price) || 0;
         const gst = eventPrice * gstRate;
         const serviceFee = eventPrice * serviceFeeRate;
-        const ticketTotal = regularTicketCount * (eventPrice + gst + serviceFee);
-        setTotalAmount(ticketTotal + sponsorshipAmount);
+        const singleTicketTotal = eventPrice + gst + serviceFee;
+        
+        const ticketTotal = Number(regularTicketCount) * singleTicketTotal;
+        
+        const sponsorshipValue = Number(sponsorshipAmount) || 0;
+        
+        const finalTotal = ticketTotal + sponsorshipValue;
+        
+        if (!isNaN(finalTotal)) {
+          setTotalAmount(finalTotal);
+        } else {
+          setTotalAmount(0);
+        }
       }
     };
     calculateTotal();
-  }, [regularTicketCount, sponsorshipAmount, quarterlyEvents]);
+  }, [regularTicketCount, sponsorshipAmount, quarterlyEvents, gstRate, serviceFeeRate]);
 
   const handleRegularIncrement = () => setRegularTicketCount(regularTicketCount + 1);
   const handleRegularDecrement = () => regularTicketCount > 0 && setRegularTicketCount(regularTicketCount - 1);
-  const handleSponsorshipIncrement = () => setSponsorshipAmount(sponsorshipAmount + 1);
-  const handleSponsorshipDecrement = () => sponsorshipAmount > 0 && setSponsorshipAmount(sponsorshipAmount - 1);
+  const handleSponsorshipIncrement = () => setSponsorshipAmount(Number(sponsorshipAmount) + 1);
+  const handleSponsorshipDecrement = () => sponsorshipAmount > 0 && setSponsorshipAmount(Number(sponsorshipAmount) - 1);
   const handleCustomAmountChange = (event) => setCustomAmount(event.target.value);
   const handleSetCustomAmount = () => {
     const amount = parseFloat(customAmount);
     if (!isNaN(amount) && amount >= 0) {
-      setSponsorshipAmount(amount);
+      setSponsorshipAmount(Number(amount));
       setCustomAmount('');
     }
   };
@@ -152,7 +164,14 @@ const Events = () => {
 
             <div className="events__checkout">
               <p className="total-amount">Total Amount: ${totalAmount.toFixed(2)}</p>
-              <a href='/Pform'>Checkout</a>
+              <Link 
+                to={{
+                  pathname: '/Pform',
+                  search: `?amount=${totalAmount}&eventName=${encodeURIComponent(quarterlyEvents[0].event_name)}&ticketCount=${regularTicketCount}&ticketPrice=${quarterlyEvents[0].price}&donation=${sponsorshipAmount}`
+                }}
+              >
+                Checkout
+              </Link>
             </div>
           </div>
         ))

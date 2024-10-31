@@ -68,6 +68,12 @@ $button-hover: #452e75;
         border-color: $accent-gold; // Accent color on focus
         background-color: rgba(255, 255, 255, 0.15);
       }
+
+      &:disabled {
+        background-color: rgba(255, 255, 255, 0.05);
+        cursor: not-allowed;
+        color: rgba(255, 255, 255, 0.7);
+      }
     }
   }
 
@@ -132,6 +138,60 @@ $button-hover: #452e75;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
+    }
+  }
+
+  &__event-details {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    width: 80%;
+    border: 2px solid $accent-gold;
+
+    h2 {
+      color: $accent-gold;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .event-info {
+      .event-name {
+        color: $text-light;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .amount-breakdown {
+        margin-top: 1rem;
+        
+        .summary-line {
+          display: flex;
+          justify-content: space-between;
+          color: $text-light;
+          margin: 0.5rem 0;
+          padding: 0.5rem 0;
+          
+          span:last-child {
+            color: $accent-gold;
+            font-weight: 500;
+          }
+        }
+
+        .total-line {
+          display: flex;
+          justify-content: space-between;
+          color: $accent-gold;
+          font-weight: bold;
+          font-size: 1.2rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 2px solid $accent-gold;
+        }
+      }
     }
   }
 }
