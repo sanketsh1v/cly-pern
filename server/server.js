@@ -10,6 +10,28 @@ const bcrypt = require('bcrypt');
 const { client: squareClient, locationId } = require('./config/squareConfig');
 const crypto = require('crypto');
 
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Configure Cloudinary Storage for Multer
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: '',
+    allowedFormats: ['jpg', 'png', 'jpeg']
+  }
+});
+
+const upload = multer({ storage: storage });
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
@@ -158,15 +180,26 @@ app.get("/Payments", async (req, res) => {
 });
 
 // Create Event
-app.post("/createEvent", async (req, res) => {
+app.post('/createEvent', upload.single('image'), async (req, res) => {
     const { event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price } = req.body;
+
     try {
+        // Store the uploaded image's URL in imageUrl
+        let imageUrl = null;
+        if (req.file && req.file.path) {
+            imageUrl = req.file.path; // Use Cloudinary secure URL
+        }
+
+        // Insert event details along with the image URL into the database
         const db = await dbClient();
-        const newEvent = await db`INSERT INTO events (event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price)
-        VALUES (${event_name}, ${event_date}, ${start_time}, ${end_time}, ${event_location}, ${zoom_link}, ${event_description}, ${event_type}, ${price}) RETURNING *`;
-        res.json({ status: "Success", event: newEvent });
+        const newEvent = await db`
+        INSERT INTO events (event_name, event_date, start_time, end_time, event_location, zoom_link, event_description, event_type, price, image_url)
+        VALUES (${event_name}, ${event_date}, ${start_time}, ${end_time}, ${event_location}, ${zoom_link}, ${event_description}, ${event_type}, ${price}, ${imageUrl})
+        RETURNING *`;
+
+        res.json({ status: 'Success', event: newEvent });
     } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
+        res.status(500).json({ status: 'Error', message: error.message });
     }
 });
  
@@ -208,27 +241,6 @@ app.delete("/deleteEvent/:id", async (req, res) => {
     }
 });
  
-const cloudinary = require('cloudinary').v2;
-const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
-
-// Configure Cloudinary Storage for Multer
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: '',
-    allowedFormats: ['jpg', 'png', 'jpeg']
-  }
-});
-
-const upload = multer({ storage: storage });
 
 app.post('/Speakers', upload.single('image'), async (req, res) => {
     const { first_name, last_name, email, speaker_location, expertise } = req.body;
@@ -254,46 +266,40 @@ app.post('/Speakers', upload.single('image'), async (req, res) => {
     }
 });
 
-
- 
-// Update an existing Speaker
-app.put("/Speakers/:id", async (req, res) => {
+// Update an existing Speaker (without updating the image)
+app.put("/updateSpeaker/:id", async (req, res) => {
     const { id } = req.params;
-    const { first_name, last_name, email, speaker_location, expertise, image_path } = req.body;
+    const { first_name, last_name, email, speaker_location, expertise } = req.body;
+
+    // Validate the request body to ensure required fields are provided
+    if (!first_name || !email || !speaker_location) {
+        return res.status(400).json({ error: "Missing required fields: first_name, email, and speaker_location." });
+    }
 
     try {
-        const db = await dbClient();
+        const sql = await dbClient();
+        const result = await sql`UPDATE speakers
+                                 SET first_name = ${first_name}, 
+                                     last_name = ${last_name}, 
+                                     email = ${email}, 
+                                     speaker_location = ${speaker_location}, 
+                                     expertise = ${expertise}
+                                 WHERE speaker_id = ${id}
+                                 RETURNING *`;
 
-        // Base query with required fields
-        let query = `
-            UPDATE speakers
-            SET first_name = $1, last_name = $2, email = $3, speaker_location = $4, expertise = $5
-        `;
-
-        // Parameters array for the base query
-        const params = [first_name, last_name, email, speaker_location, expertise];
-
-        // Conditionally add image_path if provided
-        if (image_path) {
-            query += `, image_path = $6`;
-            params.push(image_path); // Add image_path to the params array
+        if (result.length === 0) {
+            return res.status(404).json({ error: "Speaker not found" });
         }
 
-        // Complete the query with the WHERE clause
-        query += ` WHERE speaker_id = $${params.length + 1} RETURNING *`; // Ensure the next parameter is the id
-        params.push(id); // Add the id as the last parameter
-
-        // Execute the query
-        const updatedSpeaker = await db.query(query, params);
-        
-        res.json({ status: "Success", speaker: updatedSpeaker.rows[0] }); // Return the updated speaker
-    } catch (error) {
-        res.status(500).json({ status: "Error", message: error.message });
+        res.json(result[0]); // Return the updated speaker
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
 
- 
+
 // Delete a Speaker
 app.delete("/Speakers/:id", async (req, res) => {
     const { id } = req.params;

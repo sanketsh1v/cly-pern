@@ -13,27 +13,53 @@ const CreateEventModal = ({ onClose }) => {
     event_description: '',
     event_type: '',
     price: '',
+    image: null, // Image file for Cloudinary upload
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, files } = e.target;
+    if (name === 'image') {
+      // Handle file input for the image
+      setFormData((prevData) => ({
+        ...prevData,
+        image: files[0], // Set the selected file
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
 
+    // Prepare form data for submission, including the image file
+    const eventFormData = new FormData();
+    eventFormData.append('event_name', formData.event_name);
+    eventFormData.append('event_date', formData.event_date);
+    eventFormData.append('start_time', formData.start_time);
+    eventFormData.append('end_time', formData.end_time);
+    eventFormData.append('event_location', formData.event_location);
+    eventFormData.append('zoom_link', formData.zoom_link);
+    eventFormData.append('event_description', formData.event_description);
+    eventFormData.append('event_type', formData.event_type);
+    eventFormData.append('price', formData.price);
+
+    // Append image only if it exists
+    if (formData.image) {
+      eventFormData.append('image', formData.image);
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:4000/createEvent', // Full URL to the backend server
-        formData,
+        eventFormData,
         {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data', // Required for file upload
             'Authorization': `Bearer ${token}`, // Send the token in Authorization header
           },
         }
@@ -122,7 +148,13 @@ const CreateEventModal = ({ onClose }) => {
             onChange={handleChange}
             value={formData.price}
           />
-
+          {/* File input for image */}
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            accept="image/*"
+          />
           <button type="submit">Create Event</button>
         </form>
         <button className="close-btn" onClick={onClose}>

@@ -53,37 +53,39 @@ const ManageSpeakers = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('first_name', newSpeaker.first_name);
-    formData.append('last_name', newSpeaker.last_name);
-    formData.append('email', newSpeaker.email);
-    formData.append('speaker_location', newSpeaker.speaker_location);
-    formData.append('expertise', newSpeaker.expertise);
-
-    // Handle the image upload only if a new image is selected
-    if (newSpeaker.image) {
-      formData.append('image', newSpeaker.image); // Append the image file
-    } else {
-      // Append the existing image_path for update
-      formData.append('image_path', newSpeaker.image_path);
-    }
-
     try {
       if (isEditingSpeaker) {
-        // Update an existing speaker
-        const response = await axios.put(`http://localhost:4000/Speakers/${isEditingSpeaker}`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        // Update an existing speaker without including the image
+        const response = await axios.put(`http://localhost:4000/updateSpeaker/${isEditingSpeaker}`, {
+          first_name: newSpeaker.first_name,
+          last_name: newSpeaker.last_name,
+          email: newSpeaker.email,
+          speaker_location: newSpeaker.speaker_location,
+          expertise: newSpeaker.expertise
         });
-        setSpeakers(speakers.map((s) => (s.speaker_id === isEditingSpeaker ? response.data.speaker : s)));
+        setSpeakers(speakers.map((s) => (s.speaker_id === isEditingSpeaker ? response.data : s)));
         setIsEditingSpeaker(null); // Clear editing state
       } else {
         // Add a new speaker
+        const formData = new FormData();
+        formData.append('first_name', newSpeaker.first_name);
+        formData.append('last_name', newSpeaker.last_name);
+        formData.append('email', newSpeaker.email);
+        formData.append('speaker_location', newSpeaker.speaker_location);
+        formData.append('expertise', newSpeaker.expertise);
+        
+        // Only append the image if we are adding a new speaker
+        if (newSpeaker.image) {
+          formData.append('image', newSpeaker.image); // Append the image file only for new speakers
+        }
+
         const response = await axios.post('http://localhost:4000/Speakers', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         setSpeakers([...speakers, response.data.speaker]); // Add new speaker to the list
       }
 
+      // Reset the form fields
       setNewSpeaker({
         first_name: '',
         last_name: '',
@@ -174,12 +176,15 @@ const ManageSpeakers = () => {
             onChange={handleInputChange}
             placeholder="Expertise"
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-            accept="image/*"
-          />
+          {/* Only show the image input when adding a new speaker */}
+          {!isEditingSpeaker && (
+            <input
+              type="file"
+              name="image"
+              onChange={handleInputChange}
+              accept="image/*"
+            />
+          )}
           <button type="submit">{isEditingSpeaker ? 'Update Speaker' : 'Add Speaker'}</button>
           <button type="button" onClick={() => setIsAddingNewSpeaker(false)}>Cancel</button>
         </form>
