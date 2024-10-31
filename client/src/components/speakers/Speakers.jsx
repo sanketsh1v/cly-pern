@@ -38,15 +38,19 @@ const Speakers = () => {
       <div className="speakers__list">
         {speakers.map((speaker) => (
           <div key={speaker.speaker_id} className="speakers__card">
-            <img
-              src={`/assets/${speaker.speaker_id}.webp`} // Assuming image naming convention based on speaker_id
-              alt={speaker.first_name + ' ' + speaker.last_name}
-              className="speakers__image"
-            />
+            {speaker.image_path && (
+              <img
+                src={speaker.image_path} // Use Cloudinary image URL from image_path
+                alt={`${speaker.first_name} ${speaker.last_name}`}
+                className="speakers__image"
+              />
+            )}
             <h3 className="speakers__name">
               {speaker.first_name} {speaker.last_name}
             </h3>
             <p className="speakers__location">{speaker.speaker_location}</p>
+            <p className="speakers__expertise">{speaker.expertise || 'N/A'}</p>
+            <p className="speakers__email">{speaker.email}</p>
           </div>
         ))}
       </div>
