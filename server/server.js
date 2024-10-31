@@ -7,6 +7,8 @@ const authenticateToken = require('./authMiddleware');
 const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const { client: squareClient, locationId } = require('./config/squareConfig');
+const crypto = require('crypto');
 
 app.use(cors());
 app.use(express.json());
@@ -379,6 +381,133 @@ app.delete("/TrainingCourses/:id", async (req, res) => {
         res.json({ status: "Success", message: `Training course with ID ${id} has been deleted.` });
     } catch (error) {
         res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Process Square Payment
+app.post("/process-payment", async (req, res) => {
+    const { 
+        sourceId, 
+        amount,
+        firstName,
+        lastName,
+        email
+    } = req.body;
+
+    try {
+        const db = await dbClient();
+        
+        // Process payment with Square
+        const payment = await squareClient.paymentsApi.createPayment({
+            sourceId: sourceId,
+            idempotencyKey: crypto.randomUUID(),
+            amountMoney: {
+                amount: parseInt(amount * 100), // Convert dollars to cents
+                currency: 'USD'
+            },
+            buyerEmailAddress: email,
+            note: `Donation from ${firstName} ${lastName}`
+        });
+
+        // Record payment in database
+        const newPayment = await db`
+            INSERT INTO payments (
+                payment_type,
+                first_name,
+                last_name,
+                email,
+                amount_paid,
+                payment_reference,
+                payment_date
+            )
+            VALUES (
+                'donation',
+                ${firstName},
+                ${lastName},
+                ${email},
+                ${amount},
+                ${payment.result.payment.id},
+                NOW()
+            )
+            RETURNING *
+        `;
+
+        res.json({ 
+            status: "Success", 
+            payment: payment.result.payment,
+            paymentRecord: newPayment[0]
+        });
+
+    } catch (error) {
+        console.error('Payment Error:', error);
+        res.status(500).json({ 
+            status: "Error", 
+            message: error.message || 'Payment processing failed'
+        });
+    }
+});
+
+// Create Square Payment Link
+app.post("/create-payment-link", async (req, res) => {
+    try {
+        const { 
+            firstName,
+            lastName,
+            email,
+            contactNumber,
+            amount 
+        } = req.body;
+
+        console.log('Received payment request:', req.body);
+        console.log('Using location ID:', locationId); // Debug log
+
+        if (!amount) {
+            throw new Error('Amount is required');
+        }
+
+        if (!locationId) {
+            throw new Error('Square location ID is not configured');
+        }
+
+        const response = await squareClient.checkoutApi.createPaymentLink({
+            quickPay: {
+                name: "Calgary Laughter Yoga Payment",
+                priceMoney: {
+                    amount: parseInt(parseFloat(amount) * 100),
+                    currency: 'CAD'
+                },
+                locationId: locationId
+            },
+            prePopulatedData: {
+                buyerEmail: email,
+                buyerFirstName: firstName,
+                buyerLastName: lastName,
+                ...(contactNumber && { buyerPhoneNumber: contactNumber })
+            },
+            redirectUrl: `${process.env.CLIENT_URL}/payment-status?status=success`,
+            checkoutOptions: {
+                redirectUrl: `${process.env.CLIENT_URL}/payment-status?status=success`,
+                askForShippingAddress: false,
+            }
+        });
+
+        console.log('Square API Response:', response);
+
+        if (!response?.result?.paymentLink?.url) {
+            throw new Error('Failed to generate payment link');
+        }
+
+        res.json({ 
+            status: "Success", 
+            paymentLink: response.result.paymentLink.url 
+        });
+    } catch (error) {
+        console.error('Payment Link Error:', error);
+        res.status(500).json({ 
+            status: "Error", 
+            message: error.message || 'Failed to create payment link',
+            details: error.details || {}
+        });
     }
 });
 

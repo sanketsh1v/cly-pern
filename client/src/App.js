@@ -14,6 +14,7 @@ import Pform from './components/pform/Pform';
 import BlogPage from './components/blog/blog';
 import Update from './components/update/Update';
 import Dashboard from './components/dashboard/Dashboard';
+import PaymentStatus from './components/PaymentStatus/PaymentStatus';
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
         <Route path="/pform" element={<Pform />} />
         <Route path="/blog" element={<BlogPage/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/payment-status" element={<PaymentStatus />} />
+        <Route path="/payment-status/:status" element={<PaymentStatus />} />
         
         
       </Routes>
