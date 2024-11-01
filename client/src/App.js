@@ -15,6 +15,7 @@ import BlogPage from './components/blog/blog';
 import Update from './components/update/Update';
 import Dashboard from './components/dashboard/Dashboard';
 import PaymentStatus from './components/PaymentStatus/PaymentStatus';
+import ManageUsers from './components/manageUsePage/manageUsers';
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/payment-status" element={<PaymentStatus />} />
         <Route path="/payment-status/:status" element={<PaymentStatus />} />
-        
+        <Route path="/manageUsePage" element={<ManageUsers/>} />
         
       </Routes>
 

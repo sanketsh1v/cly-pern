@@ -187,7 +187,7 @@ app.post('/createEvent', upload.single('image'), async (req, res) => {
         // Store the uploaded image's URL in imageUrl
         let imageUrl = null;
         if (req.file && req.file.path) {
-            imageUrl = req.file.path; // Use Cloudinary secure URL
+            imageUrl = req.file.path;
         }
 
         // Insert event details along with the image URL into the database
@@ -249,7 +249,7 @@ app.post('/Speakers', upload.single('image'), async (req, res) => {
         // Check if image was uploaded successfully
         let imageUrl = null;
         if (req.file && req.file.path) {
-            imageUrl = req.file.path; // Use Cloudinary secure URL
+            imageUrl = req.file.path;
         }
 
         // Insert the speaker details along with the image URL into the database
@@ -291,14 +291,12 @@ app.put("/updateSpeaker/:id", async (req, res) => {
             return res.status(404).json({ error: "Speaker not found" });
         }
 
-        res.json(result[0]); // Return the updated speaker
+        res.json(result[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
-
 
 // Delete a Speaker
 app.delete("/Speakers/:id", async (req, res) => {
@@ -311,7 +309,53 @@ app.delete("/Speakers/:id", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
+// Route to fetch Donations
+app.get("/Donations", async (req, res) => {
+    try {
+        const db = await dbClient();
+        const donations = await db`SELECT * FROM donations`;
+        res.json({
+            status: "Success",
+            events: donations
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+// Route to add a new donation
+app.post("/Donations", async (req, res) => {
+    const { first_name, last_name, email, donation_amount } = req.body;
+
+    // Validate input
+    if (!first_name || !last_name || !email || !donation_amount) {
+        return res.status(400).json({ status: "Error", message: "Missing required fields" });
+    }
+
+    try {
+        const db = await dbClient();
+
+        // Insert the new donation without payment_reference
+        const newDonation = await db`
+            INSERT INTO donations (
+                first_name, last_name, email, donation_amount, donation_date
+            ) VALUES (
+                ${first_name}, ${last_name}, ${email}, ${donation_amount}, NOW()
+            )
+            RETURNING *`;
+
+        // Send the new donation details in the response
+        res.json({
+            status: "Success",
+            donation: newDonation[0]
+        });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: error.message });
+    }
+});
+
+
 // Create a new Payment
 app.post("/Payments", async (req, res) => {
     const { payment_type, event_registration_id, donation_id, first_name, last_name, email, amount_paid, payment_reference, payment_date } = req.body;

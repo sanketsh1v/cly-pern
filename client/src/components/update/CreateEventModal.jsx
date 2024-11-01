@@ -136,7 +136,7 @@ const CreateEventModal = ({ onClose }) => {
           <input
             type="text"
             name="event_type"
-            placeholder="Event Type"
+            placeholder="weekly, quarterly, or training"
             onChange={handleChange}
             value={formData.event_type}
             required

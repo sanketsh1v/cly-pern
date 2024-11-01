@@ -32,7 +32,7 @@ const Update = () => {
   return (
     <div className="admin-console">
       <div className="admin-sidebar">
-        <h2>Admin Panel</h2>
+        <h2>Update Event Schedule</h2>
         <ul>
           <li onClick={() => openModal('create')}>Create Event</li>
           <li onClick={() => openModal('update')}>Update Event</li>

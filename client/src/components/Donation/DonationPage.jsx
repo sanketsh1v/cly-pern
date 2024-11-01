@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DollarSign } from 'lucide-react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './DonationPage.scss';
 
 const DonationPage = () => {
@@ -8,29 +9,32 @@ const DonationPage = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [donationAmount, setDonationAmount] = useState('');
-  const [paymentReference, setPaymentReference] = useState(''); // Add payment reference
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');  // Clear any previous error messages
-    setMessage(''); // Clear any previous success messages
+    setError('');
+    setMessage('');
 
     try {
-      // Send donation data to the backend
-      const response = await axios.post('http://localhost:4000/api/donate', {
+      const response = await axios.post('http://localhost:4000/Donations', {
         first_name: firstName,
         last_name: lastName,
         email,
         donation_amount: donationAmount,
-        payment_reference: paymentReference || 'AUTO123', // Generate or provide a payment reference
       });
 
-      // Display success message
-      setMessage(response.data.message);
+      setMessage('Thank you for your donation!');
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setDonationAmount('');
+
+      // Navigate to /pform after successful donation
+      navigate('/pform');
     } catch (error) {
-      // Display error message if the request fails
       if (error.response && error.response.data) {
         setError(error.response.data.message);
       } else {
@@ -90,16 +94,6 @@ const DonationPage = () => {
               value={donationAmount}
               onChange={(e) => setDonationAmount(e.target.value)}
               required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Payment Reference (Optional):</label>
-            <input
-              type="text"
-              placeholder="Payment Reference"
-              value={paymentReference}
-              onChange={(e) => setPaymentReference(e.target.value)}
             />
           </div>
 

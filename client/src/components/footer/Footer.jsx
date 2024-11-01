@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Footer.scss';
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
-import emailjs from 'emailjs-com';  // Import EmailJS
+import emailjs from 'emailjs-com';
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -24,9 +24,9 @@ const Footer = () => {
 
       // Map form data to match EmailJS template variable names
       const templateParams = {
-        from_name: formData.name,    // Assuming your EmailJS template uses {{from_name}}
-        from_email: formData.email,  // Assuming your EmailJS template uses {{from_email}}
-        message: formData.message,   // Assuming your EmailJS template uses {{message}}
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
       };
 
     emailjs.send(
@@ -38,11 +38,11 @@ const Footer = () => {
     
     .then((result) => {
       console.log("Email sent successfully!", result);
-      setFormStatus('Email sent successfully!'); // Display success message
+      setFormStatus('Email sent successfully!'); 
     })
     .catch((error) => {
       console.error("Error sending email:", error);
-      setFormStatus('Error sending email, please try again.'); // Display error message
+      setFormStatus('Error sending email, please try again.');
     });
 
     // Reset form after submission

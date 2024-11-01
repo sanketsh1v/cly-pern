@@ -56,7 +56,7 @@ const Stats = () => {
         <nav>
           <button className="nav-button"><DashboardIcon /> Dashboard</button>
           <button className="nav-button" onClick={() => navigate('/update')}><Update /> Update Schedule</button>
-          <button className="nav-button"><User /> User Info</button>
+          {/* <button className="nav-button" onClick={() => navigate('/manageUsePage')}><User /> User Info</button> */}
           <button className="nav-button" onClick={() => navigate('/dashboard')}><Speaker /> Speaker Info</button>
           <button className="nav-button" onClick={handleLogout}><Logout /> Log Out</button>
         </nav>

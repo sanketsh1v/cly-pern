@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Edit, Trash2 } from 'lucide-react';
-import './ManageUsers.scss';
+import './manageUsers.scss';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([
