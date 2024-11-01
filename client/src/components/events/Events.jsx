@@ -95,6 +95,7 @@ const Events = () => {
             <div className="events__hero">
               <h3>Play, grow and shine in the life with the help of laughter yoga and adventures.</h3>
               <h1>{event.event_name}</h1>
+              <h2>{event.event_description}</h2>
               <div className="events__date">
                 {new Date(event.event_date).toLocaleDateString()} | {event.event_location || "Online"}
               </div>
