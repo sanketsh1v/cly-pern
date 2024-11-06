@@ -5,7 +5,8 @@ import './Pform.scss';
 const PaymentForm = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const amount = queryParams.get('amount');
+
+  const amountFromQuery = queryParams.get('amount');
   const eventName = queryParams.get('eventName');
   const ticketCount = queryParams.get('ticketCount');
   const ticketPrice = queryParams.get('ticketPrice');
@@ -16,50 +17,25 @@ const PaymentForm = () => {
     lastName: '',
     email: '',
     contactNumber: '',
-    amount: amount || '',
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(amountFromQuery ? parseFloat(amountFromQuery) : 0);
 
-  const EventDetailsCard = () => {
-    // Calculate totals
-    const baseTicketTotal = Number(ticketCount) * Number(ticketPrice);
-    const ticketTotalWithTaxes = baseTicketTotal * 1.07625; // Including GST (5%) and Service Fee (2.625%)
-    const donationAmount = Number(donation);
-
-    return (
-      <div className="payment-form__event-details">
-        <h2>Event Summary</h2>
-        <div className="event-info">
-          <p className="event-name">{decodeURIComponent(eventName)}</p>
-          <div className="amount-breakdown">
-            <div className="summary-line">
-              <span>Tickets Total (inc. taxes):</span>
-              <span>${ticketTotalWithTaxes.toFixed(2)}</span>
-            </div>
-            
-            {donationAmount > 0 && (
-              <div className="summary-line">
-                <span>Donation:</span>
-                <span>${donationAmount.toFixed(2)}</span>
-              </div>
-            )}
-
-            <div className="total-line">
-              <span>Final Total:</span>
-              <span>${Number(amount).toFixed(2)}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  useEffect(() => {
+    // Calculate total amount based on query params
+    const baseTicketTotal = ticketCount * ticketPrice;
+    const ticketTotalWithTaxes = baseTicketTotal * 1.07625;
+    const donationAmount = donation ? parseFloat(donation) : 0;
+    const finalAmount = ticketTotalWithTaxes + donationAmount;
+    setTotalAmount(finalAmount);
+  }, [ticketCount, ticketPrice, donation]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -69,19 +45,14 @@ const PaymentForm = () => {
     setIsLoading(true);
 
     try {
-      console.log('Sending data:', formData); // Debug log
-
       const response = await fetch('http://localhost:4000/create-payment-link', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          contactNumber: formData.contactNumber,
-          amount: formData.amount
+          ...formData,
+          amount: totalAmount,
         }),
       });
 
@@ -91,15 +62,13 @@ const PaymentForm = () => {
       }
 
       const data = await response.json();
-      console.log('Server response:', data); // Debug log
-      
-      if (data.status === "Success" && data.paymentLink) {
-        window.location.href = data.paymentLink;
+
+      if (data.status === 'Success' && data.paymentLink) {
+        window.location.href = data.paymentLink; // Redirect to Square payment link
       } else {
         throw new Error('Invalid response from server');
       }
     } catch (err) {
-      console.error('Payment error:', err);
       setError(err.message || 'An error occurred');
     } finally {
       setIsLoading(false);
@@ -110,8 +79,15 @@ const PaymentForm = () => {
     <div className="payment-form">
       <div className="payment-form__container">
         <h1 className="payment-form__title">Payment Details</h1>
-        
-        <EventDetailsCard />
+
+        <div className="payment-form__event-details">
+          <h2>Event Summary</h2>
+          <p className="event-name">{decodeURIComponent(eventName)}</p>
+          <div className="summary-line">
+            <span>Tickets Total (inc. taxes):</span>
+            <span>${totalAmount.toFixed(2)}</span>
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit} className="payment-form__form">
           <div className="payment-form__input-group">
@@ -153,18 +129,6 @@ const PaymentForm = () => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className="payment-form__input-group">
-            <input
-              type="number"
-              name="amount"
-              placeholder="Amount ($)"
-              value={formData.amount}
-              onChange={handleChange}
-              required
-              min="1"
-              step="0.01"
-            />
-          </div> */}
           <button 
             type="submit" 
             className="payment-form__button"

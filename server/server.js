@@ -9,7 +9,6 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { client: squareClient, locationId } = require('./config/squareConfig');
 const crypto = require('crypto');
-
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
@@ -164,7 +163,6 @@ app.get("/Speakers", async (req, res) => {
     }
 });
 
-
 // Route to fetch Payments
 app.get("/Payments", async (req, res) => {
     try {
@@ -202,7 +200,7 @@ app.post('/createEvent', upload.single('image'), async (req, res) => {
         res.status(500).json({ status: 'Error', message: error.message });
     }
 });
- 
+
 // Update an existing Event
 app.put('/updateEvent/:id', async (req, res) => {
     const { id } = req.params;
@@ -228,7 +226,7 @@ app.put('/updateEvent/:id', async (req, res) => {
       res.status(500).json({ status: 'Error', message: error.message });
     }
 });
-  
+
 // Delete an Event
 app.delete("/deleteEvent/:id", async (req, res) => {
     const { id } = req.params;
@@ -240,7 +238,6 @@ app.delete("/deleteEvent/:id", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
 
 app.post('/Speakers', upload.single('image'), async (req, res) => {
     const { first_name, last_name, email, speaker_location, expertise } = req.body;
@@ -355,7 +352,6 @@ app.post("/Donations", async (req, res) => {
     }
 });
 
-
 // Create a new Payment
 app.post("/Payments", async (req, res) => {
     const { payment_type, event_registration_id, donation_id, first_name, last_name, email, amount_paid, payment_reference, payment_date } = req.body;
@@ -368,7 +364,7 @@ app.post("/Payments", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
 // Update an Existing Payment
 app.put("/Payments/:id", async (req, res) => {
     const { id } = req.params;
@@ -382,7 +378,7 @@ app.put("/Payments/:id", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
 //Delete a Payment
 app.delete("/Payments/:id", async (req, res) => {
     const { id } = req.params;
@@ -394,7 +390,7 @@ app.delete("/Payments/:id", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
 // Creating a New Training Course
 app.post("/TrainingCourses", async (req, res) => {
     const { course_name, course_description, duration, instructor, start_date, end_date } = req.body;
@@ -407,7 +403,7 @@ app.post("/TrainingCourses", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
 // Update an existing Training Course
 app.put("/TrainingCourses/:id", async (req, res) => {
     const { id } = req.params;
@@ -421,7 +417,7 @@ app.put("/TrainingCourses/:id", async (req, res) => {
         res.status(500).json({ status: "Error", message: error.message });
     }
 });
- 
+
 // Delete a Training Course
 app.delete("/TrainingCourses/:id", async (req, res) => {
     const { id } = req.params;
@@ -571,7 +567,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 4001;
 app.listen(port, () => {
     console.log(`Server is up and listening on port ${port}`);
 });

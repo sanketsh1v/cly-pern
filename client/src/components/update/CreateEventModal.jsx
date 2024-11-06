@@ -13,16 +13,15 @@ const CreateEventModal = ({ onClose }) => {
     event_description: '',
     event_type: '',
     price: '',
-    image: null, // Image file for Cloudinary upload
+    image: null,
   });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'image') {
-      // Handle file input for the image
       setFormData((prevData) => ({
         ...prevData,
-        image: files[0], // Set the selected file
+        image: files[0],
       }));
     } else {
       setFormData((prevData) => ({
@@ -34,9 +33,8 @@ const CreateEventModal = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+    const token = localStorage.getItem('token');
 
-    // Prepare form data for submission, including the image file
     const eventFormData = new FormData();
     eventFormData.append('event_name', formData.event_name);
     eventFormData.append('event_date', formData.event_date);
@@ -48,19 +46,18 @@ const CreateEventModal = ({ onClose }) => {
     eventFormData.append('event_type', formData.event_type);
     eventFormData.append('price', formData.price);
 
-    // Append image only if it exists
     if (formData.image) {
       eventFormData.append('image', formData.image);
     }
 
     try {
       const response = await axios.post(
-        'http://localhost:4000/createEvent', // Full URL to the backend server
+        'http://localhost:4000/createEvent',
         eventFormData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data', // Required for file upload
-            'Authorization': `Bearer ${token}`, // Send the token in Authorization header
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`,
           },
         }
       );
@@ -133,14 +130,17 @@ const CreateEventModal = ({ onClose }) => {
             value={formData.event_description}
             required
           />
-          <input
-            type="text"
+          <select
             name="event_type"
-            placeholder="weekly, quarterly, or training"
             onChange={handleChange}
             value={formData.event_type}
             required
-          />
+          >
+            <option value="" disabled>Select event type</option>
+            <option value="weekly">weekly</option>
+            <option value="quarterly">quarterly</option>
+            <option value="training">training</option>
+          </select>
           <input
             type="number"
             name="price"
@@ -148,7 +148,6 @@ const CreateEventModal = ({ onClose }) => {
             onChange={handleChange}
             value={formData.price}
           />
-          {/* File input for image */}
           <input
             type="file"
             name="image"

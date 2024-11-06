@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import './Dashboard.scss';
 
 const ManageSpeakers = () => {
@@ -7,23 +7,23 @@ const ManageSpeakers = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAddingNewSpeaker, setIsAddingNewSpeaker] = useState(false);
-  const [isEditingSpeaker, setIsEditingSpeaker] = useState(null); // Track if editing a speaker
+  const [isEditingSpeaker, setIsEditingSpeaker] = useState(null);
   const [newSpeaker, setNewSpeaker] = useState({
     first_name: '',
     last_name: '',
     email: '',
     speaker_location: '',
     expertise: '',
-    image: null, // Added image state
-    image_path: '', // Store the existing image path for edit mode
+    image: null,
+    image_path: '',
   });
 
   // Fetch speakers from the backend
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/Speakers'); // Replace with your backend route
-        setSpeakers(response.data.events); // Assuming 'events' is the array of speakers
+        const response = await axios.get('http://localhost:4000/Speakers');
+        setSpeakers(response.data.events);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -39,7 +39,7 @@ const ManageSpeakers = () => {
     if (e.target.name === 'image') {
       setNewSpeaker({
         ...newSpeaker,
-        image: e.target.files[0], // Handle file input
+        image: e.target.files[0],
       });
     } else {
       setNewSpeaker({
@@ -61,12 +61,13 @@ const ManageSpeakers = () => {
           last_name: newSpeaker.last_name,
           email: newSpeaker.email,
           speaker_location: newSpeaker.speaker_location,
-          expertise: newSpeaker.expertise
+          expertise: newSpeaker.expertise,
         });
+        
+        // Update the speaker in the local state
         setSpeakers(speakers.map((s) => (s.speaker_id === isEditingSpeaker ? response.data : s)));
-        setIsEditingSpeaker(null); // Clear editing state
+        setIsEditingSpeaker(null);
       } else {
-        // Add a new speaker
         const formData = new FormData();
         formData.append('first_name', newSpeaker.first_name);
         formData.append('last_name', newSpeaker.last_name);
@@ -76,13 +77,15 @@ const ManageSpeakers = () => {
         
         // Only append the image if we are adding a new speaker
         if (newSpeaker.image) {
-          formData.append('image', newSpeaker.image); // Append the image file only for new speakers
+          formData.append('image', newSpeaker.image);
         }
 
         const response = await axios.post('http://localhost:4000/Speakers', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
-        setSpeakers([...speakers, response.data.speaker]); // Add new speaker to the list
+        
+        // Add the new speaker to the speakers state
+        setSpeakers([...speakers, response.data.speaker]);
       }
 
       // Reset the form fields
@@ -92,10 +95,10 @@ const ManageSpeakers = () => {
         email: '',
         speaker_location: '',
         expertise: '',
-        image: null, // Reset the image input
-        image_path: '', // Reset the image path
+        image: null,
+        image_path: '',
       });
-      setIsAddingNewSpeaker(false); // Hide the form after submission
+      setIsAddingNewSpeaker(false);
     } catch (err) {
       console.error('Error adding or updating speaker:', err);
     }
@@ -105,7 +108,7 @@ const ManageSpeakers = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:4000/Speakers/${id}`);
-      setSpeakers(speakers.filter((s) => s.speaker_id !== id)); // Remove the deleted speaker
+      setSpeakers(speakers.filter((s) => s.speaker_id !== id));
     } catch (err) {
       console.error('Error deleting speaker:', err);
     }
@@ -119,11 +122,11 @@ const ManageSpeakers = () => {
       email: speaker.email,
       speaker_location: speaker.speaker_location,
       expertise: speaker.expertise,
-      image: null, // Keep the image as is unless updated
-      image_path: speaker.image_path, // Set the existing image path
+      image: null, 
+      image_path: speaker.image_path, 
     });
     setIsEditingSpeaker(speaker.speaker_id);
-    setIsAddingNewSpeaker(true); // Open the form in "editing mode"
+    setIsAddingNewSpeaker(true); 
   };
 
   if (loading) return <p>Loading speakers...</p>;
@@ -176,7 +179,6 @@ const ManageSpeakers = () => {
             onChange={handleInputChange}
             placeholder="Expertise"
           />
-          {/* Only show the image input when adding a new speaker */}
           {!isEditingSpeaker && (
             <input
               type="file"

@@ -1,6 +1,5 @@
-/* Navbar styling */
 .navbar {
-  background-color: #f4f4f9; /* Subtle light grey background */
+  background-color: #f4f4f9;
   padding: 1rem 2rem;
   display: flex;
   justify-content: center;
@@ -12,55 +11,52 @@
 
 .navbar__content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
   width: 100%;
   max-width: 1200px;
 }
 
-/* Logo and company name */
 .navbar__logo-container {
   display: flex;
   align-items: center;
-  cursor: pointer; /* Make the entire container clickable */
-  transition: all 0.3s ease; /* Smooth transition */
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .navbar__logo-container:hover .navbar__logo-image, 
 .navbar__logo-container:hover .navbar__company-name {
-  transform: scale(1.1); /* Slightly enlarge both the logo and the company name */
-  color: #5c16c5 ; /* Accent color for the company name on hover */
+  transform: scale(1.1);
+  color: #5c16c5 ;
 }
 
 .navbar__logo-image {
   width: 120px;
   height: auto;
-  margin-right: 0rem;
-  transition: transform 0.3s ease; /* Smooth transition for the logo */
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
 .navbar__company-name {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #333; /* Darker color for company name */
-  white-space: nowrap; /* Prevents text from wrapping */
-  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and scale */
+  color: #333;
+  white-space: nowrap;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-
-/* Navbar links styling */
 .navbar__links {
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
-  margin-left: auto; 
-  text-decoration: none;/* Pushes links to the right side */
+  margin-left: auto;
+  text-decoration: none;
 }
 
 .navbar__link {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333; /* Dark text color */
+  color: #333;
   text-decoration: none;
   padding: 0.5rem 1rem;
   position: relative;
@@ -68,7 +64,7 @@
 }
 
 .navbar__link:hover {
-  color: #5c16c5; /* Purple hover effect */
+  color: #5c16c5;
 }
 
 .navbar__link::after {
@@ -78,7 +74,6 @@
   bottom: -5px;
   width: 0;
   height: 2px;
-  // background-color: #5c16c5;
   transition: width 0.3s ease;
 }
 
@@ -107,7 +102,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #f4f4f9; /* Subtle background */
+    background-color: #f4f4f9;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;

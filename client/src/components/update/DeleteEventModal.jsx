@@ -5,13 +5,13 @@ import './DeleteEventModal.scss';
 const DeleteEventModal = ({ onClose }) => {
   const [eventId, setEventId] = useState('');
   const [events, setEvents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
 
-  // Fetch all events when the modal opens
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/events'); // Assuming your route to get events is /events
-        setEvents(response.data.events); // Assuming the response structure is { events: [...] }
+        const response = await axios.get('http://localhost:4000/events');
+        setEvents(response.data.events);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -26,12 +26,12 @@ const DeleteEventModal = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token'); // Assuming you store token in localStorage
+    const token = localStorage.getItem('token');
 
     try {
       const response = await axios.delete(`http://localhost:4000/deleteEvent/${eventId}`, {
         headers: {
-          'Authorization': `Bearer ${token}`, // Add authorization token
+          'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -47,15 +47,29 @@ const DeleteEventModal = ({ onClose }) => {
     }
   };
 
+  const filteredEvents = events.filter((event) =>
+    event.event_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="modal">
       <div className="modal-content">
         <h3>Delete Event</h3>
         <form onSubmit={handleSubmit}>
+          {/* Search input for filtering events */}
+          <input
+            type="text"
+            placeholder="Search for an event..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+
+          {/* Input for specifying the event ID */}
           <input
             type="text"
             name="event_id"
-            placeholder="Event ID"
+            placeholder="Enter Event ID to delete"
             onChange={handleChange}
             value={eventId}
             required
@@ -65,18 +79,18 @@ const DeleteEventModal = ({ onClose }) => {
 
         <button className="close-btn" onClick={onClose}>Close</button>
 
-        {/* Display all events for reference */}
+        {/* Display the filtered list of events */}
         <div className="events-list">
           <h4>Available Events</h4>
           <ul>
-            {events.length > 0 ? (
-              events.map((event) => (
+            {filteredEvents.length > 0 ? (
+              filteredEvents.map((event) => (
                 <li key={event.event_id}>
                   <strong>ID:</strong> {event.event_id} - <strong>Name:</strong> {event.event_name}
                 </li>
               ))
             ) : (
-              <li>No events available.</li>
+              <li>No events found.</li>
             )}
           </ul>
         </div>
