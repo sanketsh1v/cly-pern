@@ -7,8 +7,8 @@ const Events = () => {
   const gstRate = 0.05;
   const serviceFeeRate = 0.02625;
 
-  const [regularTicketCount, setRegularTicketCount] = useState(0);
-  const [sponsorshipAmount, setSponsorshipAmount] = useState(0);
+  const [ticketCounts, setTicketCounts] = useState({});
+  const [sponsorshipAmounts, setSponsorshipAmounts] = useState({});
   const [customAmount, setCustomAmount] = useState('');
   const [quarterlyEvents, setQuarterlyEvents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,6 +19,13 @@ const Events = () => {
       try {
         const response = await axios.get("http://localhost:4000/quarterlyEvents");
         setQuarterlyEvents(response.data.events);
+        // Initialize ticket counts and sponsorship amounts for each event
+        const initialCounts = response.data.events.reduce((acc, event) => {
+          acc[event.event_id] = 0;
+          return acc;
+        }, {});
+        setTicketCounts(initialCounts);
+        setSponsorshipAmounts(initialCounts);
       } catch (error) {
         console.error("Error fetching quarterly events!", error);
       }
@@ -28,42 +35,61 @@ const Events = () => {
 
   useEffect(() => {
     const calculateTotal = () => {
-      if (quarterlyEvents.length > 0) {
-        const eventPrice = Number(quarterlyEvents[0].price) || 0;
+      const ticketTotal = quarterlyEvents.reduce((acc, event) => {
+        const eventPrice = Number(event.price) || 0;
         const gst = eventPrice * gstRate;
         const serviceFee = eventPrice * serviceFeeRate;
         const singleTicketTotal = eventPrice + gst + serviceFee;
-        
-        const ticketTotal = Number(regularTicketCount) * singleTicketTotal;
-        
-        const sponsorshipValue = Number(sponsorshipAmount) || 0;
-        
-        const finalTotal = ticketTotal + sponsorshipValue;
-        
-        if (!isNaN(finalTotal)) {
-          setTotalAmount(finalTotal);
-        } else {
-          setTotalAmount(0);
-        }
-      }
+        const count = ticketCounts[event.event_id] || 0;
+        return acc + count * singleTicketTotal;
+      }, 0);
+
+      const sponsorshipTotal = Object.values(sponsorshipAmounts).reduce((acc, amount) => acc + amount, 0);
+      const finalTotal = ticketTotal + sponsorshipTotal;
+
+      setTotalAmount(isNaN(finalTotal) ? 0 : finalTotal);
     };
     calculateTotal();
-  }, [regularTicketCount, sponsorshipAmount, quarterlyEvents, gstRate, serviceFeeRate]);
+  }, [ticketCounts, sponsorshipAmounts, quarterlyEvents, gstRate, serviceFeeRate]);
 
-  const handleRegularIncrement = () => setRegularTicketCount(regularTicketCount + 1);
-  const handleRegularDecrement = () => regularTicketCount > 0 && setRegularTicketCount(regularTicketCount - 1);
-  const handleSponsorshipIncrement = () => setSponsorshipAmount(Number(sponsorshipAmount) + 1);
-  const handleSponsorshipDecrement = () => sponsorshipAmount > 0 && setSponsorshipAmount(Number(sponsorshipAmount) - 1);
+  const handleTicketIncrement = (eventId) => {
+    setTicketCounts((prevCounts) => ({
+      ...prevCounts,
+      [eventId]: (prevCounts[eventId] || 0) + 1,
+    }));
+  };
+
+  const handleTicketDecrement = (eventId) => {
+    setTicketCounts((prevCounts) => ({
+      ...prevCounts,
+      [eventId]: Math.max((prevCounts[eventId] || 0) - 1, 0),
+    }));
+  };
+
+  const handleSponsorshipIncrement = (eventId) => {
+    setSponsorshipAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [eventId]: (prevAmounts[eventId] || 0) + 1,
+    }));
+  };
+
+  const handleSponsorshipDecrement = (eventId) => {
+    setSponsorshipAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [eventId]: Math.max((prevAmounts[eventId] || 0) - 1, 0),
+    }));
+  };
+
   const handleCustomAmountChange = (event) => setCustomAmount(event.target.value);
-  const handleSetCustomAmount = () => {
+  const handleSetCustomAmount = (eventId) => {
     const amount = parseFloat(customAmount);
     if (!isNaN(amount) && amount >= 0) {
-      setSponsorshipAmount(Number(amount));
+      setSponsorshipAmounts((prevAmounts) => ({
+        ...prevAmounts,
+        [eventId]: amount,
+      }));
       setCustomAmount('');
     }
-  };
-  const handleCheckoutClick = () => {
-    if (regularTicketCount === 0) alert('You have to add at least one ticket');
   };
 
   const filteredEvents = quarterlyEvents.filter((event) => {
@@ -90,27 +116,27 @@ const Events = () => {
       </div>
 
       {filteredEvents.length > 0 ? (
-        filteredEvents.map((event) => (
-          <div className="events__container" key={event.event_id}>
+        filteredEvents.map((eventItem) => (
+          <div className="events__container" key={eventItem.event_id}>
             <div className="events__hero">
               <h3>Play, grow and shine in the life with the help of laughter yoga and adventures.</h3>
-              <h1>{event.event_name}</h1>
-              <h2>{event.event_description}</h2>
+              <h1>{eventItem.event_name}</h1>
+              <h2>{eventItem.event_description}</h2>
               <div className="events__date">
-                {new Date(event.event_date).toLocaleDateString()} | {event.event_location || "Online"}
+                {new Date(eventItem.event_date).toLocaleDateString()} | {eventItem.event_location || "Online"}
               </div>
               <div className="events__image">
                 <img
-                  src={event.image_url || '/upcomingevent.png'} // Display event.image_url if available
-                  alt={event.event_name}
+                  src={eventItem.image_url || '/upcomingevent.png'}
+                  alt={eventItem.event_name}
                 />
               </div>
             </div>
 
             <div className="events__details">
               <h2>Time & Location</h2>
-              <p>{new Date(event.event_date).toLocaleDateString()} | {event.start_time} - {event.end_time}</p>
-              <p>{event.event_location || "Online"}</p>
+              <p>{new Date(eventItem.event_date).toLocaleDateString()} | {eventItem.start_time} - {eventItem.end_time}</p>
+              <p>{eventItem.event_location || "Online"}</p>
             </div>
 
             <div className="events__tickets">
@@ -121,13 +147,13 @@ const Events = () => {
                 </div>
                 <div className="ticket-price">
                   <h3>Price</h3>
-                  <p className="price-amount">${event.price}</p>
-                  <p>+${(event.price * gstRate).toFixed(2)} GST</p>
-                  <p>+${(event.price * serviceFeeRate).toFixed(2)} service fee</p>
+                  <p className="price-amount">${eventItem.price}</p>
+                  <p>+${(eventItem.price * gstRate).toFixed(2)} GST</p>
+                  <p>+${(eventItem.price * serviceFeeRate).toFixed(2)} service fee</p>
                   <div className="quantity-selector">
-                    <button onClick={handleRegularDecrement}>-</button>
-                    <span>{regularTicketCount}</span>
-                    <button onClick={handleRegularIncrement}>+</button>
+                    <button onClick={() => handleTicketDecrement(eventItem.event_id)}>-</button>
+                    <span>{ticketCounts[eventItem.event_id] || 0}</span>
+                    <button onClick={() => handleTicketIncrement(eventItem.event_id)}>+</button>
                   </div>
                 </div>
               </div>
@@ -146,9 +172,9 @@ const Events = () => {
                 <div className="ticket-price">
                   <h3>Pay What You Want</h3>
                   <div className="quantity-selector">
-                    <button onClick={handleSponsorshipDecrement}>-</button>
-                    <span>${sponsorshipAmount.toFixed(2)}</span>
-                    <button onClick={handleSponsorshipIncrement}>+</button>
+                    <button onClick={() => handleSponsorshipDecrement(eventItem.event_id)}>-</button>
+                    <span>${sponsorshipAmounts[eventItem.event_id]?.toFixed(2) || 0}</span>
+                    <button onClick={() => handleSponsorshipIncrement(eventItem.event_id)}>+</button>
                   </div>
                   <div className="custom-amount">
                     <label>Enter Amount:</label>
@@ -157,28 +183,28 @@ const Events = () => {
                       value={customAmount}
                       onChange={handleCustomAmountChange}
                     />
-                    <button onClick={handleSetCustomAmount}>Set Amount</button>
+                    <button onClick={() => handleSetCustomAmount(eventItem.event_id)}>Set Amount</button>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="events__checkout">
-              <p className="total-amount">Total Amount: ${totalAmount.toFixed(2)}</p>
-              <Link 
-                to={{
-                  pathname: '/Pform',
-                  search: `?amount=${totalAmount}&eventName=${encodeURIComponent(quarterlyEvents[0].event_name)}&ticketCount=${regularTicketCount}&ticketPrice=${quarterlyEvents[0].price}&donation=${sponsorshipAmount}`
-                }}
-              >
-                Checkout
-              </Link>
             </div>
           </div>
         ))
       ) : (
         <p>No quarterly events available at the moment.</p>
       )}
+
+      <div className="events__checkout">
+        <p className="total-amount">Total Amount: ${totalAmount.toFixed(2)}</p>
+        <Link 
+          to={{
+            pathname: '/Pform',
+            search: `?amount=${totalAmount}`
+          }}
+        >
+          Checkout
+        </Link>
+      </div>
     </div>
   );
 };

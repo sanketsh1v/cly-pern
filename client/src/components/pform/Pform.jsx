@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Pform.scss';
 
@@ -6,11 +6,8 @@ const PaymentForm = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const amountFromQuery = queryParams.get('amount');
-  const eventName = queryParams.get('eventName');
-  const ticketCount = queryParams.get('ticketCount');
-  const ticketPrice = queryParams.get('ticketPrice');
-  const donation = queryParams.get('donation');
+  // Retrieve the total amount directly from the query parameter
+  const amountFromQuery = parseFloat(queryParams.get('amount')) || 0;
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -20,16 +17,7 @@ const PaymentForm = () => {
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalAmount, setTotalAmount] = useState(amountFromQuery ? parseFloat(amountFromQuery) : 0);
-
-  useEffect(() => {
-    // Calculate total amount based on query params
-    const baseTicketTotal = ticketCount * ticketPrice;
-    const ticketTotalWithTaxes = baseTicketTotal * 1.07625;
-    const donationAmount = donation ? parseFloat(donation) : 0;
-    const finalAmount = ticketTotalWithTaxes + donationAmount;
-    setTotalAmount(finalAmount);
-  }, [ticketCount, ticketPrice, donation]);
+  const [totalAmount] = useState(amountFromQuery); // Set initial total amount from query
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,12 +69,8 @@ const PaymentForm = () => {
         <h1 className="payment-form__title">Payment Details</h1>
 
         <div className="payment-form__event-details">
-          <h2>Event Summary</h2>
-          <p className="event-name">{decodeURIComponent(eventName)}</p>
-          <div className="summary-line">
-            <span>Tickets Total (inc. taxes):</span>
-            <span>${totalAmount.toFixed(2)}</span>
-          </div>
+          <h2>Total Amount</h2>
+          <p className="total-amount">${totalAmount.toFixed(2)}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="payment-form__form">
