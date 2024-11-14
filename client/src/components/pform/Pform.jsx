@@ -6,18 +6,20 @@ const PaymentForm = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  // Retrieve the total amount directly from the query parameter
-  const amountFromQuery = parseFloat(queryParams.get('amount')) || 0;
+  // Retrieve the total amount from the query parameter
+  const totalAmount = parseFloat(queryParams.get('amount')) || 0;
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
+  // Get pre-filled values if coming from DonationPage
+  const initialFormData = {
+    firstName: location.state?.firstName || '',
+    lastName: location.state?.lastName || '',
+    email: location.state?.email || '',
     contactNumber: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalAmount] = useState(amountFromQuery); // Set initial total amount from query
 
   const handleChange = (e) => {
     const { name, value } = e.target;

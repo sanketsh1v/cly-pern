@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DollarSign } from 'lucide-react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './DonationPage.scss';
 
 const DonationPage = () => {
@@ -11,7 +11,7 @@ const DonationPage = () => {
   const [donationAmount, setDonationAmount] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const DonationPage = () => {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:4000/Donations', {
+      await axios.post('http://localhost:4000/Donations', {
         first_name: firstName,
         last_name: lastName,
         email,
@@ -32,8 +32,14 @@ const DonationPage = () => {
       setEmail('');
       setDonationAmount('');
 
-      // Navigate to /pform after successful donation
-      navigate('/pform');
+      // Navigate to Pform with donation amount and user info in state
+      navigate(`/pform?amount=${donationAmount}`, { 
+        state: { 
+          firstName, 
+          lastName, 
+          email 
+        } 
+      });
     } catch (error) {
       if (error.response && error.response.data) {
         setError(error.response.data.message);
@@ -97,7 +103,6 @@ const DonationPage = () => {
             />
           </div>
 
-          {/* Display success or error messages */}
           {message && <p className="success-message">{message}</p>}
           {error && <p className="error-message">{error}</p>}
 
