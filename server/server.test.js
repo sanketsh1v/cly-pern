@@ -12,5 +12,11 @@ describe('API Endpoints', () => {
     expect(response.body.message).toBe('Hello, World!'); // Adjust this based on your actual API response
   });
 
+  jest.mock('bcrypt', () => ({
+    hash: jest.fn(() => Promise.resolve('hashedPassword')),
+    compare: jest.fn(() => Promise.resolve(true)),
+  }));
+  
+
   // Add more tests for different routes as needed
 });
