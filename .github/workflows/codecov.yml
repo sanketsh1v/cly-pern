@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - main  # Trigger on pushes to the main branch
   pull_request:
     branches:
-      - main  # Change this to your default branch
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
   test:
@@ -29,7 +29,7 @@ jobs:
       - name: Run server tests and generate coverage
         run: |
           cd server
-          npm test
+          npm test -- --coverage
 
       - name: Install client dependencies
         run: |
@@ -39,10 +39,13 @@ jobs:
       - name: Run client tests and generate coverage
         run: |
           cd client
-          npm test
+          npm test -- --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          file: ./server/coverage/lcov.info  # Path to the server coverage report
-          token: $9545676c-4201-4031-8295-e05d9b285375 # Set this in your repository secrets
+          token: ${{ secrets.CODECOV_TOKEN }}  # Use the secret token
+          files: |
+            ./server/coverage/lcov.info        # Server coverage report path
+            ./client/coverage/lcov.info        # Client coverage report path
+          fail_ci_if_error: true
