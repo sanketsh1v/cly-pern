@@ -46,6 +46,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}  # Use the secret token
           files: |
-            ./server/coverage/lcov.info        # Server coverage report path
-            ./client/coverage/lcov.info        # Client coverage report path
+            server/coverage/lcov.info  # Server coverage report path
+            client/coverage/lcov.info  # Client coverage report path
+          directory: coverage
           fail_ci_if_error: true
