@@ -567,7 +567,22 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get('/api/example', (req, res) => {
+    res.status(200).json({ message: 'Hello, World!' });
+  });
+  
+
+// const port = process.env.PORT || 4001;
+// app.listen(port, () => {
+//     console.log(`Server is up and listening on port ${port}`);
+// });
+
 const port = process.env.PORT || 4001;
-app.listen(port, () => {
+
+// Only start the server if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
     console.log(`Server is up and listening on port ${port}`);
-});
+  });
+}
+module.exports = app;
