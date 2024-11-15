@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: '14'
 
+      # Install server dependencies and run tests
       - name: Install server dependencies
         run: |
           cd server
@@ -31,6 +32,7 @@ jobs:
           cd server
           npm test -- --coverage
 
+      # Install client dependencies and run tests
       - name: Install client dependencies
         run: |
           cd client
@@ -41,9 +43,17 @@ jobs:
           cd client
           npm test -- --coverage
 
-          - name: Upload coverage to Codecov
-          uses: codecov/codecov-action@v2
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            fail_ci_if_error: true
-        
+      # Debugging step to check coverage files
+      - name: List coverage files for debugging
+        run: |
+          echo "Server coverage files:"
+          ls server/coverage || echo "Server coverage folder not found or empty"
+          echo "Client coverage files:"
+          ls client/coverage || echo "Client coverage folder not found or empty"
+
+      # Upload coverage reports to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
