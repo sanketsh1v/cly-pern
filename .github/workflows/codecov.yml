@@ -44,8 +44,8 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}  # Use the secret token
           files: |
-            server/coverage/lcov.info
-            client/coverage/lcov.info
+            D:\CalgaryLY\cly-pern\server\coverage\lcov.info
+            D:\CalgaryLY\cly-pern\client\coverage\lcov.info
           fail_ci_if_error: true
