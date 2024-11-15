@@ -17,6 +17,5 @@ describe('API Endpoints', () => {
     compare: jest.fn(() => Promise.resolve(true)),
   }));
   
-
   // Add more tests for different routes as needed
 });
