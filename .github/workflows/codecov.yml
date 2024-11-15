@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+  pull_request:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify your Node.js version
+
+      - name: Install server dependencies
+        run: |
+          cd server
+          npm install
+
+      - name: Run server tests and generate coverage
+        run: |
+          cd server
+          npm test
+
+      - name: Install client dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Run client tests and generate coverage
+        run: |
+          cd client
+          npm test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          file: ./server/coverage/lcov.info  # Path to the server coverage report
+          token: $9545676c-4201-4031-8295-e05d9b285375 # Set this in your repository secrets
