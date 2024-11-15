@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger on pull requests to the main branch
+      - main
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Specify your Node.js version
+          node-version: '14'
 
       - name: Install server dependencies
         run: |
@@ -40,6 +40,14 @@ jobs:
         run: |
           cd client
           npm test -- --coverage
+
+      # Debugging step to list coverage files
+      - name: List coverage files for debugging
+        run: |
+          echo "Server coverage files:"
+          ls server/coverage || echo "Server coverage folder not found or empty"
+          echo "Client coverage files:"
+          ls client/coverage || echo "Client coverage folder not found or empty"
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
