@@ -13,5 +13,4 @@ describe('API Endpoints', () => {
     expect(response.body.message).toBe('Hello, World!');
   });
 
-  // Add more tests as needed
 });
