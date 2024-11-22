@@ -70,31 +70,33 @@ const Training = () => {
       <h1 className="training__heading">Upcoming Training</h1>
 
       {trainingEvents.length > 0 ? (
-        trainingEvents.map((eventItem) => (
-          <div className="training__content" key={eventItem.event_id}>
-            <img 
-              src={eventItem.image_url ? eventItem.image_url : "/training.jpg"} 
-              alt="Training" 
-              className="training__image" 
-            />
-            <h3 className="training__title">{eventItem.event_name}</h3>
-            <h2 className="training__description">{eventItem.event_description}</h2>
-
-            <div className="training__details-box">
-              <p className="training__schedule">
-                {new Date(eventItem.event_date).toLocaleDateString()} | {eventItem.start_time} - {eventItem.end_time}
-              </p>
-              <p className="training__schedule">{eventItem.event_location}</p>
-              <p className="training__fee">Fee: ${eventItem.price ? eventItem.price : 'TBD'}</p>
-
-              <div className="ticket-counter">
-                <button onClick={() => handleTicketDecrement(eventItem.event_id)}>-</button>
-                <span>{ticketCounts[eventItem.event_id] || 0}</span>
-                <button onClick={() => handleTicketIncrement(eventItem.event_id)}>+</button>
+        <div className="training__grid">
+          {trainingEvents.map((eventItem) => (
+            <div className="training__card" key={eventItem.event_id}>
+              <img 
+                src={eventItem.image_url ? eventItem.image_url : "/training.jpg"} 
+                alt="Training" 
+                className="training__image" 
+              />
+              <div className="training__card-content">
+                <h3 className="training__title">{eventItem.event_name}</h3>
+                <p className="training__description">{eventItem.event_description}</p>
+                <div className="training__details">
+                  <p className="training__schedule">
+                    {new Date(eventItem.event_date).toLocaleDateString()} | {eventItem.start_time} - {eventItem.end_time}
+                  </p>
+                  <p className="training__location">{eventItem.event_location}</p>
+                  <p className="training__fee">Fee: ${eventItem.price ? eventItem.price : 'TBD'}</p>
+                </div>
+                <div className="ticket-counter">
+                  <button onClick={() => handleTicketDecrement(eventItem.event_id)}>-</button>
+                  <span>{ticketCounts[eventItem.event_id] || 0}</span>
+                  <button onClick={() => handleTicketIncrement(eventItem.event_id)}>+</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       ) : (
         <p>No upcoming training events available at the moment.</p>
       )}

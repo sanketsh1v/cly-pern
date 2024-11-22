@@ -188,6 +188,7 @@ const Events = () => {
                 </div>
               </div>
             </div>
+            <hr className="styled-separator" />  
           </div>
         ))
       ) : (

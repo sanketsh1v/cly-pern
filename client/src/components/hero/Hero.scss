@@ -86,17 +86,10 @@ body {
 .upcoming-event-section {
   background-color: rgb(253, 251, 227);
   padding: 2rem;
-  margin-bottom: 2.5+rem;
+  margin-bottom: 2.5rem;
   border-radius: 1rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
-}
-
-.event-section-title {
-  font-size: 2.5rem;
-  color: #2a0078; 
-  text-align: center;
-  margin-bottom: 1rem;
 }
 
 .event-details-card {
@@ -116,7 +109,9 @@ body {
 }
 
 .event-image-large {
-  width: 40%;
+  width: 40%; // Adjust image size as needed
+  max-height: 300px; // Ensure consistent height
+  object-fit: cover; // Crop image proportionally
   border-radius: 1rem;
 }
 
@@ -153,7 +148,7 @@ body {
   transform: translateY(-2px);
 }
 
-// Weekly Events Section
+// Weekly Events Section Styling
 .weekly-events-section {
   background-color: #2e1065; // Consistent dark purple background
   padding: 2rem;
@@ -215,7 +210,6 @@ body {
   border-radius: 5px; /* Optional: rounded edges */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add a shadow to make the text pop */
 }
-
 
 .weekly-events-info {
   font-size: 1.2rem;

@@ -5,7 +5,14 @@ $text-light: #fdf7f0;
 $text-dark: #333;
 $button-hover: #452e75;
 
-
+.styled-separator {
+  height: 2px;
+  background: linear-gradient(to right, #452e75, #f0e68c, #452e75); // Unified purple to yellow gradient
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  border: none;
+  border-radius: 1px;
+}
 .search-bar {
   margin: 2rem auto;
   max-width: 800px;
@@ -31,12 +38,13 @@ $button-hover: #452e75;
 .events {
   min-height: 100vh;
   margin-top: rem;
+  margin-bottom: 6rem;
   background-color:#f6e9fc;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 
   &__container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
   }
 
@@ -64,7 +72,7 @@ $button-hover: #452e75;
     background-color: $primary-purple;
     border-radius: 2rem;
     padding: 3rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     color: $text-light;
 

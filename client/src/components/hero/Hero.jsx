@@ -55,10 +55,16 @@ function Hero() {
                 <h2 className="event-section-title">Upcoming In-Person Event</h2>
                 {latestQuarterlyEvent ? (
                     <div className="event-details-card">
-                        <img src="./upcomingevent.png" alt="Latest Quarterly Event" className="event-image-large" />
+                        <img
+                            src={latestQuarterlyEvent.image_url} // Dynamic image URL
+                            alt={latestQuarterlyEvent.event_name}
+                            className="event-image-large"
+                        />
                         <div className="event-info">
                             <h3 className="event-title">{latestQuarterlyEvent.event_name}</h3>
-                            <p className="event-date">{new Date(latestQuarterlyEvent.event_date).toLocaleDateString()}</p>
+                            <p className="event-date">
+                                {new Date(latestQuarterlyEvent.event_date).toLocaleDateString()}
+                            </p>
                             <p className="event-location">{latestQuarterlyEvent.event_description}</p>
                             <p className="event-location">{latestQuarterlyEvent.event_location || "Online"}</p>
                             <a href="/events" className="event-button">Event Details</a>
@@ -96,6 +102,7 @@ function Hero() {
 }
 
 export default Hero;
+
 
 
 // import React, { useEffect, useState } from 'react';
