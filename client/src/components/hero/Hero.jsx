@@ -10,7 +10,7 @@ function Hero() {
     useEffect(() => {
         const fetchWeeklyEvents = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/weeklyEvents");
+                const response = await axios.get("cly-pern-server.vercel.app/weeklyEvents");
                 setWeeklyEvents(response.data.events);
             } catch (error) {
                 console.error("Error fetching weekly events:", error);
@@ -23,7 +23,7 @@ function Hero() {
     useEffect(() => {
         const fetchLatestQuarterlyEvent = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/latestQuarterlyEvent");
+                const response = await axios.get("cly-pern-server.vercel.app/latestQuarterlyEvent");
                 setLatestQuarterlyEvent(response.data.events[0]); // Assuming the response contains an array with one event
             } catch (error) {
                 console.error("Error fetching latest quarterly event:", error);
