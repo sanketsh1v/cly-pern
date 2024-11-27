@@ -33,7 +33,7 @@ const upload = multer({ storage: storage });
 
 // Configure CORS
 app.use(cors({
-  origin: "https://your-frontend-url.vercel.app", // Replace with your frontend URL
+  origin: "https://cly-pern-client.vercel.app", // Replace with your frontend URL
   methods: ["POST", "GET"],
   credentials: true
 }));
