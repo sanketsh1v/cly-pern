@@ -52,7 +52,7 @@ const CreateEventModal = ({ onClose }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:4000/createEvent',
+        'cly-pern-server.vercel.app/createEvent',
         eventFormData,
         {
           headers: {

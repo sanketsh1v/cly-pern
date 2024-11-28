@@ -35,7 +35,7 @@ const PaymentForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/create-payment-link', {
+      const response = await fetch('cly-pern-server.vercel.app/create-payment-link', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

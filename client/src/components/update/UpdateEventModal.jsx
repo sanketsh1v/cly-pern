@@ -66,7 +66,7 @@ const UpdateEventModal = ({ onClose }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/updateEvent/${selectedEventId}`,
+        `cly-pern-server.vercel.app/updateEvent/${selectedEventId}`,
         formData,
         {
           headers: {

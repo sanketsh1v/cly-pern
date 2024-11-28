@@ -16,7 +16,7 @@ const Training = () => {
   useEffect(() => {
     const fetchTrainingEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/trainingCourses');
+        const response = await axios.get('cly-pern-server.vercel.app/trainingCourses');
         setTrainingEvents(response.data.events);
 
         // Initialize ticket counts for each event

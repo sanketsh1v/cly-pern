@@ -19,7 +19,7 @@ const DonationPage = () => {
     setMessage('');
 
     try {
-      await axios.post('http://localhost:4000/Donations', {
+      await axios.post('cly-pern-server.vercel.app/Donations', {
         first_name: firstName,
         last_name: lastName,
         email,
