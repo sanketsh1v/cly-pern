@@ -109,10 +109,11 @@ body {
 }
 
 .event-image-large {
-  width: 40%; // Adjust image size as needed
-  max-height: 300px; // Ensure consistent height
-  object-fit: cover; // Crop image proportionally
-  border-radius: 1rem;
+  width: 40%; /* Specify the width as needed */
+  max-height: 300px; /* Set the height limit */
+  object-fit: contain; /* Ensure the entire image fits within the area */
+  border-radius: 1rem; /* Maintain rounded corners */
+  background-color: #fdf7f0; /* Optional: Add a background color for empty spaces */
 }
 
 .event-info {
