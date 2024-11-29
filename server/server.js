@@ -32,11 +32,7 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 // Configure CORS
-app.use(cors({
-  origin: "https://cly-pern-client.vercel.app", // Replace with your frontend URL
-  methods: ["POST", "GET"],
-  credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use(morgan('dev'));

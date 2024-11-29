@@ -23,7 +23,7 @@ const Admin = () => {
     setError('');
 
     try {
-      const response = await fetch('cly-pern-server.vercel.app/auth/login', {
+      const response = await fetch('http://localhost:4000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

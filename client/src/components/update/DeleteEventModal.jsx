@@ -29,7 +29,7 @@ const DeleteEventModal = ({ onClose }) => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.delete(`cly-pern-server.vercel.app/deleteEvent/${eventId}`, {
+      const response = await axios.delete(`http://localhost:4000/deleteEvent/${eventId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

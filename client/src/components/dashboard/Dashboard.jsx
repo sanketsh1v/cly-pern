@@ -22,7 +22,7 @@ const ManageSpeakers = () => {
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const response = await axios.get('cly-pern-server.vercel.app/Speakers');
+        const response = await axios.get('http://localhost:4000/Speakers');
         setSpeakers(response.data.events);
         setLoading(false);
       } catch (err) {
@@ -56,7 +56,7 @@ const ManageSpeakers = () => {
     try {
       if (isEditingSpeaker) {
         // Update an existing speaker without including the image
-        const response = await axios.put(`cly-pern-server.vercel.app/updateSpeaker/${isEditingSpeaker}`, {
+        const response = await axios.put(`http://localhost:4000/updateSpeaker/${isEditingSpeaker}`, {
           first_name: newSpeaker.first_name,
           last_name: newSpeaker.last_name,
           email: newSpeaker.email,
@@ -80,7 +80,7 @@ const ManageSpeakers = () => {
           formData.append('image', newSpeaker.image);
         }
 
-        const response = await axios.post('cly-pern-server.vercel.app/Speakers', formData, {
+        const response = await axios.post('http://localhost:4000/Speakers', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         
@@ -107,7 +107,7 @@ const ManageSpeakers = () => {
   // Handle deleting a speaker
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`cly-pern-server.vercel.app/Speakers/${id}`);
+      await axios.delete(`http://localhost:4000/Speakers/${id}`);
       setSpeakers(speakers.filter((s) => s.speaker_id !== id));
     } catch (err) {
       console.error('Error deleting speaker:', err);

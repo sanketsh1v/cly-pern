@@ -11,7 +11,7 @@ const Speakers = () => {
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const response = await axios.get('cly-pern-server.vercel.app/Speakers'); // Make sure the backend route is correct
+        const response = await axios.get('http://localhost:4000/Speakers'); // Make sure the backend route is correct
         setSpeakers(response.data.events); // Update state with the fetched speakers
         setLoading(false); // Turn off loading spinner
       } catch (error) {

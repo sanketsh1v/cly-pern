@@ -17,7 +17,7 @@ const Events = () => {
   useEffect(() => {
     const fetchQuarterlyEvents = async () => {
       try {
-        const response = await axios.get("cly-pern-server.vercel.app/quarterlyEvents");
+        const response = await axios.get("http://localhost:4000/quarterlyEvents");
         setQuarterlyEvents(response.data.events);
         // Initialize ticket counts and sponsorship amounts for each event
         const initialCounts = response.data.events.reduce((acc, event) => {
