@@ -1,13 +1,14 @@
-$primary-purple: #2e1065;
-$secondary-purple: #452e75;
-$accent-gold: rgb(253, 251, 227);
-$text-light: #fdf7f0;
-$text-dark: #333;
-$button-hover: #452e75;
+$primary-color: #7AB2D3; // Adjusted primary color
+$secondary-color: #4A628A; // Adjusted secondary color
+$accent-color: #B9E5E8; // Accent color for hover effects
+$background-light: #DFF2EB; // Light background color
+$text-light: #fdf7f0; // No change to text-light
+$text-dark: #333; // No change to text-dark
+$button-hover: #B9E5E8; // Keeping existing hover color for contrast
 
 .styled-separator {
   height: 2px;
-  background: linear-gradient(to right, #452e75, #f0e68c, #452e75); // Unified purple to yellow gradient
+  background: linear-gradient(to right, #7AB2D3, #f0e68c, #4A628A); // Unified purple to yellow gradient
   margin-bottom: 2.5rem;
   margin-top: 2.5rem;
   border: none;
@@ -22,14 +23,14 @@ $button-hover: #452e75;
   input {
     width: 100%;
     padding: 0.75rem;
-    border: 2px solid $primary-purple;
+    border: 2px solid $secondary-color;
     border-radius: 1rem;
     font-size: 1.1rem;
     outline: none;
     transition: border-color 0.3s ease;
 
     &:focus {
-      border-color: $secondary-purple;
+      border-color: $secondary-color;
     }
   }
 }
@@ -39,7 +40,7 @@ $button-hover: #452e75;
   min-height: 100vh;
   margin-top: rem;
   margin-bottom: 6rem;
-  background-color:#f6e9fc;
+  background-color:#DFF2EB;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 
   &__container {
@@ -50,37 +51,37 @@ $button-hover: #452e75;
 
   a {
     display: inline-block;
-    background-color: $accent-gold;
-    color: $primary-purple;
+    background-color: $secondary-color;
+    color:$text-light;
     padding: 0.75rem 2rem;
     border-radius: 1.5rem;
     font-size: 1.2rem;
     font-weight: 600;
     text-decoration: none; 
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(46, 16, 101, 0.2);
+    box-shadow: 0 4px 10px #12151b;
     text-align: center;
 
     &:hover {
       background-color: $button-hover; 
       color: $text-light; 
       transform: translateY(-2px); 
-      box-shadow: 0 6px 20px rgba(46, 16, 101, 0.3);
+      box-shadow: 0 6px 20px #4A628A;
     }
   }
   &__hero {
-    background-color: $primary-purple;
+    background-color: $primary-color;
     border-radius: 2rem;
     padding: 3rem;
     margin-top: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     color: $text-light;
 
     h1 {
       font-size: 3.5rem;
       font-weight: 800;
       margin-bottom: 1.5rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     h3 {
@@ -92,11 +93,12 @@ $button-hover: #452e75;
   }
 
   &__date {
-    background-color: $accent-gold;
-    color: $primary-purple;
+    background-color: $secondary-color;
+    color: $text-light;
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 1.5rem;
+    border-color: #12151b;
     font-weight: 600;
     margin-bottom: 2rem;
   }
@@ -115,21 +117,21 @@ $button-hover: #452e75;
   }
 
   &__details {
-    background-color: $text-light;
+    background-color: $primary-color;
     border-radius: 2rem;
     padding: 2rem;
     margin: 2rem 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 
     h2 {
-      color: $primary-purple;
+      color: $text-light;
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
     }
 
     p {
-      color: $text-dark;
+      color: $text-light;
       line-height: 1.6;
       margin-bottom: 1rem;
     }
@@ -137,7 +139,7 @@ $button-hover: #452e75;
 
   &__tickets {
     h1 {
-      color: $primary-purple;
+      color: #12151b;
       font-size: 2.5rem;
       font-weight: 800;
       margin: 2rem 0;
@@ -146,7 +148,8 @@ $button-hover: #452e75;
   }
 
   .ticket-section {
-    background-color: rgb(253, 251, 227);
+    background-color: $primary-color;
+    color: $text-light;
     border-radius: 2rem;
     overflow: hidden;
     margin-bottom: 2rem;
@@ -163,14 +166,14 @@ $button-hover: #452e75;
 
       .ticket-price {
         flex: 1;
-        border-left: 2px solid $secondary-purple;
+        border-left: 2px solid #333;
 
       }
     }
 
     .price-amount {
       font-size: 2.5rem;
-      color: $primary-purple;
+      color: $secondary-color;
       font-weight: bold;
       margin-bottom: 1rem;
       text-align: center;
@@ -184,7 +187,7 @@ $button-hover: #452e75;
     }
 
     h2 {
-      color: $primary-purple;
+      color: $text-light;
       font-size: 1.8rem;
       font-weight: 700;
       margin-bottom: 1rem;
@@ -205,7 +208,7 @@ $button-hover: #452e75;
 
     
       button {
-        background-color: $primary-purple;
+        background-color: $secondary-color;
         color: $text-light;
         border: none;
         width: 40px;
@@ -246,7 +249,7 @@ $button-hover: #452e75;
 
         &:before {
           content: '•';
-          color: $primary-purple;
+          color: $text-light;
           font-weight: bold;
           position: absolute;
           left: 0;
@@ -259,7 +262,7 @@ $button-hover: #452e75;
 
       label {
         display: block;
-        color: $primary-purple;
+        color: $text-light;
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
       }
@@ -267,19 +270,19 @@ $button-hover: #452e75;
       input {
         width: 100%;
         padding: 0.75rem;
-        border: 2px solid $secondary-purple;
+        border: 2px solid $secondary-color;
         border-radius: 1rem;
         font-size: 1.1rem;
         margin-bottom: 1rem;
 
         &:focus {
           outline: none;
-          border-color: $primary-purple;
+          border-color: $secondary-color;
         }
       }
 
       button {
-        background-color: $primary-purple;
+        background-color: $secondary-color;
         color: $text-light;
         border: none;
         padding: 0.75rem 1.5rem;
@@ -305,11 +308,11 @@ $button-hover: #452e75;
     .total-amount {
       font-size: 1.5rem;
       font-weight: 700;
-      color: $primary-purple;
+      color: $text-dark;
     }
 
     button {
-      background-color: $primary-purple;
+      background-color: $secondary-color;
       color: $text-light;
       border: none;
       padding: 1rem 2rem;

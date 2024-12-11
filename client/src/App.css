@@ -4,12 +4,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f3e8ff; /* Equivalent to bg-purple-100 */
+  background-color: #DFF2EB; /* Equivalent to bg-purple-100 */
 }
 
 /* Additional global styling if needed */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f3e8ff; /* Consistent background color for the entire page */
+  background-color: #DFF2EB; /* Consistent background color for the entire page */
 }

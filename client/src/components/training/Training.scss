@@ -1,19 +1,20 @@
-$primary-purple: #2e1065;
-$secondary-purple: #452e75;
-$accent-gold: rgb(255, 252, 217);
-$text-light: #fdf7f0;
-$text-dark: #000000;
-$button-hover: #452e75;
+$primary-purple: #7AB2D3; // Adjusted primary color
+$secondary-color: #4A628A; // Adjusted secondary color
+$accent-gold: #B9E5E8; // Accent color for hover effects
+$background-light: #DFF2EB; // Light background color
+$text-light: #fdf7f0; // No change to text-light
+$text-dark: #333; // No change to text-dark
+$button-hover: #B9E5E8; // Keeping existing hover color for contrast
 
 .training {
   text-align: center;
   padding: 20px;
-  background-color: #f6e9fc;
+  background-color: $background-light;
 
   &__heading {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: $primary-purple;
+    color: $secondary-color;
   }
 
   &__grid {
@@ -29,7 +30,7 @@ $button-hover: #452e75;
     flex-direction: row;
     align-items: center;
     justify-content: space-between; /* Align content and right corner */
-    background: $text-light;
+    background: $primary-purple;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -77,7 +78,7 @@ $button-hover: #452e75;
     gap: 0.5rem;
 
     button {
-      background: $primary-purple;
+      background: $secondary-color;
       color: $text-light;
       border: none;
       padding: 0.5rem 0.75rem;
@@ -99,11 +100,11 @@ $button-hover: #452e75;
   .price {
     font-size: 1.2rem;
     font-weight: bold;
-    color: $primary-purple;
+    color: $secondary-color;
   }
 
   .add-to-cart {
-    background: $primary-purple;
+    background: $secondary-color;
     color: $text-light;
     border: none;
     padding: 0.7rem 1.5rem;
@@ -122,13 +123,13 @@ $button-hover: #452e75;
     .total-amount {
       font-size: 1.5rem;
       font-weight: bold;
-      color: $primary-purple;
+      color: $secondary-color;
       margin-bottom: 1rem;
     }
 
     .checkout-button {
-      background: $accent-gold;
-      color: $primary-purple;
+      background: $secondary-color;
+      color: $text-light;
       padding: 0.7rem 2rem;
       border: none;
       border-radius: 5px;
@@ -137,7 +138,7 @@ $button-hover: #452e75;
       transition: background-color 0.3s;
 
       &:hover {
-        background: $button-hover;
+        background: $primary-purple;
         color: $text-light;
       }
     }

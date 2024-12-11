@@ -1,13 +1,14 @@
-$primary-purple: #2e1065;
-$secondary-purple: #452e75;
-$accent-gold: rgb(253, 251, 227);
-$text-light: #fdf7f0;
-$text-dark: #333;
-$button-hover: #452e75;
+$primary-color: #7AB2D3; // Adjusted primary color
+$secondary-color: #4A628A; // Adjusted secondary color
+$accent-color: #B9E5E8; // Accent color for hover effects
+$background-light: #DFF2EB; // Light background color
+$text-light: #fdf7f0; // No change to text-light
+$text-dark: #333; // No change to text-dark
+$button-hover: #B9E5E8; // Keeping existing hover color for contrast
 
 .footer {
-  background-color: $primary-purple;
-  color: $text-light;
+  background-color: $primary-color; // Updated background color
+  color: $text-dark; // Use darker text for contrast
   padding: 4rem 0 2rem;
 
   &__container {
@@ -32,6 +33,7 @@ $button-hover: #452e75;
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       font-weight: 600;
+      color: #000000; // Use secondary color for headings
     }
   }
 
@@ -39,6 +41,7 @@ $button-hover: #452e75;
     p {
       margin-bottom: 1.5rem;
       line-height: 1.6;
+      color: #000000;
     }
   }
 
@@ -52,13 +55,13 @@ $button-hover: #452e75;
       justify-content: center;
       width: 40px;
       height: 40px;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: $secondary-color; // Updated hover color
       border-radius: 50%;
       transition: all 0.3s ease;
 
       &:hover {
-        background-color: $accent-gold;
-        color: $primary-purple;
+        background-color: $accent-color; // Primary color on hover
+        color: $text-light;
         transform: translateY(-3px);
       }
 
@@ -78,12 +81,12 @@ $button-hover: #452e75;
         margin-bottom: 0.75rem;
 
         a {
-          color: $text-light;
+          color: #000000; // Updated link color
           text-decoration: none;
           transition: color 0.3s ease;
 
           &:hover {
-            color: $accent-gold;
+            color: $secondary-color;
           }
         }
       }
@@ -94,23 +97,24 @@ $button-hover: #452e75;
     .form-group {
       margin-bottom: 1rem;
 
-      input, textarea {
+      input,
+      textarea {
         width: 100%;
         padding: 0.75rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid $accent-color; // Updated border color
+        background-color: $background-light;
         border-radius: 0.5rem;
-        color: $text-light;
+        color: #000000; // Darker text for input fields
         transition: all 0.3s ease;
 
         &::placeholder {
-          color: rgba(255, 255, 255, 0.6);
+          color: $secondary-color; // Placeholder in secondary color
         }
 
         &:focus {
           outline: none;
-          border-color: $accent-gold;
-          background-color: rgba(255, 255, 255, 0.15);
+          border-color: $primary-color;
+          background-color: lighten($background-light, 5%);
         }
       }
 
@@ -121,8 +125,8 @@ $button-hover: #452e75;
     }
 
     .submit-btn {
-      background-color: $accent-gold;
-      color: $primary-purple;
+      background-color: $secondary-color;
+      color: #000000;
       border: none;
       padding: 0.75rem 1.5rem;
       border-radius: 0.5rem;
@@ -132,7 +136,7 @@ $button-hover: #452e75;
 
       &:hover {
         background-color: $button-hover;
-        color: $text-light;
+        color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       }
@@ -140,7 +144,7 @@ $button-hover: #452e75;
   }
 
   &__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid lighten($accent-color, 20%);
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
@@ -171,13 +175,13 @@ $button-hover: #452e75;
     margin-top: 0.5rem;
 
     a {
-      color: $text-light;
+      color: #333;
       text-decoration: none;
       margin-left: 1rem;
       transition: color 0.3s ease;
 
       &:hover {
-        color: $accent-gold;
+        color: $secondary-color;
       }
 
       &:first-child {
