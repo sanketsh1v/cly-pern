@@ -2,7 +2,7 @@
 body {
   background-color: #DFF2EB; // Light purple background for the entire page
   font-family: Arial, sans-serif;
-  color: #333; // Consistent dark text color
+  color: #2C3E50; // Changed from #333 to a richer dark blue-gray that complements the theme
 }
 
 // Main container for the page content
@@ -14,13 +14,14 @@ body {
   position: relative;
   overflow: hidden;
   padding: 1rem;
+  color: #2C3E50; // Added to ensure consistent text color
 }
 
 // Box styling for sections and cards
 .box-container {
   text-align: center;
-  background: #7AB2D3; // Consistent gradient background
-  color: #080606; // Light text color for contrast
+  background: #7AB2D3;
+  color: #FFFFFF;
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   margin: 2.5rem auto;
@@ -41,7 +42,7 @@ body {
   font-weight: 800;
   margin-top: 1.25rem;
   margin-bottom: 1rem;
-  color: #fdf7f0; // Light color for main headings
+  color: #FFFFFF;
   line-height: 1.25;
   text-align: center;
 }
@@ -50,14 +51,14 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 3rem;
-  color: rgb(253, 251, 227); // Warm accent yellow for subheadings
+  color: #FFFFFF; // Warm accent yellow for subheadings
   text-align: center;
 }
 
 .event-list {
   list-style-type: none;
   padding: 0;
-  color: #fdf7f0; // Consistent light text color
+  color: #FFFFFF; // Consistent light text color
 }
 
 .image-container {
@@ -126,12 +127,12 @@ body {
 .event-title {
   font-size: 1.75rem;
   font-weight: bold;
-  color: #080606; // Purple for text
+  color: #333333; // Purple for text
 }
 
 .event-date, .event-location {
   font-size: 1rem;
-  color: #080606; // Consistent dark text for dates and locations
+  color: #333333; // Consistent dark text for dates and locations
 }
 
 .event-button {
@@ -162,7 +163,7 @@ body {
 
 .weekly-events-title {
   font-size: 2.5rem;
-  color: rgb(255, 254, 241); // Light text for contrast
+  color: #FFFFFF; // Light text for contrast
   margin-bottom: 1.5rem;
 }
 
@@ -175,7 +176,7 @@ body {
 
 .weekly-event-card {
   background-color: #B9E5E8; // Darker background for weekly event cards
-  color: black; // Light text
+  color: #333333; // Light text
   padding: 1rem;
   border-radius: 1rem;
   flex: 1;
@@ -199,7 +200,7 @@ body {
 }
 
 .weekly-zoom-link {
-  color: #000000;
+  color: #333333;
   transition: all 0.3s ease; /* Smooth transition effect */
   margin-bottom: 3rem;
 }
@@ -214,7 +215,7 @@ body {
 
 .weekly-events-info {
   font-size: 1.2rem;
-  color: white; // Accent yellow for additional info text
+  color: #FFFFFF; // Accent yellow for additional info text
   margin-top: 1.5rem;
 }
 
@@ -226,4 +227,26 @@ body {
   margin: 2.5rem auto;
   border: none;
   border-radius: 1px;
+}
+
+// For any text that's directly on the light background
+.content-text {
+  color: #2C3E50; // Rich dark blue-gray
+}
+
+// Event details on light background
+.event-details-text {
+  color: #2C3E50;
+}
+
+// Headers on light background
+h1, h2, h3, h4, h5, h6 {
+  &:not(.heading-title):not(.weekly-events-title) { // Exclude titles that should remain white
+    color: #2C3E50;
+  }
+}
+
+// Regular text on light background
+p:not(.box-container p):not(.weekly-events-section p) {
+  color: #2C3E50;
 }
