@@ -1,16 +1,16 @@
-$primary-purple: #2e1065;
-$secondary-purple: #452e75;
+$primary-purple: #7AB2D3;
+$secondary-purple: #4A628A;
 $accent-gold: #f0e68c;
 $text-light: #fdf7f0;
 $text-dark: #333;
-$button-hover: #452e75;
+$button-hover: #4A628A;
 
 .admin-login {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f6e9fc; // Subtle light background
+  background-color: #DFF2EB; // Subtle light background
   padding: 2rem;
   margin-top: 2rem; // Add a consistent margin at the top and bottom
   margin-bottom: 2rem;
@@ -40,15 +40,15 @@ $button-hover: #452e75;
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 4px solid $accent-gold; // Accent gold for the profile border
+      border: 4px solid $secondary-purple; // Accent gold for the profile border
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
   }
 
   &__title {
     font-size: 2rem;
-    color: $accent-gold;
+    color: $text-light;
     font-weight: bold;
     margin-bottom: 1.5rem;
   }
@@ -62,7 +62,7 @@ $button-hover: #452e75;
   }
 
   &__error {
-    color: #f6e9fc;
+    color: $text-light;
   }
 
   &__input-group {
@@ -72,14 +72,14 @@ $button-hover: #452e75;
       width: 100%;
       padding: 0.75rem;
       border-radius: 0.5rem;
-      border: 2px solid $primary-purple;
+      border: 2px solid $secondary-purple;
       background-color: rgba(255, 255, 255, 0.1);
-      color: $text-light;
+      color: $text-dark;
       font-size: 1rem;
       transition: border-color 0.3s ease, background-color 0.3s ease;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.6);
+        color: $text-light;
       }
 
       &:focus {
@@ -91,8 +91,8 @@ $button-hover: #452e75;
   }
 
   &__button {
-    background-color: rgb(255, 252, 217);
-    color: $primary-purple;
+    background-color: #4A628A;
+    color: $text-light;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 0.5rem;

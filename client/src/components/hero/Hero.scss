@@ -1,6 +1,6 @@
 // Global page background
 body {
-  background-color: #f6e9fc; // Light purple background for the entire page
+  background-color: #DFF2EB; // Light purple background for the entire page
   font-family: Arial, sans-serif;
   color: #333; // Consistent dark text color
 }
@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f6e9fc;
+  background-color: #DFF2EB;
   position: relative;
   overflow: hidden;
   padding: 1rem;
@@ -19,8 +19,8 @@ body {
 // Box styling for sections and cards
 .box-container {
   text-align: center;
-  background: #220060; // Consistent gradient background
-  color: #fdf7f0; // Light text color for contrast
+  background: #7AB2D3; // Consistent gradient background
+  color: #080606; // Light text color for contrast
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   margin: 2.5rem auto;
@@ -84,7 +84,7 @@ body {
 
 // Upcoming Event Section Styling
 .upcoming-event-section {
-  background-color: rgb(253, 251, 227);
+  background-color: #7AB2D3;
   padding: 2rem;
   margin-bottom: 2.5rem;
   border-radius: 1rem;
@@ -97,7 +97,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  background-color: rgb(255, 253, 235);
+  background-color: #B9E5E8;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -113,7 +113,7 @@ body {
   max-height: 300px; /* Set the height limit */
   object-fit: contain; /* Ensure the entire image fits within the area */
   border-radius: 1rem; /* Maintain rounded corners */
-  background-color: #fdf7f0; /* Optional: Add a background color for empty spaces */
+  background-color: #B9E5E8; /* Optional: Add a background color for empty spaces */
 }
 
 .event-info {
@@ -126,17 +126,17 @@ body {
 .event-title {
   font-size: 1.75rem;
   font-weight: bold;
-  color: #220060; // Purple for text
+  color: #080606; // Purple for text
 }
 
 .event-date, .event-location {
   font-size: 1rem;
-  color: #000000; // Consistent dark text for dates and locations
+  color: #080606; // Consistent dark text for dates and locations
 }
 
 .event-button {
-  background-color: #210052;
-  color: #fdf7f0;
+  background-color: #4A628A;
+  color: #080606;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 0.5rem;
@@ -145,13 +145,13 @@ body {
 }
 
 .event-button:hover {
-  background-color: #d3beff;
+  background-color: #7AB2D3;
   transform: translateY(-2px);
 }
 
 // Weekly Events Section Styling
 .weekly-events-section {
-  background-color: #2e1065; // Consistent dark purple background
+  background-color: #7AB2D3; // Consistent dark purple background
   padding: 2rem;
   margin-bottom: 5rem;
   border-radius: 1rem;
@@ -174,7 +174,7 @@ body {
 }
 
 .weekly-event-card {
-  background-color: rgb(255, 253, 234); // Darker background for weekly event cards
+  background-color: #B9E5E8; // Darker background for weekly event cards
   color: black; // Light text
   padding: 1rem;
   border-radius: 1rem;
@@ -206,7 +206,7 @@ body {
 
 .weekly-zoom-link:hover {
   color: white; /* Accent color to match your theme */
-  background-color: #452e75; /* Slightly lighter purple */
+  background-color: #7AB2D3; /* Slightly lighter purple */
   padding: 5px; /* Optional: add padding to emphasize the hover effect */
   border-radius: 5px; /* Optional: rounded edges */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Optional: add a shadow to make the text pop */
@@ -222,7 +222,7 @@ body {
 .styled-separator {
   width: 80%;
   height: 2px;
-  background: linear-gradient(to right, #452e75, #f0e68c, #452e75); // Unified purple to yellow gradient
+  background: linear-gradient(to right, #7AB2D3, #f0e68c, #4A628A); // Unified purple to yellow gradient
   margin: 2.5rem auto;
   border: none;
   border-radius: 1px;

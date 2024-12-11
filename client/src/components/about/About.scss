@@ -1,13 +1,14 @@
-$primary-purple: #2e1065;
-
-$accent-gold: rgb(253, 251, 227);
-$text-light: #fdf7f0;
-$text-dark: #333;
-$button-hover: #240071;
+$primary-purple: #7AB2D3; // Adjusted primary color
+$secondary-color: #4A628A; // Adjusted secondary color
+$accent-gold: #B9E5E8; // Accent color for hover effects
+$background-light: #DFF2EB; // Light background color
+$text-light: #fdf7f0; // No change to text-light
+$text-dark: #333; // No change to text-dark
+$button-hover: #B9E5E8; // Keeping existing hover color for contrast
 
 .main {
   min-height: 100vh;
-  background-color: #f6e9fc; // Light background for overall page
+  background-color: $background-light; // Light background for overall page
   padding: 2rem;
 }
 
@@ -21,7 +22,7 @@ $button-hover: #240071;
     font-size: 3rem;
     font-weight: bold;
     margin-left: 10px;
-    color: $primary-purple; // Title in deep purple
+    color: $secondary-color; // Title in deep purple
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); // Soft shadow for text
   }
 }
@@ -38,7 +39,7 @@ $button-hover: #240071;
   .quote {
     font-size: 1.5rem;
     font-weight: bold;
-    color: $accent-gold; // Accent color for quote text
+    color: $text-light; // Accent color for quote text
     margin-bottom: 10px;
   }
 
@@ -73,7 +74,7 @@ $button-hover: #240071;
 
 .mission-vision-section {
   background-color: $primary-purple; // Deep purple background
-  color: $text-light; // Light text for better contrast
+  color: $text-dark; // Light text for better contrast
   border-radius: 1.5rem;
   padding: 2rem;
   margin: 20px 0;
@@ -85,38 +86,38 @@ $button-hover: #240071;
   .heading {
     font-size: 2rem;
     font-weight: bold;
-    color: $accent-gold; // Accent color for heading
+    color: $text-dark; // Accent color for heading
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); // Slight text shadow
   }
 
   p {
     margin-top: 10px;
-    color: $text-light; // Light text for paragraph
+    color: $text-dark; // Light text for paragraph
   }
 }
 
 .separator {
   width: 100%;
   height: 2px;
-  background-color: $primary-purple; // Separator using secondary purple
+  background-color: $text-dark; // Separator using secondary purple
   margin: 30px 0;
 }
 
 a {
-  color: $accent-gold; // Accent color for links
+  color: $text-light; // Accent color for links
   text-decoration: none;
   transition: color 300ms ease-in-out;
 
   &:hover {
-    color: $primary-purple; // Hover color change to primary purple
+    color: $secondary-color; // Hover color change to primary purple
     text-decoration: underline;
   }
 }
 
 .donation-box {
   background-color: $primary-purple; // Light purple background
-  color: $text-light;
+  color: $text-dark;
   border-radius: 1.5rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // Softer shadow
   padding: 20px;
@@ -126,24 +127,23 @@ a {
   .heading {
     font-size: 1.8rem;
     font-weight: bold;
-    color: $accent-gold; // Gold for heading
+    color: $text-dark; // Gold for heading
     margin-bottom: 1rem;
   }
 
   p {
     margin-top: 10px;
-    color: $text-light;
+    color: $text-dark;
   }
 }
 
 button {
-  background-color: $accent-gold; // Warm yellow for buttons
-  color: $accent-gold; // Purple text for contrast
+  background-color: $secondary-color; // Warm yellow for buttons
+  color: $secondary-color; // Purple text for contrast
   padding: 12px 24px;
   border-radius: 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;
-  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 
   &:hover {
     background-color: $button-hover; // Hover effect with secondary purple
@@ -171,5 +171,15 @@ button {
 
 .donation-button{
   color: $primary-purple;
-  background-color: $accent-gold;
+  background-color: $secondary-color;
+}
+.bg-black {
+  background-color: $secondary-color;
+  color: $text-light;
+
+  &:hover {
+    background-color: $accent-gold; // Hover effect with secondary purple
+    color: $text-light;
+  }
+  
 }
