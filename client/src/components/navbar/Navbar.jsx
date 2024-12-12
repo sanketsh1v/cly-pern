@@ -14,8 +14,11 @@ const Navbar = () => {
       <div className="navbar__content">
         <div className="navbar__logo-container">
           <img src="/logo.png" alt="Logo" className="navbar__logo-image" />
-          <h1 className="navbar__company-name">Calgary Laughter Yoga and Adventures</h1>
+          <div className="navbar__branding">
+            <h1 className="navbar__company-name">Calgary Laughter Yoga and Adventures</h1>
+          </div>
         </div>
+        <div className="navbar__separator"></div>
         <div className={`navbar__links ${isOpen ? 'navbar__links--open' : ''}`}>
           <Link to="/" className="navbar__link">Home</Link>
           <Link to="/events" className="navbar__link">Upcoming Events</Link>
