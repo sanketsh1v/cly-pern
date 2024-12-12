@@ -14,11 +14,15 @@ const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
+try {
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+} catch (error) {
+    console.error('Cloudinary configuration error:', error);
+}
 
 // Configure Cloudinary Storage for Multer
 const storage = new CloudinaryStorage({
@@ -39,8 +43,13 @@ app.use(morgan('dev'));
 
 // Database client connection
 async function dbClient() {
-    const sql = neon(process.env.DATABASE_URL);
-    return sql;
+    try {
+        const sql = neon(process.env.DATABASE_URL);
+        return sql;
+    } catch (error) {
+        console.error('Database connection error:', error);
+        throw error;
+    }
 }
 
 // Function to hash passwords
